@@ -99,12 +99,14 @@
   <header class="sticky top-0 z-50 glass-panel border-t-0 border-x-0 rounded-b-2xl mb-8">
     <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
       <div class="flex items-center gap-4">
-        <!-- LOGO OFICIAL EN CÍRCULO ESTILIZADO -->
-        <div class="w-16 h-16 rounded-full bg-black border-2 border-neuro-green shadow-[0_0_20px_rgba(154,255,95,0.4)] flex items-center justify-center overflow-hidden p-2 relative group hover:scale-105 transition-transform duration-300">
-            <div class="absolute inset-0 bg-neuro-green opacity-10 rounded-full"></div>
+        <!-- LOGO OFICIAL -->
+        <div class="w-20 h-20 rounded-2xl bg-black border-2 border-neuro-green shadow-[0_0_20px_rgba(154,255,95,0.4)] flex items-center justify-center overflow-hidden relative group hover:scale-105 transition-transform duration-300">
+            <!-- Fondo sutil interno -->
+            <div class="absolute inset-0 bg-neuro-green opacity-10"></div>
+            <!-- Imagen ajustada -->
             <img src="https://github.com/neurotechsoluciones-design/neurotech-assets/blob/d40e800d52607451a69ec394b84db98fc36a8d82/logo_%20Neurotech_soluciones.png?raw=true" 
                  alt="NeuroTech Logo" 
-                 class="w-full h-full object-contain drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">
+                 class="w-full h-full object-contain p-0.5 drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">
         </div>
         
         <div class="hidden sm:block">
@@ -134,63 +136,6 @@
       </p>
     </div>
 
-    <!-- SECCIÓN EDUCATIVA: TÉCNICA R.C.I. -->
-    <section class="glass-panel rounded-2xl p-6 md:p-8 border-t-4 border-t-neuro-blue relative overflow-hidden">
-        <!-- Background decoration -->
-        <div class="absolute -right-10 -top-10 w-40 h-40 bg-neuro-blue rounded-full filter blur-[80px] opacity-20 pointer-events-none"></div>
-
-        <div class="flex items-center gap-3 mb-6 relative z-10">
-            <div class="bg-neuro-blue/20 p-2 rounded-lg border border-neuro-blue">
-                <i data-lucide="brain-circuit" class="text-neuro-green w-6 h-6"></i>
-            </div>
-            <div>
-                <h3 class="text-xl font-orbitron font-bold text-white">LA FÓRMULA R.C.I.</h3>
-                <p class="text-xs text-gray-400 font-inter uppercase tracking-wider">Estructura esencial de un prompt</p>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 relative z-10">
-            <!-- ROL -->
-            <div class="bg-black/40 border border-neuro-green/30 rounded-xl p-4 hover:bg-neuro-green/5 transition-colors">
-                <div class="text-neuro-green font-orbitron font-bold text-lg mb-2 flex items-center gap-2">
-                    <span class="w-6 h-6 rounded-full border border-neuro-green flex items-center justify-center text-xs">R</span>
-                    ROL
-                </div>
-                <p class="text-sm text-gray-300 mb-2 font-bold">"¿Quién eres?"</p>
-                <p class="text-xs text-gray-400 leading-relaxed">
-                    Define la experticia de la IA. <br>
-                    <span class="italic text-neuro-green/80">Ej: "Actúa como experto en Marketing..."</span>
-                </p>
-            </div>
-
-            <!-- CONTEXTO -->
-            <div class="bg-black/40 border border-neuro-blue/30 rounded-xl p-4 hover:bg-neuro-blue/5 transition-colors">
-                <div class="text-neuro-blue font-orbitron font-bold text-lg mb-2 flex items-center gap-2">
-                    <span class="w-6 h-6 rounded-full border border-neuro-blue flex items-center justify-center text-xs">C</span>
-                    CONTEXTO
-                </div>
-                <p class="text-sm text-gray-300 mb-2 font-bold">"¿Dónde estamos?"</p>
-                <p class="text-xs text-gray-400 leading-relaxed">
-                    Antecedentes y situación actual. <br>
-                    <span class="italic text-neuro-blue/80">Ej: "Tengo un negocio de turismo y..."</span>
-                </p>
-            </div>
-
-            <!-- INSTRUCCIÓN -->
-            <div class="bg-black/40 border border-purple-500/30 rounded-xl p-4 hover:bg-purple-500/5 transition-colors">
-                <div class="text-purple-400 font-orbitron font-bold text-lg mb-2 flex items-center gap-2">
-                    <span class="w-6 h-6 rounded-full border border-purple-400 flex items-center justify-center text-xs">I</span>
-                    INSTRUCCIÓN
-                </div>
-                <p class="text-sm text-gray-300 mb-2 font-bold">"¿Qué hago?"</p>
-                <p class="text-xs text-gray-400 leading-relaxed">
-                    La tarea exacta y el formato. <br>
-                    <span class="italic text-purple-400/80">Ej: "Crea una tabla con 3 ideas..."</span>
-                </p>
-            </div>
-        </div>
-    </section>
-
     <!-- TARJETA PROMPT 1 -->
     <article class="glass-panel rounded-2xl overflow-hidden relative group">
       <!-- Decoración de esquina -->
@@ -210,7 +155,6 @@
           Configura la "personalidad" de tu asistente para evitar respuestas genéricas.
         </p>
 
-        <!-- Área de Código Visual (Línea lateral eliminada) -->
         <div class="bg-black/60 rounded-xl border border-white/10 p-5 font-mono text-sm text-gray-300 leading-relaxed relative overflow-hidden">
           
           <!-- Contenido REAL a copiar -->
@@ -262,7 +206,6 @@ Calidad y precisión
           Convierte a la IA en un Ingeniero de Prompts para mejorar tus propias instrucciones.
         </p>
 
-        <!-- Área de Código Visual (Línea lateral eliminada) -->
         <div class="bg-black/60 rounded-xl border border-white/10 p-5 font-mono text-sm text-gray-300 leading-relaxed relative overflow-hidden">
           
           <div id="prompt-content-2">
@@ -292,6 +235,128 @@ Prompt original:
                   class="flex items-center gap-2 bg-transparent border-2 border-neuro-green text-neuro-green hover:bg-neuro-green hover:text-black font-orbitron font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-[0_0_10px_rgba(154,255,95,0.1)] transform active:scale-95">
             <i data-lucide="copy" class="w-4 h-4"></i>
             <span>COPIAR PROMPT</span>
+          </button>
+        </div>
+      </div>
+    </article>
+
+
+    <!-- SECCIÓN EDUCATIVA: TÉCNICA R.C.I. -->
+    <section class="glass-panel rounded-2xl p-6 md:p-8 border-t-4 border-t-neuro-blue relative overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute -right-10 -top-10 w-40 h-40 bg-neuro-blue rounded-full filter blur-[80px] opacity-20 pointer-events-none"></div>
+
+        <div class="flex items-center gap-3 mb-6 relative z-10">
+            <div class="bg-neuro-blue/20 p-2 rounded-lg border border-neuro-blue">
+                <i data-lucide="brain-circuit" class="text-neuro-green w-6 h-6"></i>
+            </div>
+            <div>
+                <h3 class="text-xl font-orbitron font-bold text-white">LA FÓRMULA R.C.I.</h3>
+                <p class="text-xs text-gray-400 font-inter uppercase tracking-wider">Estructura esencial de un prompt</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 relative z-10">
+            <!-- ROL -->
+            <div class="bg-black/40 border border-neuro-green/30 rounded-xl p-4 hover:bg-neuro-green/5 transition-colors">
+                <div class="text-neuro-green font-orbitron font-bold text-lg mb-2 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full border border-neuro-green flex items-center justify-center text-xs">R</span>
+                    ROL
+                </div>
+                <p class="text-sm text-gray-300 mb-2 font-bold">"¿Quién eres?"</p>
+                <p class="text-xs text-gray-400 leading-relaxed">
+                    Define la experticia de la IA. <br>
+                    <span class="italic text-neuro-green/80">Ej: "Actúa como experto en Marketing..."</span>
+                </p>
+            </div>
+
+            <!-- CONTEXTO -->
+            <div class="bg-black/40 border border-neuro-blue/30 rounded-xl p-4 hover:bg-neuro-blue/5 transition-colors">
+                <div class="text-neuro-blue font-orbitron font-bold text-lg mb-2 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full border border-neuro-blue flex items-center justify-center text-xs">C</span>
+                    CONTEXTO
+                </div>
+                <p class="text-sm text-gray-300 mb-2 font-bold">"¿Dónde estamos?"</p>
+                <p class="text-xs text-gray-400 leading-relaxed">
+                    Antecedentes y situación actual. <br>
+                    <span class="italic text-neuro-blue/80">Ej: "Tengo un negocio de turismo y..."</span>
+                </p>
+            </div>
+
+            <!-- INSTRUCCIÓN (Actualizado a Verde NeuroTech) -->
+            <div class="bg-black/40 border border-neuro-green/30 rounded-xl p-4 hover:bg-neuro-green/5 transition-colors">
+                <div class="text-neuro-green font-orbitron font-bold text-lg mb-2 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full border border-neuro-green flex items-center justify-center text-xs">I</span>
+                    INSTRUCCIÓN
+                </div>
+                <p class="text-sm text-gray-300 mb-2 font-bold">"¿Qué hago?"</p>
+                <p class="text-xs text-gray-400 leading-relaxed">
+                    La tarea exacta y el formato. <br>
+                    <span class="italic text-neuro-green/80">Ej: "Crea una tabla con 3 ideas..."</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NUEVA SECCIÓN: EJEMPLO DE USO (Sin violeta, sin línea izquierda) -->
+    <article class="glass-panel rounded-2xl overflow-hidden relative group">
+      <div class="absolute top-0 right-0 p-4 opacity-50">
+        <i data-lucide="map" class="text-neuro-blue w-12 h-12"></i>
+      </div>
+
+      <div class="p-6 md:p-8">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="bg-neuro-blue text-white font-orbitron font-bold text-xs px-2 py-1 rounded">
+            EJEMPLO
+          </span>
+          <h3 class="text-xl font-orbitron font-bold text-white tracking-wide">Ejemplo Práctico R.C.I.</h3>
+        </div>
+
+        <p class="text-sm text-gray-400 mb-4 italic">
+          Así es como se aplica la estructura en un caso real de turismo.
+        </p>
+
+        <div class="bg-black/60 rounded-xl border border-white/10 p-5 font-mono text-sm text-gray-300 leading-relaxed relative overflow-hidden">
+          
+          <!-- Contenido REAL a copiar -->
+          <div id="prompt-content-example">
+R (ROL):
+Actuá como un experto organizador de viajes turísticos.
+
+C (CONTEXTO):
+Vas a realizar un viaje durante el mes de enero.
+
+Destino:
+Brasil
+
+Cantidad de personas:
+[COMPLETAR – por ejemplo: 1 persona, 2 adultos, familia, amigos]
+
+Tipo de viaje:
+Turismo y descanso
+
+Medio de transporte:
+Avión
+
+Duración del viaje:
+7 días
+
+I (INSTRUCCIONES):
+Organizá una posible agenda de viaje teniendo en cuenta la información brindada.
+
+La agenda debe incluir:
+- Un breve resumen del viaje
+- Una propuesta de actividades día por día
+- Sugerencias generales acordes al tipo de viaje
+
+Presentá la información de forma clara, simple y ordenada.</div>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+          <button onclick="copyToClipboard('prompt-content-example', this)" 
+                  class="flex items-center gap-2 bg-transparent border-2 border-neuro-green text-neuro-green hover:bg-neuro-green hover:text-black font-orbitron font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-[0_0_10px_rgba(154,255,95,0.1)] transform active:scale-95">
+            <i data-lucide="copy" class="w-4 h-4"></i>
+            <span>COPIAR EJEMPLO</span>
           </button>
         </div>
       </div>
@@ -335,33 +400,27 @@ Prompt original:
   <footer class="glass-panel border-b-0 border-x-0 rounded-t-2xl py-8 mt-12">
     <div class="max-w-4xl mx-auto px-6 text-center">
       
-      <!-- Redes Sociales -->
-      <div class="flex justify-center gap-8 mb-6">
+      <!-- Redes Sociales CON ICONOS REALISTAS -->
+      <div class="flex justify-center gap-10 mb-6">
         <a href="https://wa.me/5492604087086?text=Hola%20NeuroTech%20Soluciones!%20Me%20interesa%20inscribirme%20en%20el%20curso%20de%20IA%20Aplicada." 
            target="_blank"
-           class="group flex flex-col items-center gap-2 text-gray-400 hover:text-neuro-green transition-colors">
-          <div class="w-12 h-12 rounded-full border border-gray-700 bg-black/50 flex items-center justify-center group-hover:border-neuro-green group-hover:shadow-[0_0_15px_rgba(154,255,95,0.3)] transition-all">
-            <i data-lucide="message-circle" class="w-6 h-6"></i>
-          </div>
-          <span class="text-xs font-orbitron hidden md:block opacity-0 group-hover:opacity-100 transition-opacity">WhatsApp</span>
+           class="group flex flex-col items-center gap-2 hover:scale-110 transition-transform duration-300">
+          <img src="https://img.icons8.com/color/96/whatsapp--v1.png" width="48" height="48" alt="WhatsApp" class="drop-shadow-lg">
+          <span class="text-xs font-orbitron text-gray-400 group-hover:text-neuro-green transition-colors opacity-0 group-hover:opacity-100">WhatsApp</span>
         </a>
 
         <a href="https://www.instagram.com/neurotech.soluciones/" 
            target="_blank"
-           class="group flex flex-col items-center gap-2 text-gray-400 hover:text-[#E1306C] transition-colors">
-          <div class="w-12 h-12 rounded-full border border-gray-700 bg-black/50 flex items-center justify-center group-hover:border-[#E1306C] group-hover:shadow-[0_0_15px_rgba(225,48,108,0.3)] transition-all">
-            <i data-lucide="instagram" class="w-6 h-6"></i>
-          </div>
-          <span class="text-xs font-orbitron hidden md:block opacity-0 group-hover:opacity-100 transition-opacity">Instagram</span>
+           class="group flex flex-col items-center gap-2 hover:scale-110 transition-transform duration-300">
+          <img src="https://img.icons8.com/color/96/instagram-new--v1.png" width="48" height="48" alt="Instagram" class="drop-shadow-lg">
+          <span class="text-xs font-orbitron text-gray-400 group-hover:text-[#E1306C] transition-colors opacity-0 group-hover:opacity-100">Instagram</span>
         </a>
 
         <a href="https://www.youtube.com/@neurotech-soluciones" 
            target="_blank"
-           class="group flex flex-col items-center gap-2 text-gray-400 hover:text-[#FF0000] transition-colors">
-          <div class="w-12 h-12 rounded-full border border-gray-700 bg-black/50 flex items-center justify-center group-hover:border-[#FF0000] group-hover:shadow-[0_0_15px_rgba(255,0,0,0.3)] transition-all">
-            <i data-lucide="youtube" class="w-6 h-6"></i>
-          </div>
-          <span class="text-xs font-orbitron hidden md:block opacity-0 group-hover:opacity-100 transition-opacity">YouTube</span>
+           class="group flex flex-col items-center gap-2 hover:scale-110 transition-transform duration-300">
+          <img src="https://img.icons8.com/color/96/youtube-play.png" width="48" height="48" alt="YouTube" class="drop-shadow-lg">
+          <span class="text-xs font-orbitron text-gray-400 group-hover:text-[#FF0000] transition-colors opacity-0 group-hover:opacity-100">YouTube</span>
         </a>
       </div>
 
