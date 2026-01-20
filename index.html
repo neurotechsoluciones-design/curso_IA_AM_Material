@@ -25,13 +25,30 @@
               dark: '#0a0a0a',
               green: '#9AFF5F',
               blue: '#2100E5',
-              glass: 'rgba(255, 255, 255, 0.05)',
-              border: 'rgba(33, 0, 229, 0.5)'
+              glass: 'rgba(255, 255, 255, 0.03)',
+              border: 'rgba(255, 255, 255, 0.1)'
             }
           },
           fontFamily: {
             orbitron: ['Orbitron', 'sans-serif'],
             inter: ['Inter', 'sans-serif'],
+          },
+          animation: {
+            'spin-slow': 'spin 3s linear infinite',
+            'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'text-shimmer': 'text-shimmer 3s linear infinite',
+          },
+          keyframes: {
+            'text-shimmer': {
+              '0%, 100%': {
+                'background-size': '200% 200%',
+                'background-position': 'left center'
+              },
+              '50%': {
+                'background-size': '200% 200%',
+                'background-position': 'right center'
+              }
+            }
           }
         }
       }
@@ -41,24 +58,53 @@
   <style>
     body {
       background-color: #020202;
-      background-image: 
-        radial-gradient(circle at 50% 0%, rgba(33, 0, 229, 0.15), transparent 40%),
-        radial-gradient(circle at 80% 80%, rgba(154, 255, 95, 0.05), transparent 30%);
       color: #ffffff;
       font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* === ACETERNITY STYLE: GRID BACKGROUND === */
+    .bg-grid-pattern {
+      background-size: 40px 40px;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+      -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
     }
     
-    /* Efecto Glassmorphism refinado */
+    /* === ACETERNITY STYLE: GLASS CARDS === */
     .glass-panel {
-      background: rgba(10, 10, 10, 0.6);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(33, 0, 229, 0.3);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      background: rgba(10, 10, 10, 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
     }
     
     .glass-panel:hover {
-      border-color: rgba(154, 255, 95, 0.5);
-      transition: all 0.3s ease;
+      border-color: rgba(154, 255, 95, 0.4);
+      box-shadow: 0 0 30px -5px rgba(154, 255, 95, 0.15);
+      transform: translateY(-2px);
+    }
+
+    /* Brillo interno sutil al hover */
+    .glass-panel::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.06), transparent 40%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .glass-panel:hover::after {
+      opacity: 1;
     }
 
     /* Scrollbar personalizada */
@@ -76,6 +122,31 @@
       background: #9AFF5F; 
     }
 
+    /* Botón Cyberpunk */
+    .btn-cyber {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      z-index: 2;
+    }
+    .btn-cyber::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+      z-index: -1;
+    }
+    .btn-cyber:hover::before {
+      left: 100%;
+    }
+    .btn-cyber:active {
+      transform: scale(0.95);
+    }
+
     /* Animación del Toast */
     .toast-enter {
       transform: translateY(100%);
@@ -91,23 +162,32 @@
       opacity: 0;
       transition: all 0.3s ease;
     }
-
-    /* Utilidad para preservar saltos de línea en el copiado pero dar estilo */
-    .prompt-text {
-      white-space: pre-wrap; /* Mantiene los saltos de línea originales */
+    
+    /* Gradiente animado para texto */
+    .animate-text-gradient {
+      background: linear-gradient(to right, #ffffff, #9AFF5F, #2100E5, #ffffff);
+      background-size: 300%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: text-shimmer 6s linear infinite;
     }
   </style>
 </head>
-<body class="min-h-screen pb-20">
+<body class="min-h-screen pb-20 selection:bg-neuro-green selection:text-black relative">
+
+  <!-- Background Grid Overlay -->
+  <div class="fixed inset-0 bg-grid-pattern pointer-events-none z-[-1]"></div>
+  <div class="fixed inset-0 bg-gradient-to-b from-transparent via-neuro-black/50 to-neuro-black pointer-events-none z-[-1]"></div>
 
   <!-- Header -->
-  <header class="sticky top-0 z-50 glass-panel border-t-0 border-x-0 rounded-b-2xl mb-8">
+  <header class="sticky top-0 z-50 glass-panel border-t-0 border-x-0 rounded-b-2xl mb-8 backdrop-blur-xl bg-black/50">
     <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
       <div class="flex items-center gap-4">
         <!-- LOGO OFICIAL -->
-        <div class="w-20 h-20 rounded-2xl bg-black border-2 border-neuro-green shadow-[0_0_20px_rgba(154,255,95,0.4)] flex items-center justify-center overflow-hidden relative group hover:scale-105 transition-transform duration-300">
+        <div class="w-16 h-16 rounded-xl bg-black border border-neuro-green/30 shadow-[0_0_15px_rgba(154,255,95,0.2)] flex items-center justify-center overflow-hidden relative group hover:scale-105 transition-transform duration-300">
             <!-- Fondo sutil interno -->
-            <div class="absolute inset-0 bg-neuro-green opacity-10"></div>
+            <div class="absolute inset-0 bg-neuro-green/10"></div>
             <!-- Imagen ajustada -->
             <img src="https://github.com/neurotechsoluciones-design/neurotech-assets/blob/d40e800d52607451a69ec394b84db98fc36a8d82/logo_%20Neurotech_soluciones.png?raw=true" 
                  alt="NeuroTech Logo" 
@@ -115,14 +195,15 @@
         </div>
         
         <div class="hidden sm:block">
-            <h1 class="text-white font-orbitron font-bold text-lg leading-tight">NEUROTECH</h1>
-            <p class="text-neuro-green text-[10px] tracking-[0.2em] uppercase font-bold">Academy</p>
+            <h1 class="text-white font-orbitron font-bold text-lg leading-tight tracking-wider">NEUROTECH</h1>
+            <p class="text-neuro-green text-[10px] tracking-[0.3em] uppercase font-bold opacity-80">Academy</p>
         </div>
       </div>
       
       <div class="hidden md:block">
-        <span class="px-3 py-1 rounded border border-neuro-blue bg-neuro-blue/20 text-xs font-orbitron text-white animate-pulse">
-          ● EN VIVO
+        <span class="flex items-center gap-2 px-3 py-1 rounded-full border border-neuro-blue/50 bg-neuro-blue/10 text-[10px] font-orbitron text-neuro-blue font-bold tracking-widest shadow-[0_0_10px_rgba(33,0,229,0.2)]">
+          <span class="w-1.5 h-1.5 rounded-full bg-neuro-blue animate-pulse"></span>
+          EN VIVO
         </span>
       </div>
     </div>
@@ -132,38 +213,39 @@
   <main class="max-w-3xl mx-auto px-4 space-y-12">
 
     <!-- INTRODUCCIÓN -->
-    <div class="text-center mb-10">
-      <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white mb-3 text-shadow-glow">
-        PROMPTS <span class="text-neuro-green">MAESTROS</span>
+    <div class="text-center mb-16 pt-8">
+      <div class="inline-block mb-3 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[10px] text-gray-400 font-orbitron tracking-widest uppercase">
+        Material Exclusivo
+      </div>
+      <h2 class="text-4xl md:text-5xl font-orbitron font-black text-white mb-4 tracking-tight">
+        PROMPTS <span class="animate-text-gradient">MAESTROS</span>
       </h2>
-      <p class="text-gray-400 max-w-lg mx-auto">
-        Domina la comunicación con la IA utilizando las estructuras profesionales.
+      <p class="text-gray-400 max-w-lg mx-auto text-sm leading-relaxed">
+        Arquitectura de instrucciones avanzadas para dominar la comunicación con Modelos de Lenguaje Grande (LLMs).
       </p>
     </div>
 
     <!-- TARJETA PROMPT 1 -->
-    <article class="glass-panel rounded-2xl overflow-hidden relative group">
-      <!-- Decoración de esquina -->
-      <div class="absolute top-0 right-0 p-4 opacity-50">
-        <i data-lucide="cpu" class="text-neuro-blue w-12 h-12"></i>
-      </div>
+    <article class="glass-panel rounded-3xl p-1 relative group">
+      <!-- Glow effect container -->
+      <div class="absolute -inset-0.5 bg-gradient-to-r from-neuro-green to-neuro-blue opacity-10 group-hover:opacity-30 rounded-3xl blur transition duration-500"></div>
+      
+      <div class="relative bg-neuro-dark/90 h-full rounded-[20px] p-6 md:p-8 overflow-hidden">
+        <div class="relative z-10">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="bg-neuro-green/10 border border-neuro-green/30 text-neuro-green font-orbitron font-bold text-[10px] px-3 py-1 rounded-full tracking-wider">
+              FASE 01
+            </span>
+            <h3 class="text-xl font-orbitron font-bold text-white tracking-wide">Personalización Simple</h3>
+          </div>
 
-      <div class="p-6 md:p-8">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="bg-neuro-green text-black font-orbitron font-bold text-xs px-2 py-1 rounded">
-            FASE 1
-          </span>
-          <h3 class="text-xl font-orbitron font-bold text-white tracking-wide">Personalización Simple</h3>
-        </div>
+          <p class="text-sm text-gray-400 mb-6 font-light border-l-2 border-neuro-green/30 pl-4">
+            Configura la "personalidad" de tu asistente para evitar respuestas genéricas y obtener un feedback real.
+          </p>
 
-        <p class="text-sm text-gray-400 mb-4 italic">
-          Configura la "personalidad" de tu asistente para evitar respuestas genéricas.
-        </p>
-
-        <!-- Contenedor del Prompt -->
-        <div class="bg-black/60 rounded-xl border border-white/10 p-5 font-mono text-sm text-gray-300 leading-relaxed relative overflow-hidden">
-          
-          <div id="prompt-content-1">
+          <!-- Contenedor del Prompt -->
+          <div class="bg-black/80 rounded-xl border border-white/5 p-6 font-mono text-sm text-gray-300 leading-relaxed shadow-inner">
+            <div id="prompt-content-1">
 <div class="mb-4">No quiero que siempre me validez todo lo que diga quiero que seas crítico conmigo en los momentos que sea necesario, que seas asertivo y no me des la razón simplemente por dármela. Tomate el tiempo que necesites para razonar. Nunca uses guiones largos. Nunca uses la palabra "robusto".</div>
 
 <div class="mb-2"><strong class="text-neuro-green">personalizacion</strong></div>
@@ -171,185 +253,204 @@
 
 <div class="mb-2"><strong class="text-neuro-green">Reglas de comunicación</strong></div>
 <div class="mb-4">
-<div>- No me valides por default. Si algo está flojo o es mala idea, decímelo directo y proponé una alternativa mejor.</div>
-<div>- Sé asertivo/a, claro/a y práctico/a. Sin relleno.</div>
-<div>- Tomate el tiempo de razonar, pero entregá conclusiones y pasos. No muestres tu razonamiento interno.</div>
-<div>- Nunca uses guiones largos (—).</div>
+<div class="pl-2 border-l border-gray-700 hover:border-neuro-green/50 transition-colors">- No me valides por default. Si algo está flojo o es mala idea, decímelo directo y proponé una alternativa mejor.</div>
+<div class="pl-2 border-l border-gray-700 hover:border-neuro-green/50 transition-colors mt-1">- Sé asertivo/a, claro/a y práctico/a. Sin relleno.</div>
+<div class="pl-2 border-l border-gray-700 hover:border-neuro-green/50 transition-colors mt-1">- Tomate el tiempo de razonar, pero entregá conclusiones y pasos. No muestres tu razonamiento interno.</div>
+<div class="pl-2 border-l border-gray-700 hover:border-neuro-green/50 transition-colors mt-1">- Nunca uses guiones largos (—).</div>
 </div>
 
 <div class="mb-2"><strong class="text-neuro-green">Calidad y precisión</strong></div>
 <div>
-<div>- Si faltan datos críticos, pedime solo lo mínimo indispensable.</div>
-<div>- Si hay riesgo de error (fechas, precios, normas, “lo último”), verificá con web y citá fuentes.</div>
-<div>- Si no se puede asegurar algo, decilo y ofrecé 2 opciones con pros y contras.</div>
+<div class="pl-2 border-l border-gray-700 hover:border-neuro-green/50 transition-colors">- Si faltan datos críticos, pedime solo lo mínimo indispensable.</div>
+<div class="pl-2 border-l border-gray-700 hover:border-neuro-green/50 transition-colors mt-1">- Si hay riesgo de error (fechas, precios, normas, “lo último”), verificá con web y citá fuentes.</div>
+<div class="pl-2 border-l border-gray-700 hover:border-neuro-green/50 transition-colors mt-1">- Si no se puede asegurar algo, decilo y ofrecé 2 opciones con pros y contras.</div>
 </div>
+            </div>
           </div>
 
-        </div>
-
-        <!-- Botón de Acción -->
-        <div class="mt-6 flex justify-end">
-          <button onclick="copyToClipboard('prompt-content-1', this)" 
-                  class="flex items-center gap-2 bg-neuro-green hover:bg-white text-black font-orbitron font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(154,255,95,0.4)] hover:shadow-[0_0_25px_rgba(154,255,95,0.6)] transform active:scale-95 group-hover:translate-x-1">
-            <i data-lucide="copy" class="w-4 h-4"></i>
-            <span>COPIAR PROMPT</span>
-          </button>
+          <!-- Botón de Acción -->
+          <div class="mt-8 flex justify-end">
+            <button onclick="copyToClipboard('prompt-content-1', this)" 
+                    class="btn-cyber group/btn flex items-center gap-3 bg-neuro-green text-black font-orbitron font-bold py-3 px-8 rounded-xl hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(154,255,95,0.3)] hover:shadow-[0_0_30px_rgba(154,255,95,0.6)]">
+              <i data-lucide="copy" class="w-4 h-4 group-hover/btn:scale-110 transition-transform"></i>
+              <span>COPIAR</span>
+            </button>
+          </div>
         </div>
       </div>
     </article>
 
 
     <!-- TARJETA PROMPT 2 -->
-    <article class="glass-panel rounded-2xl overflow-hidden relative group">
-      <div class="absolute top-0 right-0 p-4 opacity-50">
-        <i data-lucide="sparkles" class="text-neuro-blue w-12 h-12"></i>
-      </div>
+    <article class="glass-panel rounded-3xl p-1 relative group">
+      <div class="absolute -inset-0.5 bg-gradient-to-r from-neuro-blue to-purple-600 opacity-10 group-hover:opacity-30 rounded-3xl blur transition duration-500"></div>
 
-      <div class="p-6 md:p-8">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="bg-neuro-blue text-white font-orbitron font-bold text-xs px-2 py-1 rounded">
-            FASE 2
-          </span>
-          <h3 class="text-xl font-orbitron font-bold text-white tracking-wide">Prompt Maestro</h3>
-        </div>
+      <div class="relative bg-neuro-dark/90 h-full rounded-[20px] p-6 md:p-8 overflow-hidden">
+        <div class="relative z-10">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="bg-neuro-blue/10 border border-neuro-blue/30 text-neuro-blue font-orbitron font-bold text-[10px] px-3 py-1 rounded-full tracking-wider">
+              FASE 02
+            </span>
+            <h3 class="text-xl font-orbitron font-bold text-white tracking-wide">Prompt Maestro</h3>
+          </div>
 
-        <p class="text-sm text-gray-400 mb-4 italic">
-          Convierte a la IA en un Ingeniero de Prompts para mejorar tus propias instrucciones.
-        </p>
+          <p class="text-sm text-gray-400 mb-6 font-light border-l-2 border-neuro-blue/30 pl-4">
+            Metaprompting: Convierte a la IA en un Ingeniero de Prompts para mejorar tus propias instrucciones recursivamente.
+          </p>
 
-        <div class="bg-black/60 rounded-xl border border-white/10 p-5 font-mono text-sm text-gray-300 leading-relaxed relative overflow-hidden">
-          
-          <div id="prompt-content-2">
+          <div class="bg-black/80 rounded-xl border border-white/5 p-6 font-mono text-sm text-gray-300 leading-relaxed shadow-inner">
+            <div id="prompt-content-2">
 <div class="mb-4">
   <strong class="text-neuro-green">Rol:</strong><br>
   Actúa como ingeniero de prompts experto, especializado en optimización y diseño de instrucciones para IA.
 </div>
 
 <div class="mb-4">
-  <strong class="text-neuro-green">Objetivo:</strong><br>
-  Analizar y optimizar el prompt proporcionado, aplicando las mejores prácticas de prompt engineering para hacerlo claro, preciso y efectivo.
+  <strong class="text-neuro-green">Contexto:</strong><br>
+  Voy a pegar un prompt que quiero mejorar. Necesito que lo optimices aplicando las mejores prácticas de prompt engineering para hacerlo claro, preciso y efectivo.
 </div>
 
 <div class="mb-4">
   <strong class="text-neuro-green">Instrucciones:</strong>
   
-  <div class="mt-2 space-y-2">
-    <div>1. Analiza el prompt original y detecta ambigüedades, falta de contexto o problemas de formato.</div>
-    <div>2. Formula preguntas necesarias al usuario antes de optimizar.
-      <div class="pl-4 text-gray-400 text-xs mt-1 border-l-2 border-neuro-green/30">
-        - Regla de Oro de Numeración: Todas las opciones de respuesta deben seguir una secuencia numérica única e incremental (1, 2, 3, 4, 5... N). No reinicies la numeración en cada pregunta.<br>
-        - Las preguntas deben ser breves y las opciones simples para reducir la carga cognitiva.<br>
-        - Siempre incluye una opción final *“Otro / aclarar”* para permitir respuestas libres.
+  <div class="mt-2 space-y-4">
+    <div>
+      <div class="font-bold text-white mb-1">1) Analiza el prompt original y detecta:</div>
+      <div class="pl-4 border-l border-gray-700 text-gray-400 text-xs">
+        - ambigüedades<br>
+        - falta de contexto<br>
+        - contradicciones<br>
+        - redundancias<br>
+        - problemas de formato
       </div>
     </div>
-    <div>3. Espera las respuestas del usuario antes de continuar.</div>
-    <div>4. Una vez recibidas, optimiza el prompt y entrégalo en formato completo, estructurado con encabezados:
-       <div class="pl-4 text-gray-400 text-xs mt-1 border-l-2 border-neuro-green/30">
-         - **Rol** - **Objetivo** - **Contexto** (si aplica)<br>
-         - **Instrucciones**
-       </div>
+
+    <div>
+      <div class="font-bold text-white mb-1">2) Formula preguntas necesarias al usuario antes de optimizar, PERO con esta regla estricta:</div>
+      <div class="pl-4 border-l border-gray-700 text-gray-400 text-xs">
+        - Solo haz preguntas si la respuesta producirá un cambio significativo en el resultado final.<br>
+        - Prohibido hacer preguntas por “curiosidad” o para ampliar contexto que no sea esencial.
+      </div>
     </div>
-    <div>5. Explica las mejoras aplicadas y devuelve el prompt final.</div>
+
+    <div>
+      <div class="font-bold text-white mb-1">3) Regla de Oro de Numeración (OBLIGATORIA):</div>
+      <div class="pl-4 border-l border-gray-700 text-gray-400 text-xs">
+        - Las preguntas NO llevan número.<br>
+        - Las opciones SÍ llevan números consecutivos y únicos (1, 2, 3, 4, 5... N).<br>
+        - La numeración NO se reinicia entre preguntas.<br>
+        - Siempre incluye una opción final: “Otro / aclarar”.<br>
+        - Agrega esta nota al final de las opciones: "Respondé con el número de la opción elegida. Si seleccionás 'Otro / aclarar', escribí tu aclaración en texto libre."
+      </div>
+    </div>
+
+    <div>
+      <div class="font-bold text-white mb-1">4) Luego entrega el prompt optimizado final listo para usar, con esta estructura:</div>
+      <div class="pl-4 border-l border-gray-700 text-gray-400 text-xs">
+        - Rol<br>
+        - Contexto (si aplica)<br>
+        - Instrucciones
+      </div>
+    </div>
+
+    <div>
+      <div class="font-bold text-white mb-1">5) Entregables (en este orden):</div>
+      <div class="pl-4 border-l border-gray-700 text-gray-400 text-xs">
+        A) Prompt optimizado final (primero)<br>
+        B) Mejoras aplicadas (máximo 5 bullets, sin teoría)
+      </div>
+    </div>
   </div>
 </div>
 
-<div>
+<div class="mt-6 pt-4 border-t border-white/5">
   <strong class="text-neuro-green">Prompt original:</strong><br>
-  [Inserta aquí el prompt a optimizar]
+  <span class="text-gray-500">[PEGAR AQUÍ EL PROMPT A OPTIMIZAR]</span>
 </div>
+            </div>
           </div>
 
-        </div>
-
-        <div class="mt-6 flex justify-end">
-          <button onclick="copyToClipboard('prompt-content-2', this)" 
-                  class="flex items-center gap-2 bg-transparent border-2 border-neuro-green text-neuro-green hover:bg-neuro-green hover:text-black font-orbitron font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-[0_0_10px_rgba(154,255,95,0.1)] transform active:scale-95">
-            <i data-lucide="copy" class="w-4 h-4"></i>
-            <span>COPIAR PROMPT</span>
-          </button>
+          <div class="mt-8 flex justify-end">
+            <button onclick="copyToClipboard('prompt-content-2', this)" 
+                    class="btn-cyber group/btn flex items-center gap-3 bg-transparent border border-neuro-blue text-neuro-blue hover:bg-neuro-blue hover:text-white font-orbitron font-bold py-3 px-8 rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(33,0,229,0.1)] hover:shadow-[0_0_30px_rgba(33,0,229,0.5)]">
+              <i data-lucide="copy" class="w-4 h-4 group-hover/btn:scale-110 transition-transform"></i>
+              <span>COPIAR</span>
+            </button>
+          </div>
         </div>
       </div>
     </article>
 
 
     <!-- SECCIÓN EDUCATIVA: TÉCNICA R.C.I. -->
-    <section class="glass-panel rounded-2xl p-6 md:p-8 border-t-4 border-t-neuro-blue relative overflow-hidden">
+    <section class="glass-panel rounded-3xl p-8 border border-white/5 relative overflow-hidden group">
         <!-- Background decoration -->
-        <div class="absolute -right-10 -top-10 w-40 h-40 bg-neuro-blue rounded-full filter blur-[80px] opacity-20 pointer-events-none"></div>
+        <div class="absolute -right-20 -top-20 w-60 h-60 bg-neuro-blue rounded-full filter blur-[100px] opacity-10 group-hover:opacity-20 transition-opacity duration-700"></div>
 
-        <div class="flex items-center gap-3 mb-6 relative z-10">
-            <div class="bg-neuro-blue/20 p-2 rounded-lg border border-neuro-blue">
+        <div class="flex items-center gap-4 mb-8 relative z-10">
+            <div class="bg-black/50 p-3 rounded-xl border border-neuro-blue/30 shadow-[0_0_15px_rgba(33,0,229,0.2)]">
                 <i data-lucide="brain-circuit" class="text-neuro-green w-6 h-6"></i>
             </div>
             <div>
-                <h3 class="text-xl font-orbitron font-bold text-white">LA FÓRMULA R.C.I.</h3>
-                <p class="text-xs text-gray-400 font-inter uppercase tracking-wider">Estructura esencial de un prompt</p>
+                <h3 class="text-2xl font-orbitron font-bold text-white">LA FÓRMULA R.C.I.</h3>
+                <p class="text-[10px] text-neuro-green font-orbitron uppercase tracking-[0.2em]">Framework Esencial</p>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
             <!-- ROL -->
-            <div class="bg-black/40 border border-neuro-green/30 rounded-xl p-4 hover:bg-neuro-green/5 transition-colors">
-                <div class="text-neuro-green font-orbitron font-bold text-lg mb-2 flex items-center gap-2">
-                    <span class="w-6 h-6 rounded-full border border-neuro-green flex items-center justify-center text-xs">R</span>
+            <div class="group/card bg-black/40 border border-white/5 rounded-2xl p-6 hover:bg-neuro-green/5 transition-all hover:border-neuro-green/30">
+                <div class="text-neuro-green font-orbitron font-bold text-lg mb-3 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-neuro-green/10 flex items-center justify-center text-sm shadow-[0_0_10px_rgba(154,255,95,0.2)]">R</span>
                     ROL
                 </div>
-                <p class="text-sm text-gray-300 mb-2 font-bold">"¿Quién eres?"</p>
-                <p class="text-xs text-gray-400 leading-relaxed">
-                    Define la experticia de la IA. <br>
-                    <span class="italic text-neuro-green/80">Ej: "Actúa como experto en Marketing..."</span>
+                <p class="text-xs text-gray-400 leading-relaxed font-light">
+                    Define la <strong class="text-white">identidad y experticia</strong> de la IA. Es el "quién".<br><br>
+                    <span class="italic text-neuro-green/60 text-[10px]">Ej: "Actúa como experto en Marketing..."</span>
                 </p>
             </div>
 
             <!-- CONTEXTO -->
-            <div class="bg-black/40 border border-neuro-blue/30 rounded-xl p-4 hover:bg-neuro-blue/5 transition-colors">
-                <div class="text-neuro-blue font-orbitron font-bold text-lg mb-2 flex items-center gap-2">
-                    <span class="w-6 h-6 rounded-full border border-neuro-blue flex items-center justify-center text-xs">C</span>
+            <div class="group/card bg-black/40 border border-white/5 rounded-2xl p-6 hover:bg-neuro-blue/5 transition-all hover:border-neuro-blue/30">
+                <div class="text-neuro-blue font-orbitron font-bold text-lg mb-3 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-neuro-blue/10 flex items-center justify-center text-sm shadow-[0_0_10px_rgba(33,0,229,0.3)]">C</span>
                     CONTEXTO
                 </div>
-                <p class="text-sm text-gray-300 mb-2 font-bold">"¿Dónde estamos?"</p>
-                <p class="text-xs text-gray-400 leading-relaxed">
-                    Antecedentes y situación actual. <br>
-                    <span class="italic text-neuro-blue/80">Ej: "Tengo un negocio de turismo y..."</span>
+                <p class="text-xs text-gray-400 leading-relaxed font-light">
+                    Establece el <strong class="text-white">escenario y los datos</strong> previos. Es el "dónde".<br><br>
+                    <span class="italic text-neuro-blue/60 text-[10px]">Ej: "Tengo un negocio de turismo y..."</span>
                 </p>
             </div>
 
-            <!-- INSTRUCCIÓN (Actualizado a Verde NeuroTech) -->
-            <div class="bg-black/40 border border-neuro-green/30 rounded-xl p-4 hover:bg-neuro-green/5 transition-colors">
-                <div class="text-neuro-green font-orbitron font-bold text-lg mb-2 flex items-center gap-2">
-                    <span class="w-6 h-6 rounded-full border border-neuro-green flex items-center justify-center text-xs">I</span>
+            <!-- INSTRUCCIÓN -->
+            <div class="group/card bg-black/40 border border-white/5 rounded-2xl p-6 hover:bg-neuro-green/5 transition-all hover:border-neuro-green/30">
+                <div class="text-neuro-green font-orbitron font-bold text-lg mb-3 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-neuro-green/10 flex items-center justify-center text-sm shadow-[0_0_10px_rgba(154,255,95,0.2)]">I</span>
                     INSTRUCCIÓN
                 </div>
-                <p class="text-sm text-gray-300 mb-2 font-bold">"¿Qué hago?"</p>
-                <p class="text-xs text-gray-400 leading-relaxed">
-                    La tarea exacta y el formato. <br>
-                    <span class="italic text-neuro-green/80">Ej: "Crea una tabla con 3 ideas..."</span>
+                <p class="text-xs text-gray-400 leading-relaxed font-light">
+                    Ordena la <strong class="text-white">acción específica</strong> y el formato de salida. Es el "qué".<br><br>
+                    <span class="italic text-neuro-green/60 text-[10px]">Ej: "Crea una tabla con 3 ideas..."</span>
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- NUEVA SECCIÓN: EJEMPLO DE USO -->
-    <article class="glass-panel rounded-2xl overflow-hidden relative group">
-      <div class="absolute top-0 right-0 p-4 opacity-50">
-        <i data-lucide="map" class="text-neuro-blue w-12 h-12"></i>
-      </div>
+    <!-- EJEMPLO DE USO -->
+    <article class="glass-panel rounded-3xl p-1 relative group mt-12">
+      <div class="absolute -inset-0.5 bg-gradient-to-br from-gray-700 to-black opacity-20 group-hover:opacity-40 rounded-3xl blur transition duration-500"></div>
 
-      <div class="p-6 md:p-8">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="bg-neuro-blue text-white font-orbitron font-bold text-xs px-2 py-1 rounded">
-            EJEMPLO
-          </span>
-          <h3 class="text-xl font-orbitron font-bold text-white tracking-wide">Ejemplo Práctico R.C.I.</h3>
-        </div>
+      <div class="relative bg-neuro-dark/95 h-full rounded-[20px] p-6 md:p-8 overflow-hidden">
+        <div class="relative z-10">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="bg-white/10 text-white font-orbitron font-bold text-[10px] px-3 py-1 rounded-full border border-white/20">
+              CASO PRÁCTICO
+            </span>
+            <h3 class="text-xl font-orbitron font-bold text-white tracking-wide">Ejemplo Turismo</h3>
+          </div>
 
-        <p class="text-sm text-gray-400 mb-4 italic">
-          Así es como se aplica la estructura en un caso real de turismo.
-        </p>
-
-        <div class="bg-black/60 rounded-xl border border-white/10 p-5 font-mono text-sm text-gray-300 leading-relaxed relative overflow-hidden">
-          
-          <div id="prompt-content-example">
+          <div class="bg-black/60 rounded-xl border border-white/5 p-6 font-mono text-sm text-gray-300 leading-relaxed">
+            <div id="prompt-content-example">
 <div class="mb-4">
   <strong class="text-neuro-green">R (ROL):</strong><br>
   Actuá como un experto en organización de viajes turísticos y optimización de costos, con experiencia en planificación de itinerarios y búsqueda de vuelos económicos.
@@ -357,16 +458,12 @@
 
 <div class="mb-4">
   <strong class="text-neuro-green">C (CONTEXTO):</strong><br>
-  <div class="mt-1 space-y-1">
-    <div>Origen del viaje: San Rafael, Mendoza (Argentina)</div>
-    <div>Destino: Brasil</div>
-    <div>Cantidad de personas: [COMPLETAR – ej. 1 persona, 2 adultos, familia, amigos]</div>
-    <div>Tipo de viaje: turismo y descanso</div>
-    <div>Duración del viaje: 7 días</div>
-    <div>Medio de transporte principal: avión</div>
-    <div>Meses posibles de viaje: febrero o marzo</div>
-    <div>Prioridad: encontrar vuelos baratos y la opción más económica disponible</div>
-    <div>Moneda de referencia: pesos argentinos (ARS)</div>
+  <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-gray-400">
+    <div class="bg-white/5 p-2 rounded">Origen: San Rafael, Mendoza</div>
+    <div class="bg-white/5 p-2 rounded">Destino: Brasil</div>
+    <div class="bg-white/5 p-2 rounded">Duración: 7 días</div>
+    <div class="bg-white/5 p-2 rounded">Transporte: Avión</div>
+    <div class="bg-white/5 p-2 rounded col-span-1 md:col-span-2">Prioridad: Economía y Vuelos Baratos</div>
   </div>
 </div>
 
@@ -377,56 +474,54 @@
     <div>Sugerí estrategias para encontrar vuelos más económicos (fechas flexibles, escalas, horarios, anticipación, etc.).</div>
     <div>Organizá una agenda de viaje día por día, acorde a un viaje de turismo y descanso.</div>
     
-    <div class="mt-4">
-      <div class="text-neuro-green font-bold text-xs mb-1 uppercase tracking-wide">Incluí en la respuesta:</div>
-      <div class="pl-2 border-l border-neuro-green/30">
-        <div>Un resumen general del viaje</div>
-        <div>Actividades recomendadas para cada día</div>
-        <div>Consejos prácticos para ahorrar dinero durante el viaje</div>
+    <div class="mt-4 p-3 bg-neuro-green/5 border-l-2 border-neuro-green rounded-r-lg">
+      <div class="text-neuro-green font-bold text-xs mb-1 uppercase tracking-wide">Output Requerido:</div>
+      <div class="pl-2">
+        <div>• Resumen general</div>
+        <div>• Actividades diarias</div>
+        <div>• Tips de ahorro</div>
       </div>
     </div>
-
-    <div class="mt-2 italic text-xs text-gray-400">Presentá la información de forma clara, simple y ordenada.</div>
   </div>
 </div>
+            </div>
           </div>
 
-        </div>
-
-        <div class="mt-6 flex justify-end">
-          <button onclick="copyToClipboard('prompt-content-example', this)" 
-                  class="flex items-center gap-2 bg-transparent border-2 border-neuro-green text-neuro-green hover:bg-neuro-green hover:text-black font-orbitron font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-[0_0_10px_rgba(154,255,95,0.1)] transform active:scale-95">
-            <i data-lucide="copy" class="w-4 h-4"></i>
-            <span>COPIAR EJEMPLO</span>
-          </button>
+          <div class="mt-6 flex justify-end">
+            <button onclick="copyToClipboard('prompt-content-example', this)" 
+                    class="btn-cyber flex items-center gap-2 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white font-orbitron text-xs font-bold py-3 px-6 rounded-lg transition-all border border-white/10">
+              <i data-lucide="copy" class="w-3 h-3"></i>
+              <span>COPIAR EJEMPLO</span>
+            </button>
+          </div>
         </div>
       </div>
     </article>
 
 
-    <!-- SECCIÓN RECURSOS / DRIVE -->
+    <!-- SECCIÓN RECURSOS / DRIVE (Estilo Bento Grid Grande) -->
     <section class="mt-16 mb-20">
-      <div class="glass-panel rounded-2xl p-1 bg-gradient-to-r from-neuro-blue to-purple-900 border-none">
-        <div class="bg-neuro-dark rounded-xl p-8 h-full flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+      <div class="glass-panel rounded-3xl p-1 bg-gradient-to-r from-neuro-blue/50 to-purple-900/50 border-none group hover:scale-[1.01] transition-transform duration-500">
+        <div class="bg-neuro-dark rounded-[22px] p-8 h-full flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
           
           <!-- Fondo decorativo sutil -->
-          <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+          <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 mix-blend-overlay"></div>
+          <div class="absolute -right-20 -bottom-40 w-80 h-80 bg-neuro-blue rounded-full filter blur-[120px] opacity-20 group-hover:opacity-30 transition-opacity"></div>
 
           <div class="relative z-10 text-center md:text-left">
-            <h3 class="text-2xl font-orbitron font-bold text-white mb-2">
-              <i data-lucide="folder-open" class="inline-block mr-2 text-neuro-green w-6 h-6"></i>
-              RECURSOS DE CLASE
+            <h3 class="text-3xl font-orbitron font-bold text-white mb-3">
+              Recursos de Clase
             </h3>
-            <p class="text-gray-300 text-sm max-w-md">
-              Accede a la carpeta compartida donde encontrarás todo el material, PDFs y las conclusiones que surjan durante la sesión en vivo.
+            <p class="text-gray-400 text-sm max-w-md font-light">
+              Repositorio centralizado. Accede a PDFs, presentaciones y conclusiones en vivo.
             </p>
           </div>
 
           <div class="relative z-10">
             <a href="https://docs.google.com/document/d/1c9XH_-VPwVup4u5ZEOzC0SIv5sO_kDjoNkhSxD9N6dk/edit?usp=sharing" 
                target="_blank"
-               class="flex items-center gap-3 bg-white text-neuro-blue font-bold py-4 px-8 rounded-xl hover:bg-neuro-green hover:text-black transition-all duration-300 shadow-lg group">
-              <span class="font-orbitron tracking-wide">ABRIR DRIVE</span>
+               class="btn-cyber flex items-center gap-4 bg-white text-neuro-blue font-bold py-4 px-10 rounded-xl hover:bg-neuro-green hover:text-black shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(154,255,95,0.5)] group-hover:scale-105 transition-transform">
+              <span class="font-orbitron tracking-widest text-sm">ABRIR DRIVE</span>
               <i data-lucide="external-link" class="w-5 h-5 group-hover:rotate-45 transition-transform"></i>
             </a>
           </div>
@@ -438,86 +533,88 @@
   </main>
 
   <!-- Footer con Redes Sociales -->
-  <footer class="glass-panel border-b-0 border-x-0 rounded-t-2xl py-8 mt-12">
+  <footer class="glass-panel border-b-0 border-x-0 rounded-t-3xl py-12 mt-12 bg-black/60">
     <div class="max-w-4xl mx-auto px-6 text-center">
       
-      <!-- Redes Sociales CON ICONOS REALISTAS -->
-      <div class="flex justify-center gap-10 mb-6">
+      <!-- Redes Sociales CON ICONOS REALISTAS Y EFECTO HOVER -->
+      <div class="flex justify-center gap-12 mb-8">
         <a href="https://wa.me/5492604087086?text=Hola%20NeuroTech%20Soluciones!%20Me%20interesa%20inscribirme%20en%20el%20curso%20de%20IA%20Aplicada." 
            target="_blank"
-           class="group flex flex-col items-center gap-2 hover:scale-110 transition-transform duration-300">
-          <img src="https://img.icons8.com/color/96/whatsapp--v1.png" width="48" height="48" alt="WhatsApp" class="drop-shadow-lg">
-          <span class="text-xs font-orbitron text-gray-400 group-hover:text-neuro-green transition-colors opacity-0 group-hover:opacity-100">WhatsApp</span>
+           class="group flex flex-col items-center gap-3 transition-transform duration-300 hover:-translate-y-2">
+          <div class="relative">
+            <div class="absolute inset-0 bg-green-500 blur-lg opacity-0 group-hover:opacity-40 transition-opacity"></div>
+            <img src="https://img.icons8.com/color/96/whatsapp--v1.png" width="48" height="48" alt="WhatsApp" class="relative z-10 drop-shadow-2xl">
+          </div>
+          <span class="text-[10px] font-orbitron text-gray-500 group-hover:text-neuro-green transition-colors uppercase tracking-widest">WhatsApp</span>
         </a>
 
         <a href="https://www.instagram.com/neurotech.soluciones/" 
            target="_blank"
-           class="group flex flex-col items-center gap-2 hover:scale-110 transition-transform duration-300">
-          <img src="https://img.icons8.com/color/96/instagram-new--v1.png" width="48" height="48" alt="Instagram" class="drop-shadow-lg">
-          <span class="text-xs font-orbitron text-gray-400 group-hover:text-[#E1306C] transition-colors opacity-0 group-hover:opacity-100">Instagram</span>
+           class="group flex flex-col items-center gap-3 transition-transform duration-300 hover:-translate-y-2">
+          <div class="relative">
+             <div class="absolute inset-0 bg-pink-500 blur-lg opacity-0 group-hover:opacity-40 transition-opacity"></div>
+             <img src="https://img.icons8.com/color/96/instagram-new--v1.png" width="48" height="48" alt="Instagram" class="relative z-10 drop-shadow-2xl">
+          </div>
+          <span class="text-[10px] font-orbitron text-gray-500 group-hover:text-[#E1306C] transition-colors uppercase tracking-widest">Instagram</span>
         </a>
 
         <a href="https://www.youtube.com/@neurotech-soluciones" 
            target="_blank"
-           class="group flex flex-col items-center gap-2 hover:scale-110 transition-transform duration-300">
-          <img src="https://img.icons8.com/color/96/youtube-play.png" width="48" height="48" alt="YouTube" class="drop-shadow-lg">
-          <span class="text-xs font-orbitron text-gray-400 group-hover:text-[#FF0000] transition-colors opacity-0 group-hover:opacity-100">YouTube</span>
+           class="group flex flex-col items-center gap-3 transition-transform duration-300 hover:-translate-y-2">
+          <div class="relative">
+            <div class="absolute inset-0 bg-red-600 blur-lg opacity-0 group-hover:opacity-40 transition-opacity"></div>
+            <img src="https://img.icons8.com/color/96/youtube-play.png" width="48" height="48" alt="YouTube" class="relative z-10 drop-shadow-2xl">
+          </div>
+          <span class="text-[10px] font-orbitron text-gray-500 group-hover:text-[#FF0000] transition-colors uppercase tracking-widest">YouTube</span>
         </a>
       </div>
 
-      <div class="text-gray-600 text-xs font-inter border-t border-white/5 pt-6">
-        <p>NeuroTech Academy © 2026. Material exclusivo para alumnos.</p>
-        <p class="mt-2">San Rafael, Mendoza</p>
+      <div class="text-gray-600 text-xs font-inter border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p>NeuroTech Academy © 2026. Material exclusivo.</p>
+        <p class="flex items-center gap-2">
+           <span class="w-1.5 h-1.5 rounded-full bg-neuro-green"></span>
+           San Rafael, Mendoza
+        </p>
       </div>
     </div>
   </footer>
 
-  <!-- Toast Notification (Oculto por defecto) -->
-  <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-neuro-green text-black px-6 py-3 rounded-full shadow-[0_0_20px_rgba(154,255,95,0.5)] flex items-center gap-3 z-50 transition-all duration-300 opacity-0 translate-y-20 pointer-events-none">
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-neuro-green text-black px-6 py-3 rounded-xl shadow-[0_0_30px_rgba(154,255,95,0.4)] flex items-center gap-3 z-50 transition-all duration-300 opacity-0 translate-y-10 pointer-events-none border border-white/20">
     <i data-lucide="check-circle-2" class="w-5 h-5"></i>
-    <span class="font-orbitron font-bold text-sm">¡PROMPT COPIADO!</span>
+    <span class="font-orbitron font-bold text-sm tracking-wide">COPIADO AL PORTAPAPELES</span>
   </div>
 
   <script>
-    // Inicializar iconos
     lucide.createIcons();
 
     function copyToClipboard(elementId, btnElement) {
-      // Obtener el elemento
       const element = document.getElementById(elementId);
-      
-      // Obtener el texto. innerText respeta los saltos de línea de los elementos block (divs, p, etc.)
-      // Esto asegura que al pegar en ChatGPT se vea estructurado.
       const textToCopy = element.innerText;
       
-      // Copiar al portapapeles
       navigator.clipboard.writeText(textToCopy).then(() => {
-        // Feedback en el botón
         const originalContent = btnElement.innerHTML;
         
-        btnElement.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i><span>¡LISTO!</span>`;
+        btnElement.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i><span>LISTO</span>`;
         lucide.createIcons();
         
-        // Feedback visual tipo Toast
         showToast();
 
-        // Restaurar botón después de 2 segundos
         setTimeout(() => {
           btnElement.innerHTML = originalContent;
           lucide.createIcons();
         }, 2000);
       }).catch(err => {
-        console.error('Error al copiar: ', err);
-        alert('No se pudo copiar el texto automáticamente.');
+        console.error('Error:', err);
       });
     }
 
     function showToast() {
       const toast = document.getElementById('toast');
-      toast.classList.remove('opacity-0', 'translate-y-20', 'pointer-events-none');
+      toast.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
       
       setTimeout(() => {
-        toast.classList.add('opacity-0', 'translate-y-20', 'pointer-events-none');
+        toast.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
       }, 2500);
     }
   </script>
