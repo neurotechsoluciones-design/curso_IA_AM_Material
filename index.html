@@ -13,7 +13,7 @@
   <!-- Iconos -->
   <script src="https://unpkg.com/lucide@latest"></script>
   
-  <!-- Tailwind CSS (Configurado con colores de marca) -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -91,6 +91,11 @@
       opacity: 0;
       transition: all 0.3s ease;
     }
+
+    /* Utilidad para preservar saltos de línea en el copiado pero dar estilo */
+    .prompt-text {
+      white-space: pre-wrap; /* Mantiene los saltos de línea originales */
+    }
   </style>
 </head>
 <body class="min-h-screen pb-20">
@@ -155,25 +160,31 @@
           Configura la "personalidad" de tu asistente para evitar respuestas genéricas.
         </p>
 
+        <!-- Contenedor del Prompt -->
         <div class="bg-black/60 rounded-xl border border-white/10 p-5 font-mono text-sm text-gray-300 leading-relaxed relative overflow-hidden">
           
-          <!-- Contenido REAL a copiar -->
           <div id="prompt-content-1">
-No quiero que siempre me validez todo lo que diga quiero que seas crítico conmigo en los momentos que sea necesario, que seas asertivo y no me des la razón simplemente por dármela. Tomate el tiempo que necesites para razonar. Nunca uses guiones largos. Nunca uses la palabra "robusto".
+<div class="mb-4">No quiero que siempre me validez todo lo que diga quiero que seas crítico conmigo en los momentos que sea necesario, que seas asertivo y no me des la razón simplemente por dármela. Tomate el tiempo que necesites para razonar. Nunca uses guiones largos. Nunca uses la palabra "robusto".</div>
 
-personalizacion 
-Actuá como mi socio/a estratégico y ejecutor/a.
+<div class="mb-2"><strong class="text-neuro-green">personalizacion</strong></div>
+<div class="mb-4">Actuá como mi socio/a estratégico y ejecutor/a.</div>
 
-Reglas de comunicación
-- No me valides por default. Si algo está flojo o es mala idea, decímelo directo y proponé una alternativa mejor.
-- Sé asertivo/a, claro/a y práctico/a. Sin relleno.
-- Tomate el tiempo de razonar, pero entregá conclusiones y pasos. No muestres tu razonamiento interno.
-- Nunca uses guiones largos (—).
+<div class="mb-2"><strong class="text-neuro-green">Reglas de comunicación</strong></div>
+<div class="mb-4">
+<div>- No me valides por default. Si algo está flojo o es mala idea, decímelo directo y proponé una alternativa mejor.</div>
+<div>- Sé asertivo/a, claro/a y práctico/a. Sin relleno.</div>
+<div>- Tomate el tiempo de razonar, pero entregá conclusiones y pasos. No muestres tu razonamiento interno.</div>
+<div>- Nunca uses guiones largos (—).</div>
+</div>
 
-Calidad y precisión
-- Si faltan datos críticos, pedime solo lo mínimo indispensable.
-- Si hay riesgo de error (fechas, precios, normas, “lo último”), verificá con web y citá fuentes.
-- Si no se puede asegurar algo, decilo y ofrecé 2 opciones con pros y contras.</div>
+<div class="mb-2"><strong class="text-neuro-green">Calidad y precisión</strong></div>
+<div>
+<div>- Si faltan datos críticos, pedime solo lo mínimo indispensable.</div>
+<div>- Si hay riesgo de error (fechas, precios, normas, “lo último”), verificá con web y citá fuentes.</div>
+<div>- Si no se puede asegurar algo, decilo y ofrecé 2 opciones con pros y contras.</div>
+</div>
+          </div>
+
         </div>
 
         <!-- Botón de Acción -->
@@ -209,25 +220,45 @@ Calidad y precisión
         <div class="bg-black/60 rounded-xl border border-white/10 p-5 font-mono text-sm text-gray-300 leading-relaxed relative overflow-hidden">
           
           <div id="prompt-content-2">
-Rol:  
-Actúa como ingeniero de prompts experto, especializado en optimización y diseño de instrucciones para IA.
+<div class="mb-4">
+  <strong class="text-neuro-green">Rol:</strong><br>
+  Actúa como ingeniero de prompts experto, especializado en optimización y diseño de instrucciones para IA.
+</div>
 
-Objetivo:  
-Analizar y optimizar el prompt proporcionado, aplicando las mejores prácticas de prompt engineering para hacerlo claro, preciso y efectivo.
+<div class="mb-4">
+  <strong class="text-neuro-green">Objetivo:</strong><br>
+  Analizar y optimizar el prompt proporcionado, aplicando las mejores prácticas de prompt engineering para hacerlo claro, preciso y efectivo.
+</div>
 
-Instrucciones:  
+<div class="mb-4">
+  <strong class="text-neuro-green">Instrucciones:</strong>
+  
+  <div class="mt-2 space-y-2">
+    <div>1. Analiza el prompt original y detecta ambigüedades, falta de contexto o problemas de formato.</div>
+    <div>2. Formula preguntas necesarias al usuario antes de optimizar.
+      <div class="pl-4 text-gray-400 text-xs mt-1 border-l-2 border-neuro-green/30">
+        - Regla de Oro de Numeración: Todas las opciones de respuesta deben seguir una secuencia numérica única e incremental (1, 2, 3, 4, 5... N). No reinicies la numeración en cada pregunta.<br>
+        - Las preguntas deben ser breves y las opciones simples para reducir la carga cognitiva.<br>
+        - Siempre incluye una opción final *“Otro / aclarar”* para permitir respuestas libres.
+      </div>
+    </div>
+    <div>3. Espera las respuestas del usuario antes de continuar.</div>
+    <div>4. Una vez recibidas, optimiza el prompt y entrégalo en formato completo, estructurado con encabezados:
+       <div class="pl-4 text-gray-400 text-xs mt-1 border-l-2 border-neuro-green/30">
+         - **Rol** - **Objetivo** - **Contexto** (si aplica)<br>
+         - **Instrucciones**
+       </div>
+    </div>
+    <div>5. Explica las mejoras aplicadas y devuelve el prompt final.</div>
+  </div>
+</div>
 
-1. Analiza el prompt original y detecta ambigüedades, falta de contexto o problemas de formato.  
-2. Formula preguntas necesarias al usuario antes de optimizar.  
-   - Regla de Oro de Numeración: Todas las opciones de respuesta deben seguir una secuencia numérica única e incremental (1, 2, 3, 4, 5... N). No reinicies la numeración en cada pregunta.
-  - Las preguntas deben ser breves y las opciones simples para reducir la carga cognitiva.
-   - Siempre incluye una opción final *“Otro / aclarar”* para permitir respuestas libres.
-3. Espera las respuestas del usuario antes de continuar.  
-4. Una vez recibidas, optimiza el prompt y entrégalo en formato completo, estructurado con encabezados:  
-   - **Rol** - **Objetivo** - **Contexto** (si aplica)  
-   - **Instrucciones** 5. Explica las mejoras aplicadas y devuelve el prompt final. 
-Prompt original:  
-[Inserta aquí el prompt a optimizar]</div>
+<div>
+  <strong class="text-neuro-green">Prompt original:</strong><br>
+  [Inserta aquí el prompt a optimizar]
+</div>
+          </div>
+
         </div>
 
         <div class="mt-6 flex justify-end">
@@ -298,7 +329,7 @@ Prompt original:
         </div>
     </section>
 
-    <!-- NUEVA SECCIÓN: EJEMPLO DE USO (Sin violeta, sin línea izquierda) -->
+    <!-- NUEVA SECCIÓN: EJEMPLO DE USO -->
     <article class="glass-panel rounded-2xl overflow-hidden relative group">
       <div class="absolute top-0 right-0 p-4 opacity-50">
         <i data-lucide="map" class="text-neuro-blue w-12 h-12"></i>
@@ -318,46 +349,48 @@ Prompt original:
 
         <div class="bg-black/60 rounded-xl border border-white/10 p-5 font-mono text-sm text-gray-300 leading-relaxed relative overflow-hidden">
           
-          <!-- Contenido REAL a copiar -->
           <div id="prompt-content-example">
-R (ROL):
-Actuá como un experto en organización de viajes turísticos y optimización de costos, con experiencia en planificación de itinerarios y búsqueda de vuelos económicos.
+<div class="mb-4">
+  <strong class="text-neuro-green">R (ROL):</strong><br>
+  Actuá como un experto en organización de viajes turísticos y optimización de costos, con experiencia en planificación de itinerarios y búsqueda de vuelos económicos.
+</div>
 
-C (CONTEXTO):
-Origen del viaje: San Rafael, Mendoza (Argentina)
+<div class="mb-4">
+  <strong class="text-neuro-green">C (CONTEXTO):</strong><br>
+  <div class="mt-1 space-y-1">
+    <div>Origen del viaje: San Rafael, Mendoza (Argentina)</div>
+    <div>Destino: Brasil</div>
+    <div>Cantidad de personas: [COMPLETAR – ej. 1 persona, 2 adultos, familia, amigos]</div>
+    <div>Tipo de viaje: turismo y descanso</div>
+    <div>Duración del viaje: 7 días</div>
+    <div>Medio de transporte principal: avión</div>
+    <div>Meses posibles de viaje: febrero o marzo</div>
+    <div>Prioridad: encontrar vuelos baratos y la opción más económica disponible</div>
+    <div>Moneda de referencia: pesos argentinos (ARS)</div>
+  </div>
+</div>
 
-Destino: Brasil
+<div>
+  <strong class="text-neuro-green">I (INSTRUCCIONES):</strong>
+  <div class="mt-2 space-y-2">
+    <div>Indicá cuál es el mejor mes para viajar (febrero o marzo) teniendo en cuenta precios y conveniencia general.</div>
+    <div>Sugerí estrategias para encontrar vuelos más económicos (fechas flexibles, escalas, horarios, anticipación, etc.).</div>
+    <div>Organizá una agenda de viaje día por día, acorde a un viaje de turismo y descanso.</div>
+    
+    <div class="mt-4">
+      <div class="text-neuro-green font-bold text-xs mb-1 uppercase tracking-wide">Incluí en la respuesta:</div>
+      <div class="pl-2 border-l border-neuro-green/30">
+        <div>Un resumen general del viaje</div>
+        <div>Actividades recomendadas para cada día</div>
+        <div>Consejos prácticos para ahorrar dinero durante el viaje</div>
+      </div>
+    </div>
 
-Cantidad de personas: [COMPLETAR – ej. 1 persona, 2 adultos, familia, amigos]
+    <div class="mt-2 italic text-xs text-gray-400">Presentá la información de forma clara, simple y ordenada.</div>
+  </div>
+</div>
+          </div>
 
-Tipo de viaje: turismo y descanso
-
-Duración del viaje: 7 días
-
-Medio de transporte principal: avión
-
-Meses posibles de viaje: febrero o marzo
-
-Prioridad: encontrar vuelos baratos y la opción más económica disponible
-
-Moneda de referencia: pesos argentinos (ARS)
-
-I (INSTRUCCIONES):
-Indicá cuál es el mejor mes para viajar (febrero o marzo) teniendo en cuenta precios y conveniencia general.
-
-Sugerí estrategias para encontrar vuelos más económicos (fechas flexibles, escalas, horarios, anticipación, etc.).
-
-Organizá una agenda de viaje día por día, acorde a un viaje de turismo y descanso.
-
-Incluí en la respuesta:
-
-Un resumen general del viaje
-
-Actividades recomendadas para cada día
-
-Consejos prácticos para ahorrar dinero durante el viaje
-
-Presentá la información de forma clara, simple y ordenada.</div>
         </div>
 
         <div class="mt-6 flex justify-end">
@@ -450,8 +483,12 @@ Presentá la información de forma clara, simple y ordenada.</div>
     lucide.createIcons();
 
     function copyToClipboard(elementId, btnElement) {
-      // Obtener el texto del elemento
-      const textToCopy = document.getElementById(elementId).innerText;
+      // Obtener el elemento
+      const element = document.getElementById(elementId);
+      
+      // Obtener el texto. innerText respeta los saltos de línea de los elementos block (divs, p, etc.)
+      // Esto asegura que al pegar en ChatGPT se vea estructurado.
+      const textToCopy = element.innerText;
       
       // Copiar al portapapeles
       navigator.clipboard.writeText(textToCopy).then(() => {
