@@ -167,9 +167,33 @@
       box-shadow: 0 0 10px #9AFF5F;
     }
 
+    /* ESTILOS PDF CORREGIDOS */
     .pdf-no-break { page-break-inside: avoid; break-inside: avoid; margin-bottom: 20px; }
     #pdf-template strong { color: #2100E5; }
     #pdf-template h1, #pdf-template h2, #pdf-template h3 { font-family: 'Orbitron', sans-serif; }
+
+    /* Forzar colores oscuros para legibilidad en PDF (Fondo Blanco) */
+    #pdf-template [id^="pdf-content-"] * {
+        color: #1a1a1a !important; /* Texto general casi negro */
+        text-shadow: none !important;
+    }
+    #pdf-template [id^="pdf-content-"] strong, 
+    #pdf-template [id^="pdf-content-"] b,
+    #pdf-template [id^="pdf-content-"] .font-bold {
+        color: #2100E5 !important; /* Negritas en Azul Neuro */
+    }
+    #pdf-template [id^="pdf-content-"] .text-neuro-green,
+    #pdf-template [id^="pdf-content-"] .text-neuro-blue-light {
+        color: #2100E5 !important; /* Reemplazar colores claros por Azul Neuro */
+    }
+    #pdf-template [id^="pdf-content-"] .border-l {
+        border-left-color: #2100E5 !important; /* Bordes laterales azules */
+    }
+    #pdf-template [id^="pdf-content-"] .bg-white\/5,
+    #pdf-template [id^="pdf-content-"] .bg-black\/80 {
+        background-color: transparent !important; /* Quitar fondos oscuros */
+        border: none !important;
+    }
     
     .cursor-bar {
       display: inline-block;
@@ -195,7 +219,8 @@
         <!-- LOGO OFICIAL -->
         <div class="w-16 h-16 rounded-xl bg-black border border-neuro-green/30 shadow-[0_0_15px_rgba(154,255,95,0.2)] flex items-center justify-center overflow-hidden relative group hover:scale-105 transition-transform duration-300">
             <div class="absolute inset-0 bg-neuro-green/10"></div>
-            <img src="https://github.com/neurotechsoluciones-design/neurotech-assets/blob/d40e800d52607451a69ec394b84db98fc36a8d82/logo_%20Neurotech_soluciones.png?raw=true" 
+            <!-- IMAGEN URL CORREGIDA -->
+            <img src="https://raw.githubusercontent.com/neurotechsoluciones-design/neurotech-assets/d40e800d52607451a69ec394b84db98fc36a8d82/logo_%20Neurotech_soluciones.png" 
                  alt="NeuroTech Logo" 
                  class="w-full h-full object-contain p-0.5 drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">
         </div>
@@ -500,7 +525,7 @@
           </div>
         </article>
 
-        <!-- SECCIÓN RECURSOS / DRIVE -->
+        <!-- SECCIÓN RECURSOS / DRIVE - BOTÓN CORREGIDO -->
         <section class="mt-16 mb-20">
             <div class="glass-panel rounded-3xl p-1 bg-gradient-to-r from-neuro-blue/50 to-purple-900/50 border-none group hover:scale-[1.01] transition-transform duration-500">
               <div class="bg-neuro-dark rounded-[22px] p-8 h-full flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
@@ -511,7 +536,7 @@
                   <p class="text-gray-400 text-sm max-w-md font-light">Repositorio centralizado. Accede a PDFs, presentaciones y conclusiones en vivo.</p>
                 </div>
                 <div class="relative z-10">
-                  <a href="https://docs.google.com/document/d/1c9XH_-VPwVup4u5ZEOzC0SIv5sO_kDjoNkhSxD9N6dk/edit?usp=sharing" target="_blank" class="btn-cyber flex items-center gap-4 bg-white text-neuro-blue-light font-bold py-4 px-10 rounded-xl hover:bg-neuro-green hover:text-black shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(154,255,95,0.5)] group-hover:scale-105 transition-transform">
+                  <a href="https://docs.google.com/document/d/1c9XH_-VPwVup4u5ZEOzC0SIv5sO_kDjoNkhSxD9N6dk/edit?usp=sharing" target="_blank" class="btn-cyber flex items-center gap-4 bg-neuro-dark border border-neuro-blue text-white font-bold py-4 px-10 rounded-xl hover:bg-neuro-blue hover:text-white shadow-[0_0_20px_rgba(33,0,229,0.3)] hover:shadow-[0_0_30px_rgba(33,0,229,0.5)] group-hover:scale-105 transition-transform">
                     <span class="font-orbitron tracking-widest text-sm">ABRIR DRIVE</span>
                     <i data-lucide="external-link" class="w-5 h-5 group-hover:rotate-45 transition-transform"></i>
                   </a>
@@ -521,7 +546,7 @@
         </section>
     </div>
 
-    <!-- CONTENIDO BLOQUE 2 (Guía de Prompts NotebookLM) - CORREGIDO COLORES NEUROTECH -->
+    <!-- CONTENIDO BLOQUE 2 (Guía de Prompts NotebookLM) -->
     <div id="content-bloque2" class="hidden animate-fade-in space-y-12">
         
         <!-- ENCABEZADO DE BLOQUE -->
@@ -851,51 +876,90 @@
     <span class="font-orbitron font-bold text-sm tracking-wide">COPIADO AL PORTAPAPELES</span>
   </div>
 
-  <!-- Plantilla oculta para PDF -->
+  <!-- Plantilla oculta para PDF - ACTUALIZADA CON TODOS LOS BLOQUES -->
   <div id="pdf-template" style="display: none; background: white; color: black; padding: 40px; font-family: 'Inter', sans-serif;">
      <!-- Header con Logo Oficial -->
      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #2100E5; padding-bottom: 20px; margin-bottom: 40px;">
         <div style="display: flex; align-items: center; gap: 15px;">
-           <img src="https://github.com/neurotechsoluciones-design/neurotech-assets/blob/d40e800d52607451a69ec394b84db98fc36a8d82/logo_%20Neurotech_soluciones.png?raw=true" 
-                alt="Logo" style="width: 80px; height: 80px; object-fit: contain;">
+           <img src="https://raw.githubusercontent.com/neurotechsoluciones-design/neurotech-assets/d40e800d52607451a69ec394b84db98fc36a8d82/logo_%20Neurotech_soluciones.png" 
+                alt="Logo" style="width: 80px; height: 80px; object-fit: contain;" crossorigin="anonymous">
            <div>
               <h1 style="margin: 0; font-size: 20px; color: black; font-weight: 800; letter-spacing: 1px;">NEUROTECH SOLUCIONES</h1>
               <p style="margin: 0; font-size: 12px; color: #2100E5; font-weight: bold; text-transform: uppercase;">Cursos y Capacitaciones</p>
            </div>
         </div>
         <div style="text-align: right;">
-           <p style="margin: 0; font-size: 12px; color: gray;">Material Exclusivo - Bloque 1</p>
+           <p style="margin: 0; font-size: 12px; color: gray;">Guía Completa de Recursos</p>
            <p style="margin: 0; font-size: 12px; color: gray;">San Rafael, Mendoza</p>
         </div>
      </div>
 
-     <!-- Contenido Dinámico -->
-     <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 30px; text-align: center; color: #2100E5;">GUÍA DE PROMPTS MAESTROS</h2>
+     <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 30px; text-align: center; color: #2100E5;">RECURSOS EXCLUSIVOS</h2>
 
-     <!-- Fase 1 -->
-     <div class="pdf-no-break">
-        <h3 style="font-size: 16px; font-weight: bold; color: black; border-left: 4px solid #9AFF5F; padding-left: 10px; margin-bottom: 15px;">FASE 1: Personalización Simple</h3>
-        <div id="pdf-content-1" style="background: #f4f4f4; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 12px; line-height: 1.5;"></div>
+     <!-- BLOQUE 1 -->
+     <div style="margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px;">
+         <h3 style="background: #000; color: #9AFF5F; display: inline-block; padding: 5px 15px; border-radius: 4px; font-size: 14px; font-weight: bold; margin-bottom: 20px;">BLOQUE 1: PROMPTS GENERALES</h3>
+         
+         <div class="pdf-no-break">
+            <h4 style="font-size: 14px; font-weight: bold; color: black; margin-bottom: 10px;">Personalización Simple</h4>
+            <div id="pdf-content-1" style="background: #f4f4f4; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 11px; line-height: 1.4;"></div>
+         </div>
+
+         <div class="pdf-no-break">
+            <h4 style="font-size: 14px; font-weight: bold; color: black; margin-bottom: 10px;">Prompt Maestro</h4>
+            <div id="pdf-content-2" style="background: #f4f4f4; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 11px; line-height: 1.4;"></div>
+         </div>
+
+         <div class="pdf-no-break">
+            <h4 style="font-size: 14px; font-weight: bold; color: black; margin-bottom: 10px;">Ejemplo Práctico (Turismo)</h4>
+            <div id="pdf-content-example" style="background: #f4f4f4; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 11px; line-height: 1.4;"></div>
+         </div>
      </div>
 
-     <!-- Fase 2 -->
-     <div class="pdf-no-break">
-        <h3 style="font-size: 16px; font-weight: bold; color: black; border-left: 4px solid #2100E5; padding-left: 10px; margin-bottom: 15px;">FASE 2: Prompt Maestro</h3>
-        <div id="pdf-content-2" style="background: #f4f4f4; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 12px; line-height: 1.5;"></div>
+     <!-- BLOQUE 2 -->
+     <div style="margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px;">
+         <h3 style="background: #000; color: #2100E5; display: inline-block; padding: 5px 15px; border-radius: 4px; font-size: 14px; font-weight: bold; margin-bottom: 20px;">BLOQUE 2: NOTEBOOK LM (R.C.I.)</h3>
+         
+         <div class="pdf-no-break">
+            <h4 style="font-size: 14px; font-weight: bold; color: black; margin-bottom: 10px;">1. Identificación de Contradicciones (Legal)</h4>
+            <div id="pdf-content-nb-1" style="background: #f0f4ff; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 11px; line-height: 1.4;"></div>
+         </div>
+
+         <div class="pdf-no-break">
+            <h4 style="font-size: 14px; font-weight: bold; color: black; margin-bottom: 10px;">2. Prompt Maestro (Análisis de Datos)</h4>
+            <div id="pdf-content-nb-2" style="background: #f0f4ff; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 11px; line-height: 1.4;"></div>
+         </div>
+
+         <div class="pdf-no-break">
+            <h4 style="font-size: 14px; font-weight: bold; color: black; margin-bottom: 10px;">3. Borrador de Escrito (Abogados)</h4>
+            <div id="pdf-content-nb-3" style="background: #f0f4ff; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 11px; line-height: 1.4;"></div>
+         </div>
+
+         <div class="pdf-no-break">
+            <h4 style="font-size: 14px; font-weight: bold; color: black; margin-bottom: 10px;">4. Simplificación (Jubilados)</h4>
+            <div id="pdf-content-nb-4" style="background: #f0f4ff; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 11px; line-height: 1.4;"></div>
+         </div>
+         
+         <div class="pdf-no-break">
+            <h4 style="font-size: 14px; font-weight: bold; color: black; margin-bottom: 10px;">5. Pensamiento Crítico (Estudiantes)</h4>
+            <div id="pdf-content-nb-5" style="background: #f0f4ff; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 11px; line-height: 1.4;"></div>
+         </div>
+
+         <div class="pdf-no-break">
+            <h4 style="font-size: 14px; font-weight: bold; color: black; margin-bottom: 10px;">6. Emprendedores (Riesgos y Comparación)</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div id="pdf-content-nb-6a" style="background: #f0f4ff; padding: 10px; border-radius: 8px; font-family: monospace; font-size: 10px; line-height: 1.4;"></div>
+                <div id="pdf-content-nb-6b" style="background: #f0f4ff; padding: 10px; border-radius: 8px; font-family: monospace; font-size: 10px; line-height: 1.4;"></div>
+            </div>
+         </div>
      </div>
 
-     <!-- RCI -->
-     <div class="pdf-no-break">
-         <h3 style="font-size: 16px; font-weight: bold; color: black; border-left: 4px solid #9AFF5F; padding-left: 10px; margin-bottom: 15px;">Fórmula R.C.I.</h3>
-         <p style="font-size: 12px; margin-bottom: 10px;"><strong>Rol (R):</strong> Define la identidad y experticia de la IA.</p>
-         <p style="font-size: 12px; margin-bottom: 10px;"><strong>Contexto (C):</strong> Establece el escenario y los datos previos.</p>
-         <p style="font-size: 12px; margin-bottom: 10px;"><strong>Instrucción (I):</strong> Ordena la acción específica y el formato de salida.</p>
-     </div>
-
-     <!-- Ejemplo -->
-     <div class="pdf-no-break">
-        <h3 style="font-size: 16px; font-weight: bold; color: black; border-left: 4px solid #2100E5; padding-left: 10px; margin-bottom: 15px;">Ejemplo Práctico (Turismo)</h3>
-        <div id="pdf-content-example" style="background: #f4f4f4; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 12px; line-height: 1.5;"></div>
+     <!-- BLOQUE 3 -->
+     <div style="margin-bottom: 30px;">
+         <h3 style="background: #333; color: #fff; display: inline-block; padding: 5px 15px; border-radius: 4px; font-size: 14px; font-weight: bold; margin-bottom: 20px;">BLOQUE 3</h3>
+         <div style="padding: 20px; border: 1px dashed #ccc; text-align: center; color: #666; font-size: 12px;">
+             Contenido en desarrollo. Disponible próximamente.
+         </div>
      </div>
      
      <!-- AVISO LEGAL PDF -->
@@ -1011,19 +1075,30 @@
       }, 2500);
     }
 
+    // PDF Optimizado para evitar cortes e incluir TODOS los bloques
     function downloadPDF(btn) {
         btn.classList.add('loading');
         
+        // Bloque 1
         document.getElementById('pdf-content-1').innerHTML = document.getElementById('prompt-content-1').innerHTML;
         document.getElementById('pdf-content-2').innerHTML = document.getElementById('prompt-content-2').innerHTML;
         document.getElementById('pdf-content-example').innerHTML = document.getElementById('prompt-content-example').innerHTML;
+
+        // Bloque 2 (NotebookLM)
+        document.getElementById('pdf-content-nb-1').innerHTML = document.getElementById('prompt-nb-1').innerHTML;
+        document.getElementById('pdf-content-nb-2').innerHTML = document.getElementById('prompt-nb-2').innerHTML;
+        document.getElementById('pdf-content-nb-3').innerHTML = document.getElementById('prompt-nb-3').innerHTML;
+        document.getElementById('pdf-content-nb-4').innerHTML = document.getElementById('prompt-nb-4').innerHTML;
+        document.getElementById('pdf-content-nb-5').innerHTML = document.getElementById('prompt-nb-5').innerHTML;
+        document.getElementById('pdf-content-nb-6a').innerHTML = document.getElementById('prompt-nb-6a').innerHTML;
+        document.getElementById('pdf-content-nb-6b').innerHTML = document.getElementById('prompt-nb-6b').innerHTML;
 
         const element = document.getElementById('pdf-template');
         element.style.display = 'block';
 
         const opt = {
           margin:       0.4, 
-          filename:     'NeuroTech_Guia_Bloque1.pdf',
+          filename:     'NeuroTech_Guia_Completa.pdf',
           image:        { type: 'jpeg', quality: 0.98 },
           html2canvas:  { 
               scale: 2, 
