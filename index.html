@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,6 +43,7 @@
             'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             'text-shimmer': 'text-shimmer 3s linear infinite',
             'cursor-blink': 'blink 1s step-end infinite',
+            'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
           },
           keyframes: {
             'text-shimmer': {
@@ -58,6 +59,10 @@
             'blink': {
               '0%, 100%': { opacity: '1' },
               '50%': { opacity: '0' }
+            },
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
             }
           }
         }
@@ -116,10 +121,17 @@
       opacity: 1;
     }
 
-    ::-webkit-scrollbar { width: 8px; }
+    /* SCROLLBAR PERSONALIZADO */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
     ::-webkit-scrollbar-track { background: #0a0a0a; }
     ::-webkit-scrollbar-thumb { background: #2100E5; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #9AFF5F; }
+
+    /* Scrollbar específico para el editor de código */
+    .custom-scrollbar::-webkit-scrollbar { height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #1a1a1a; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #555; }
 
     .btn-cyber {
       position: relative;
@@ -174,24 +186,30 @@
 
     /* Forzar colores oscuros para legibilidad en PDF (Fondo Blanco) */
     #pdf-template [id^="pdf-content-"] * {
-        color: #1a1a1a !important; /* Texto general casi negro */
+        color: #1a1a1a !important; 
         text-shadow: none !important;
     }
     #pdf-template [id^="pdf-content-"] strong, 
     #pdf-template [id^="pdf-content-"] b,
     #pdf-template [id^="pdf-content-"] .font-bold {
-        color: #2100E5 !important; /* Negritas en Azul Neuro */
+        color: #2100E5 !important; 
     }
     #pdf-template [id^="pdf-content-"] .text-neuro-green,
-    #pdf-template [id^="pdf-content-"] .text-neuro-blue-light {
-        color: #2100E5 !important; /* Reemplazar colores claros por Azul Neuro */
+    #pdf-template [id^="pdf-content-"] .text-neuro-blue-light,
+    #pdf-template [id^="pdf-content-"] .text-neuro-blue {
+        color: #2100E5 !important; 
     }
+    /* Estilos específicos para el JSON en PDF */
+    #pdf-template .json-key { color: #008000 !important; font-weight: bold; } /* Verde oscuro para keys */
+    #pdf-template .json-string { color: #A31515 !important; } /* Rojo oscuro para strings */
+
     #pdf-template [id^="pdf-content-"] .border-l {
-        border-left-color: #2100E5 !important; /* Bordes laterales azules */
+        border-left-color: #2100E5 !important; 
     }
     #pdf-template [id^="pdf-content-"] .bg-white\/5,
-    #pdf-template [id^="pdf-content-"] .bg-black\/80 {
-        background-color: transparent !important; /* Quitar fondos oscuros */
+    #pdf-template [id^="pdf-content-"] .bg-black\/80,
+    #pdf-template [id^="pdf-content-"] .bg-neuro-dark\/95 {
+        background-color: transparent !important; 
         border: none !important;
     }
     
@@ -286,7 +304,7 @@
     </div>
 
     <!-- CONTENIDO BLOQUE 1 -->
-    <div id="content-bloque1" class="space-y-12 animate-fade-in">
+    <div id="content-bloque1" class="space-y-12 animate-fade-in-up">
         <!-- TARJETA PROMPT 1 -->
         <article class="glass-panel rounded-3xl p-1 relative group">
           <div class="absolute -inset-0.5 bg-gradient-to-r from-neuro-green to-neuro-blue opacity-10 group-hover:opacity-30 rounded-3xl blur transition duration-500"></div>
@@ -299,7 +317,7 @@
                 </span>
                 <h3 class="text-xl font-orbitron font-bold text-white tracking-wide">Personalización Simple</h3>
               </div>
-              <p class="text-sm text-gray-400 mb-6 font-light border-l-2 border-neuro-green/30 pl-4">
+              <p class="text-sm text-gray-300 mb-6 font-light border-l-2 border-neuro-green/30 pl-4">
                 Configura la "personalidad" de tu asistente para evitar respuestas genéricas.
               </p>
               <div class="bg-black/80 rounded-xl border border-white/5 p-6 font-mono text-sm text-gray-300 leading-relaxed shadow-inner">
@@ -324,7 +342,7 @@
               </div>
               <div class="mt-8 flex justify-end">
                 <button onclick="copyToClipboard('prompt-content-1', this)" 
-                        class="btn-cyber group/btn flex items-center gap-3 bg-neuro-green text-black font-orbitron font-bold py-3 px-8 rounded-xl hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(154,255,95,0.3)] hover:shadow-[0_0_30px_rgba(154,255,95,0.6)]">
+                        class="btn-cyber group/btn flex items-center justify-center gap-3 bg-neuro-green text-black font-orbitron font-bold py-3 px-8 rounded-xl hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(154,255,95,0.3)] hover:shadow-[0_0_30px_rgba(154,255,95,0.6)] w-full sm:w-auto">
                   <i data-lucide="copy" class="w-4 h-4 group-hover/btn:scale-110 transition-transform"></i>
                   <span>COPIAR</span>
                 </button>
@@ -344,7 +362,7 @@
                 </span>
                 <h3 class="text-xl font-orbitron font-bold text-white tracking-wide">Prompt Maestro</h3>
               </div>
-              <p class="text-sm text-gray-400 mb-6 font-light border-l-2 border-neuro-blue/30 pl-4">
+              <p class="text-sm text-gray-300 mb-6 font-light border-l-2 border-neuro-blue/30 pl-4">
                 Convierte a la IA en un Ingeniero de Prompts para mejorar tus propias instrucciones.
               </p>
               <div class="bg-black/80 rounded-xl border border-white/5 p-6 font-mono text-sm text-gray-300 leading-relaxed shadow-inner">
@@ -406,7 +424,7 @@
               </div>
               <div class="mt-8 flex justify-end">
                 <button onclick="copyToClipboard('prompt-content-2', this)" 
-                        class="btn-cyber group/btn flex items-center gap-3 bg-transparent border border-neuro-blue text-neuro-blue-light hover:bg-neuro-blue hover:text-white font-orbitron font-bold py-3 px-8 rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(33,0,229,0.1)] hover:shadow-[0_0_30px_rgba(33,0,229,0.5)]">
+                        class="btn-cyber group/btn flex items-center justify-center gap-3 bg-transparent border border-neuro-blue text-neuro-blue-light hover:bg-neuro-blue hover:text-white font-orbitron font-bold py-3 px-8 rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(33,0,229,0.1)] hover:shadow-[0_0_30px_rgba(33,0,229,0.5)] w-full sm:w-auto">
                   <i data-lucide="copy" class="w-4 h-4 group-hover/btn:scale-110 transition-transform"></i>
                   <span>COPIAR</span>
                 </button>
@@ -436,7 +454,7 @@
                         <span class="w-8 h-8 rounded-lg bg-neuro-green/10 flex items-center justify-center text-sm shadow-[0_0_10px_rgba(154,255,95,0.2)]">R</span>
                         ROL
                     </div>
-                    <p class="text-xs text-gray-400 leading-relaxed font-light">
+                    <p class="text-xs text-gray-300 leading-relaxed font-light">
                         Define la <strong class="text-white">identidad y experticia</strong> de la IA. Es el "quién".<br><br>
                         <span class="italic text-neuro-green/60 text-[10px]">Ej: "Actúa como experto en Marketing..."</span>
                     </p>
@@ -447,7 +465,7 @@
                         <span class="w-8 h-8 rounded-lg bg-neuro-blue/10 flex items-center justify-center text-sm shadow-[0_0_10px_rgba(33,0,229,0.3)]">C</span>
                         CONTEXTO
                     </div>
-                    <p class="text-xs text-gray-400 leading-relaxed font-light">
+                    <p class="text-xs text-gray-300 leading-relaxed font-light">
                         Establece el <strong class="text-white">escenario y los datos</strong> previos. Es el "dónde".<br><br>
                         <span class="italic text-neuro-blue-light/80 text-[10px]">Ej: "Tengo un negocio de turismo y..."</span>
                     </p>
@@ -458,7 +476,7 @@
                         <span class="w-8 h-8 rounded-lg bg-neuro-green/10 flex items-center justify-center text-sm shadow-[0_0_10px_rgba(154,255,95,0.2)]">I</span>
                         INSTRUCCIÓN
                     </div>
-                    <p class="text-xs text-gray-400 leading-relaxed font-light">
+                    <p class="text-xs text-gray-300 leading-relaxed font-light">
                         Ordena la <strong class="text-white">acción específica</strong> y el formato de salida. Es el "qué".<br><br>
                         <span class="italic text-neuro-green/60 text-[10px]">Ej: "Crea una tabla con 3 ideas..."</span>
                     </p>
@@ -477,7 +495,7 @@
                 </span>
                 <h3 class="text-xl font-orbitron font-bold text-white tracking-wide">Ejemplo Práctico R.C.I.</h3>
               </div>
-              <p class="text-sm text-gray-400 mb-6 italic border-l-2 border-white/20 pl-4">
+              <p class="text-sm text-gray-300 mb-6 italic border-l-2 border-white/20 pl-4">
                 Así es como se aplica la estructura en un caso real de turismo.
               </p>
               <div class="bg-black/60 rounded-xl border border-white/5 p-6 font-mono text-sm text-gray-300 leading-relaxed">
@@ -516,7 +534,7 @@
               </div>
               <div class="mt-6 flex justify-end">
                 <button onclick="copyToClipboard('prompt-content-example', this)" 
-                        class="btn-cyber flex items-center gap-2 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white font-orbitron text-xs font-bold py-3 px-6 rounded-lg transition-all border border-white/10">
+                        class="btn-cyber flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white font-orbitron text-xs font-bold py-3 px-6 rounded-lg transition-all border border-white/10 w-full sm:w-auto">
                   <i data-lucide="copy" class="w-3 h-3"></i>
                   <span>COPIAR EJEMPLO</span>
                 </button>
@@ -525,7 +543,7 @@
           </div>
         </article>
 
-        <!-- SECCIÓN RECURSOS / DRIVE - BOTÓN CORREGIDO -->
+        <!-- SECCIÓN RECURSOS / DRIVE -->
         <section class="mt-16 mb-20">
             <div class="glass-panel rounded-3xl p-1 bg-gradient-to-r from-neuro-blue/50 to-purple-900/50 border-none group hover:scale-[1.01] transition-transform duration-500">
               <div class="bg-neuro-dark rounded-[22px] p-8 h-full flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
@@ -533,10 +551,10 @@
                 <div class="absolute -right-20 -bottom-40 w-80 h-80 bg-neuro-blue rounded-full filter blur-[120px] opacity-20 group-hover:opacity-30 transition-opacity"></div>
                 <div class="relative z-10 text-center md:text-left">
                   <h3 class="text-3xl font-orbitron font-bold text-white mb-3">Recursos de Clase</h3>
-                  <p class="text-gray-400 text-sm max-w-md font-light">Repositorio centralizado. Accede a PDFs, presentaciones y conclusiones en vivo.</p>
+                  <p class="text-gray-300 text-sm max-w-md font-light">Repositorio centralizado. Accede a PDFs, presentaciones y conclusiones en vivo.</p>
                 </div>
                 <div class="relative z-10">
-                  <a href="https://docs.google.com/document/d/1c9XH_-VPwVup4u5ZEOzC0SIv5sO_kDjoNkhSxD9N6dk/edit?usp=sharing" target="_blank" class="btn-cyber flex items-center gap-4 bg-neuro-dark border border-neuro-blue text-white font-bold py-4 px-10 rounded-xl hover:bg-neuro-blue hover:text-white shadow-[0_0_20px_rgba(33,0,229,0.3)] hover:shadow-[0_0_30px_rgba(33,0,229,0.5)] group-hover:scale-105 transition-transform">
+                  <a href="https://docs.google.com/document/d/1c9XH_-VPwVup4u5ZEOzC0SIv5sO_kDjoNkhSxD9N6dk/edit?usp=sharing" target="_blank" class="btn-cyber flex items-center justify-center gap-4 bg-neuro-dark border border-neuro-blue text-white font-bold py-4 px-10 rounded-xl hover:bg-neuro-blue hover:text-white shadow-[0_0_20px_rgba(33,0,229,0.3)] hover:shadow-[0_0_30px_rgba(33,0,229,0.5)] group-hover:scale-105 transition-transform w-full sm:w-auto">
                     <span class="font-orbitron tracking-widest text-sm">ABRIR DRIVE</span>
                     <i data-lucide="external-link" class="w-5 h-5 group-hover:rotate-45 transition-transform"></i>
                   </a>
@@ -547,13 +565,22 @@
     </div>
 
     <!-- CONTENIDO BLOQUE 2 (Guía de Prompts NotebookLM) -->
-    <div id="content-bloque2" class="hidden animate-fade-in space-y-12">
+    <div id="content-bloque2" class="hidden animate-fade-in-up space-y-12">
         
-        <!-- ENCABEZADO DE BLOQUE -->
+        <!-- ENCABEZADO DE BLOQUE CON MINI NAV -->
         <div class="text-center py-8">
             <h2 class="text-3xl font-orbitron font-bold text-white mb-4">GUÍA DE PROMPTS <span class="text-neuro-green">NOTEBOOK LM</span></h2>
-            <p class="text-gray-400 text-sm max-w-xl mx-auto">Aplicación práctica de la fórmula R.C.I. para estudiantes y profesionales.</p>
+            <p class="text-gray-300 text-sm max-w-xl mx-auto mb-6">Aplicación práctica de la fórmula R.C.I. para estudiantes y profesionales.</p>
+            
+            <!-- MINI NAV (ANCHORS) -->
+            <div class="flex flex-wrap justify-center gap-3">
+                <a href="#section-legal" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] text-gray-300 hover:text-white hover:bg-white/10 transition-colors uppercase font-orbitron">Legal</a>
+                <a href="#section-emprendedores" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] text-gray-300 hover:text-white hover:bg-white/10 transition-colors uppercase font-orbitron">Emprendedores</a>
+                <a href="#section-audiovisual" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] text-gray-300 hover:text-white hover:bg-white/10 transition-colors uppercase font-orbitron">Audiovisual</a>
+            </div>
         </div>
+
+        <div id="section-legal" class="scroll-mt-32"></div>
 
         <!-- 1. IDENTIFICACIÓN DE CONTRADICCIONES (LEGAL) -->
         <article class="glass-panel rounded-3xl p-1 relative group">
@@ -567,7 +594,7 @@
                 </div>
                 <h3 class="text-xl font-orbitron font-bold text-white tracking-wide">Identificación de Contradicciones</h3>
               </div>
-              <p class="text-sm text-gray-400 mb-6 font-light border-l-2 border-neuro-blue/30 pl-4">
+              <p class="text-sm text-gray-300 mb-6 font-light border-l-2 border-neuro-blue/30 pl-4">
                 Para auditores legales meticulosos. Detecta inconsistencias en testimonios y documentos.
               </p>
               <div class="bg-black/80 rounded-xl border border-white/5 p-6 font-mono text-sm text-gray-300 leading-relaxed shadow-inner">
@@ -595,7 +622,7 @@
               </div>
               <div class="mt-6 flex justify-end">
                 <button onclick="copyToClipboard('prompt-nb-1', this)" 
-                        class="btn-cyber flex items-center gap-2 bg-neuro-blue text-white hover:bg-white hover:text-neuro-blue font-orbitron text-xs font-bold py-3 px-6 rounded-lg transition-all shadow-[0_0_15px_rgba(33,0,229,0.2)]">
+                        class="btn-cyber flex items-center justify-center gap-2 bg-neuro-blue text-white hover:bg-white hover:text-neuro-blue font-orbitron text-xs font-bold py-3 px-6 rounded-lg transition-all shadow-[0_0_15px_rgba(33,0,229,0.2)] w-full sm:w-auto">
                   <i data-lucide="copy" class="w-3 h-3"></i>
                   <span>COPIAR PROMPT</span>
                 </button>
@@ -616,7 +643,7 @@
                 </div>
                 <h3 class="text-xl font-orbitron font-bold text-white tracking-wide">Prompt Maestro: Análisis de Datos</h3>
               </div>
-              <p class="text-sm text-gray-400 mb-6 font-light border-l-2 border-neuro-green/30 pl-4">
+              <p class="text-sm text-gray-300 mb-6 font-light border-l-2 border-neuro-green/30 pl-4">
                 Genera tablas comparativas de hallazgos basadas estrictamente en las fuentes.
               </p>
               <div class="bg-black/80 rounded-xl border border-white/5 p-6 font-mono text-sm text-gray-300 leading-relaxed shadow-inner">
@@ -638,7 +665,7 @@
               </div>
               <div class="mt-6 flex justify-end">
                 <button onclick="copyToClipboard('prompt-nb-2', this)" 
-                        class="btn-cyber flex items-center gap-2 bg-transparent border border-neuro-green text-neuro-green hover:bg-neuro-green hover:text-black font-orbitron text-xs font-bold py-3 px-6 rounded-lg transition-all">
+                        class="btn-cyber flex items-center justify-center gap-2 bg-transparent border border-neuro-green text-neuro-green hover:bg-neuro-green hover:text-black font-orbitron text-xs font-bold py-3 px-6 rounded-lg transition-all w-full sm:w-auto">
                   <i data-lucide="copy" class="w-3 h-3"></i>
                   <span>COPIAR PROMPT</span>
                 </button>
@@ -692,7 +719,7 @@
               </div>
               <div class="mt-6 flex justify-end">
                 <button onclick="copyToClipboard('prompt-nb-3', this)" 
-                        class="btn-cyber flex items-center gap-2 bg-neuro-blue-light/10 border border-neuro-blue-light text-neuro-blue-light hover:bg-neuro-blue-light hover:text-white font-orbitron text-xs font-bold py-3 px-6 rounded-lg transition-all">
+                        class="btn-cyber flex items-center justify-center gap-2 bg-neuro-blue-light/10 border border-neuro-blue-light text-neuro-blue-light hover:bg-neuro-blue-light hover:text-white font-orbitron text-xs font-bold py-3 px-6 rounded-lg transition-all w-full sm:w-auto">
                   <i data-lucide="copy" class="w-3 h-3"></i>
                   <span>COPIAR PROMPT</span>
                 </button>
@@ -726,7 +753,7 @@
                         </div>
                     </div>
                     <div class="mt-4 flex justify-end">
-                        <button onclick="copyToClipboard('prompt-nb-4', this)" class="text-[10px] font-orbitron font-bold text-neuro-green hover:text-white flex items-center gap-2 px-3 py-2 border border-neuro-green/30 rounded hover:bg-neuro-green/20 transition-all">
+                        <button onclick="copyToClipboard('prompt-nb-4', this)" class="text-[10px] font-orbitron font-bold text-neuro-green hover:text-white flex items-center justify-center gap-2 px-3 py-2 border border-neuro-green/30 rounded hover:bg-neuro-green/20 transition-all w-full sm:w-auto">
                             <i data-lucide="copy" class="w-3 h-3"></i> COPIAR
                         </button>
                     </div>
@@ -756,13 +783,15 @@
                         </div>
                     </div>
                     <div class="mt-4 flex justify-end">
-                        <button onclick="copyToClipboard('prompt-nb-5', this)" class="text-[10px] font-orbitron font-bold text-neuro-blue-light hover:text-white flex items-center gap-2 px-3 py-2 border border-neuro-blue-light/30 rounded hover:bg-neuro-blue-light/20 transition-all">
+                        <button onclick="copyToClipboard('prompt-nb-5', this)" class="text-[10px] font-orbitron font-bold text-neuro-blue-light hover:text-white flex items-center justify-center gap-2 px-3 py-2 border border-neuro-blue-light/30 rounded hover:bg-neuro-blue-light/20 transition-all w-full sm:w-auto">
                             <i data-lucide="copy" class="w-3 h-3"></i> COPIAR
                         </button>
                     </div>
                 </div>
             </article>
         </div>
+
+        <div id="section-emprendedores" class="scroll-mt-32"></div>
 
         <!-- 6. EMPRENDEDORES (RIESGOS Y COMPARACIÓN) -->
         <article class="glass-panel rounded-3xl p-1 relative group">
@@ -823,10 +852,294 @@
           </div>
         </article>
 
+        <!-- === SEPARADOR VISUAL Y NUEVA SECCIÓN === -->
+        <div id="section-audiovisual" class="scroll-mt-32 pt-12 border-t border-white/5 mt-16 relative">
+            <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neuro-blue/50 to-transparent"></div>
+            
+            <div class="text-center mb-10">
+                <h2 class="text-2xl md:text-3xl font-orbitron font-bold text-white mt-4">
+                    GUÍA AUDIOVISUAL <span class="text-transparent bg-clip-text bg-gradient-to-r from-neuro-blue-light to-neuro-blue">AI ART</span>
+                </h2>
+                <p class="text-gray-300 text-sm mt-2">Prompts de ingeniería inversa para generación de imágenes hiperrealistas.</p>
+            </div>
+
+            <!-- TARJETA: MARCA PERSONAL (ESTILO JSON) - CORREGIDO -->
+            <article class="glass-panel rounded-3xl p-1 relative group">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-neuro-blue via-neuro-green to-neuro-dark opacity-20 group-hover:opacity-50 rounded-3xl blur transition duration-500"></div>
+                
+                <div class="relative bg-neuro-dark/95 h-full rounded-[20px] p-6 md:p-8 overflow-hidden">
+                    <div class="relative z-10">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-neuro-blue/10 p-3 rounded-xl border border-neuro-blue/30 shadow-[0_0_15px_rgba(33,0,229,0.15)]">
+                                    <i data-lucide="aperture" class="text-neuro-blue-light w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-orbitron font-bold text-white tracking-wide">Marca Personal Premium</h3>
+                                    <div class="flex items-center gap-2 mt-1">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-neuro-green animate-pulse"></span>
+                                        <p class="text-[10px] text-gray-400 uppercase tracking-wider font-bold">Formato JSON • Nano Banana Style</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-sm text-gray-300 mb-6 font-light border-l-2 border-neuro-blue/50 pl-4">
+                            Prompt estructurado para mantener la identidad facial exacta mientras se mejora la calidad estética a nivel editorial.
+                        </p>
+
+                        <!-- ESTILO CORREGIDO: CONTENEDOR SIMPLE CON ESTRUCTURA R.C.I. -->
+                        <div class="bg-black/80 rounded-xl border border-white/5 p-6 font-mono text-sm text-gray-300 leading-relaxed shadow-inner">
+                            <div id="prompt-visual-1">
+<div class="mb-4">
+  <strong class="text-neuro-green">R (ROL):</strong><br>
+  Actuá como fotógrafo publicitario de élite especializado en marca personal (headshots premium, estética editorial y corporativa). Tu objetivo es crear imágenes hiperrealistas y vendibles para Instagram.
+</div>
+
+<div class="mb-4">
+  <strong class="text-neuro-green">C (CONTEXTO):</strong><br>
+  Crear una foto de marca personal premium para el perfil de Instagram usando como referencia la foto subida.
+  
+  <div class="mt-2">
+    <strong class="text-neuro-blue-light text-xs uppercase">Referencia Obligatoria:</strong><br>
+    Analizá la foto subida y usala como referencia principal para la persona (misma identidad).
+  </div>
+
+  <div class="mt-2">
+    <strong class="text-neuro-blue-light text-xs uppercase">Restricciones Identidad:</strong>
+    <ul class="pl-2 border-l border-gray-700 mt-1 space-y-1 text-xs text-gray-400">
+      <li>- NO modificar identidad: mantener el rostro, rasgos faciales, edad aproximada y tono de piel del sujeto de la foto subida.</li>
+      <li>- NO cambiar género ni expresión base (solo mejorar naturalidad si hace falta).</li>
+      <li>- NO deformar manos, ojos ni dientes.</li>
+      <li>- NO filtros exagerados ni efecto plástico.</li>
+      <li>- Si tiene tatuajes: conservarlos tal cual. NO inventar tatuajes.</li>
+    </ul>
+  </div>
+
+  <div class="mt-2">
+    <strong class="text-neuro-blue-light text-xs uppercase">Negativos (Evitar):</strong>
+    <ul class="pl-2 border-l border-gray-700 mt-1 space-y-1 text-xs text-gray-400">
+      <li>- Evitar cara de muñeco / plástico / piel perfecta irreal.</li>
+      <li>- Evitar manos deformes o dedos extra.</li>
+      <li>- Evitar dientes raros o sonrisa forzada.</li>
+      <li>- Evitar distorsión de lente extrema.</li>
+      <li>- Evitar filtros tipo beauty agresivos.</li>
+    </ul>
+  </div>
+</div>
+
+<div>
+  <strong class="text-neuro-green">I (INSTRUCCIONES):</strong><br>
+  dame un promt en estilo json para nano banana en cuadro de código
+</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex justify-end">
+                            <button onclick="copyToClipboard('prompt-visual-1', this)" 
+                                    class="btn-cyber group/btn flex items-center justify-center gap-3 bg-neuro-green text-black font-orbitron font-bold py-3 px-8 rounded-xl hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(154,255,95,0.3)] hover:shadow-[0_0_30px_rgba(154,255,95,0.6)] w-full sm:w-auto">
+                                <i data-lucide="copy" class="w-4 h-4 group-hover/btn:scale-110 transition-transform"></i>
+                                <span>COPIAR PROMPT</span>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </article>
+
+            <!-- 7. ESTRATEGIA DE CAMPAÑA 360 -->
+            <article class="glass-panel rounded-3xl p-1 relative group mt-8">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-neuro-blue to-white opacity-10 group-hover:opacity-30 rounded-3xl blur transition duration-500"></div>
+                <div class="relative bg-neuro-dark/90 h-full rounded-[20px] p-6 md:p-8 overflow-hidden">
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="bg-neuro-blue/10 p-2 rounded-lg border border-neuro-blue/30">
+                                <i data-lucide="rocket" class="text-white w-5 h-5"></i>
+                            </div>
+                            <h3 class="text-xl font-orbitron font-bold text-white tracking-wide">Estrategia de Campaña 360°</h3>
+                        </div>
+                        <p class="text-sm text-gray-300 mb-6 font-light border-l-2 border-white/30 pl-4">
+                             Automatiza tu estrategia digital: desde la identidad de marca hasta el plan de contenidos semanal.
+                        </p>
+                        <div class="bg-black/80 rounded-xl border border-white/5 p-6 font-mono text-sm text-gray-300 leading-relaxed shadow-inner max-h-[500px] overflow-y-auto custom-scrollbar">
+                            <div id="prompt-nb-7">
+<div class="mb-4">Actúa como mi Director de Estrategia de Marca y Marketing Digital (Senior). Tu misión es facilitarme la vida: yo te doy los datos básicos y tú haces todo el análisis, la investigación y la estrategia.</div>
+
+<div class="mb-2"><strong class="text-neuro-blue-light">TU PROTOCOLO DE ACTUACIÓN:</strong></div>
+
+<div class="mb-4">
+  <strong class="text-neuro-green">PASO 1: LA ENTREVISTA GUIADA</strong><br>
+  No generes ninguna estrategia todavía. Tu primera acción es saludarme y presentarme el siguiente MENÚ DE SELECCIÓN para que yo configure la campaña. Copia y pega esta lista exactamente para que yo pueda responder:
+</div>
+
+<div class="mb-4 pl-4 border-l border-gray-700">
+  <div class="mb-2 text-white font-bold">---</div>
+  <div class="mb-2"><strong class="text-white">POR FAVOR, RESPONDE A ESTOS 4 PUNTOS:</strong></div>
+  
+  <div class="mb-2">
+    <strong class="text-neuro-green">A. TU ENLACE O DESCRIPCIÓN (Fundamental para mi investigación):</strong><br>
+    * Pega aquí tu Instagram, Web, TikTok , sube un documento o describe tu negocio si no tienes links.
+  </div>
+
+  <div class="mb-2">
+    <strong class="text-neuro-green">B. ELIGE TU OBJETIVO (Responde con el número):</strong><br>
+    1. Lanzar un producto<br>
+    2. Lanzar un curso<br>
+    3. Lanzar un servicio<br>
+    4. Aumentar ventas<br>
+    5. Posicionamiento / Seguidores<br>
+    6. Otro (aclarar)
+  </div>
+
+  <div class="mb-2">
+    <strong class="text-neuro-green">C. ELIGE TU CANAL DE VENTA (Donde se cierra el dinero):</strong><br>
+    7. WhatsApp<br>
+    8. Instagram DM<br>
+    9. Web / Landing Page<br>
+    10. Tienda Online<br>
+    11. Otro (Aclarar)
+  </div>
+
+  <div class="mb-2">
+    <strong class="text-neuro-green">D. TU DISPONIBILIDAD DE TIEMPO (Para ajustar el plan):</strong><br>
+    12. Poca (1-2 horas/semana)<br>
+    13. Media (3-5 horas/semana)<br>
+    14. Alta (Tengo equipo o mucho tiempo)
+  </div>
+  <div class="mb-2 text-white font-bold">---</div>
+</div>
+
+<div class="mb-4 text-xs text-gray-500 italic">[DETENTE AQUÍ Y ESPERA MI RESPUESTA CON LOS DATOS]</div>
+
+<div class="mb-4">
+  <strong class="text-neuro-green">PASO 2: EL ANÁLISIS Y LA ESTRATEGIA</strong><br>
+  Una vez recibas mis respuestas y mi enlace:<br>
+  1. <strong class="text-white">INVESTIGA:</strong> Entra al link (o analiza la descripción) y deduce tú mismo mi identidad de marca, mi cliente ideal y mis fortalezas. No me preguntes, dedúcelo.<br>
+  2. <strong class="text-white">EJECUTA:</strong> Genera el siguiente informe estratégico basándote en tu investigación:
+</div>
+
+<div class="mb-4">
+  <div class="mb-2 text-white font-bold">ENTREGABLE FINAL (Usa este formato):</div>
+  
+  <div class="mb-3">
+    <strong class="text-neuro-blue-light">### 1) 📸 FOTO RÁPIDA DE MARCA (Análisis de identidad)</strong><br>
+    * <strong class="text-white">Propuesta de valor detectada:</strong> (Redáctala en 1 frase potente).<br>
+    * <strong class="text-white">Estilo Visual y Colores:</strong> (Si mi marca tiene colores, úsalos. Si no, SUGIERE una paleta de 3 colores y un estilo de fotos/video acorde a mi nicho).<br>
+    * <strong class="text-white">Voz de Marca:</strong> (Define cómo debo hablar: serio, divertido, inspirador, etc.).
+  </div>
+
+  <div>
+    <strong class="text-neuro-blue-light">### 2) 🚀 ESTRATEGIA DE VENTA EN 1 PÁGINA (Modelo 5P Simplificado)</strong><br>
+    * <strong class="text-white">PRODUCTO:</strong> Ángulo ganador + Promesa recomendada + 1 Bonus sugerido para aumentar valor.<br>
+    * <strong class="text-white">PRECIO:</strong> Recomendación de estructura de precio (o cómo presentarlo).<br>
+    * <strong class="text-white">PLAZA (El flujo):</strong> Ruta exacta. Ej: Reel (gancho) → DM (automatización) → WhatsApp (cierre).<br>
+    * <strong class="text-white">PROMOCIÓN (Plan de Acción):</strong> Plan de contenidos exacto para 7 días (qué subir cada día para lograr el objetivo que elegí).<br>
+    * <strong class="text-white">PERSONAS (Psicología):</strong> 5 Objeciones probables de mi cliente + 5 Respuestas cortas listas para copiar y pegar.
+  </div>
+</div>
+
+<div class="mt-4">Si has entendido tu rol, salúdame y preséntame el menú del PASO 1.</div>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex justify-end">
+                            <button onclick="copyToClipboard('prompt-nb-7', this)" 
+                                    class="btn-cyber flex items-center justify-center gap-2 bg-neuro-blue text-white hover:bg-white hover:text-neuro-blue font-orbitron text-xs font-bold py-3 px-6 rounded-lg transition-all shadow-[0_0_15px_rgba(33,0,229,0.2)] w-full sm:w-auto">
+                              <i data-lucide="copy" class="w-3 h-3"></i>
+                              <span>COPIAR ESTRATEGIA</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- NUEVO: PROMPT DE EJECUCIÓN (DÍA 1) -->
+            <article class="glass-panel rounded-3xl p-1 relative group mt-8">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-neuro-blue-light to-neuro-blue opacity-10 group-hover:opacity-30 rounded-3xl blur transition duration-500"></div>
+                <div class="relative bg-neuro-dark/90 h-full rounded-[20px] p-6 md:p-8 overflow-hidden">
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="bg-neuro-blue/10 p-2 rounded-lg border border-neuro-blue/30">
+                                <i data-lucide="image-plus" class="text-neuro-blue-light w-5 h-5"></i>
+                            </div>
+                            <h3 class="text-xl font-orbitron font-bold text-white tracking-wide">Ejecución Día 1 (Venta Visual)</h3>
+                        </div>
+                        <p class="text-sm text-gray-300 mb-6 font-light border-l-2 border-neuro-blue/30 pl-4">
+                             Genera la imagen de venta perfecta usando la información de la estrategia anterior y una foto de referencia.
+                        </p>
+                        <div class="bg-black/80 rounded-xl border border-white/5 p-6 font-mono text-sm text-gray-300 leading-relaxed shadow-inner">
+                            <div id="prompt-visual-2">
+Con la información que tienes de mi , ejecuta el día número uno. voy a suvbir y una foto y proponme un prom para Nano Banana para crear una imagen que venda en formato JSON en cuadro de texto de código.
+<br><br>
+<strong class="text-neuro-green">PROHIBIDO:</strong><br>
+- Cambiar colores, logos o etiquetas.<br>
+- Inventar o rediseñar marcas.<br>
+- Alterar textos impresos.<br>
+- Modificar rasgos físicos.<br>
+- Transformar el producto para hacerlo “más premium”.
+                            </div>
+                        </div>
+                        <div class="mt-6 flex justify-end">
+                            <button onclick="copyToClipboard('prompt-visual-2', this)" 
+                                    class="btn-cyber flex items-center justify-center gap-2 bg-neuro-blue/10 border border-neuro-blue text-neuro-blue-light hover:bg-neuro-blue hover:text-white font-orbitron text-xs font-bold py-3 px-6 rounded-lg transition-all w-full sm:w-auto">
+                              <i data-lucide="copy" class="w-3 h-3"></i>
+                              <span>COPIAR PROMPT</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- NUEVO: ANIMACIÓN DE IMAGEN (GROK) -->
+            <article class="glass-panel rounded-3xl p-1 relative group mt-8">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-neuro-green to-white opacity-10 group-hover:opacity-30 rounded-3xl blur transition duration-500"></div>
+                <div class="relative bg-neuro-dark/90 h-full rounded-[20px] p-6 md:p-8 overflow-hidden">
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="bg-neuro-green/10 p-2 rounded-lg border border-neuro-green/30">
+                                <i data-lucide="film" class="text-neuro-green w-5 h-5"></i>
+                            </div>
+                            <h3 class="text-xl font-orbitron font-bold text-white tracking-wide">Animación de Imagen (Grok)</h3>
+                        </div>
+                        <p class="text-sm text-gray-300 mb-6 font-light border-l-2 border-neuro-green/30 pl-4">
+                             Transforma imágenes estáticas en clips de video manteniendo la fidelidad visual.
+                        </p>
+                        <div class="bg-black/80 rounded-xl border border-white/5 p-6 font-mono text-sm text-gray-300 leading-relaxed shadow-inner">
+                            <div id="prompt-visual-3">
+<div class="mb-4">
+  <strong class="text-neuro-green">R (ROL):</strong><br>
+  Actúa como director de animación y diseñador de prompts experto en Grok, especializado en transformar imágenes estáticas en clips cortos, claros y visualmente atractivos.
+</div>
+<div class="mb-4">
+  <strong class="text-neuro-green">C (CONTEXTO):</strong><br>
+  Observa la imagen de referencia. Quiero convertirla en una animación manteniendo el estilo visual, los personajes/objetos principales, la iluminación y el encuadre lo más fiel posible.
+  <br><br>
+  <span class="text-neuro-blue-light font-bold text-xs uppercase">Restricciones:</span><br>
+  No cambiar identidad del sujeto, no deformar caras, no agregar elementos que no estén en la imagen.
+</div>
+<div>
+  <strong class="text-neuro-green">I (INSTRUCCIONES):</strong><br>
+  Genera 1 prompt en cuadro de codigo listo para pegar en Grok.<br>
+  <span class="text-neuro-blue-light font-bold text-xs uppercase">Duración:</span> 4 a 6 segundos.
+</div>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex justify-end">
+                            <button onclick="copyToClipboard('prompt-visual-3', this)" 
+                                    class="btn-cyber flex items-center justify-center gap-2 bg-neuro-green/10 border border-neuro-green text-neuro-green hover:bg-neuro-green hover:text-black font-orbitron text-xs font-bold py-3 px-6 rounded-lg transition-all w-full sm:w-auto">
+                              <i data-lucide="copy" class="w-3 h-3"></i>
+                              <span>COPIAR PROMPT</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
     </div>
 
     <!-- CONTENIDO BLOQUE 3 (Próximamente) -->
-    <div id="content-bloque3" class="hidden animate-fade-in text-center py-20">
+    <div id="content-bloque3" class="hidden animate-fade-in-up text-center py-20">
         <div class="glass-panel rounded-3xl p-12 border border-white/5 bg-black/50">
             <i data-lucide="lock" class="w-16 h-16 text-gray-600 mx-auto mb-6"></i>
             <h3 class="text-2xl font-orbitron font-bold text-gray-300 mb-2">BLOQUE 3</h3>
@@ -835,6 +1148,11 @@
     </div>
 
   </main>
+
+  <!-- Botón Volver Arriba -->
+  <button id="scrollToTopBtn" onclick="scrollToTop()" class="fixed bottom-8 right-8 z-50 p-3 rounded-full bg-neuro-blue text-white shadow-lg border border-white/20 transition-all duration-300 opacity-0 translate-y-10 pointer-events-none hover:bg-white hover:text-neuro-blue">
+    <i data-lucide="arrow-up" class="w-6 h-6"></i>
+  </button>
 
   <!-- Footer -->
   <footer class="glass-panel border-b-0 border-x-0 rounded-t-3xl py-12 mt-12 bg-black/60">
@@ -952,6 +1270,15 @@
                 <div id="pdf-content-nb-6b" style="background: #f0f4ff; padding: 10px; border-radius: 8px; font-family: monospace; font-size: 10px; line-height: 1.4;"></div>
             </div>
          </div>
+
+         <!-- NUEVO MÓDULO VISUAL EN PDF -->
+         <div class="pdf-no-break" style="margin-top: 20px; border-top: 1px dashed #ccc; padding-top: 20px;">
+            <h4 style="font-size: 14px; font-weight: bold; color: #2100E5; margin-bottom: 10px; text-transform: uppercase;">Módulo Visual & Estrategia</h4>
+            <div id="pdf-content-visual-1" style="background: #fdf6e3; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 10px; line-height: 1.4; border: 1px solid #ddd; margin-bottom: 10px;"></div>
+            <div id="pdf-content-nb-7" style="background: #f0f4ff; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 11px; line-height: 1.4; border: 1px solid #ddd; margin-bottom: 10px;"></div>
+            <div id="pdf-content-visual-2" style="background: #fdf6e3; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 10px; line-height: 1.4; border: 1px solid #ddd; margin-bottom: 10px;"></div>
+            <div id="pdf-content-visual-3" style="background: #fdf6e3; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 10px; line-height: 1.4; border: 1px solid #ddd;"></div>
+         </div>
      </div>
 
      <!-- BLOQUE 3 -->
@@ -1027,15 +1354,29 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         setTimeout(typeEffect, 500);
+        
+        // Restore tab
+        const savedTab = localStorage.getItem('activeTab') || 'bloque1';
+        switchTab(savedTab);
+        
+        // Scroll listener for Top Button
+        window.addEventListener('scroll', toggleScrollTopBtn);
     });
 
     function switchTab(tabId) {
+        // Save state
+        localStorage.setItem('activeTab', tabId);
+
         document.getElementById('content-bloque1').classList.add('hidden');
         document.getElementById('content-bloque2').classList.add('hidden');
         document.getElementById('content-bloque3').classList.add('hidden');
 
         const content = document.getElementById('content-' + tabId);
         content.classList.remove('hidden');
+        // Restart animation
+        content.classList.remove('animate-fade-in-up');
+        void content.offsetWidth; // trigger reflow
+        content.classList.add('animate-fade-in-up');
 
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.classList.remove('active');
@@ -1044,9 +1385,24 @@
         });
 
         const btn = document.getElementById('tab-' + tabId);
-        btn.classList.add('active');
-        btn.classList.remove('text-gray-400');
-        btn.classList.add('text-white');
+        if(btn) {
+            btn.classList.add('active');
+            btn.classList.remove('text-gray-400');
+            btn.classList.add('text-white');
+        }
+    }
+
+    function toggleScrollTopBtn() {
+        const btn = document.getElementById('scrollToTopBtn');
+        if (window.scrollY > 300) {
+            btn.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+        } else {
+            btn.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+        }
+    }
+
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function copyToClipboard(elementId, btnElement) {
@@ -1092,6 +1448,21 @@
         document.getElementById('pdf-content-nb-5').innerHTML = document.getElementById('prompt-nb-5').innerHTML;
         document.getElementById('pdf-content-nb-6a').innerHTML = document.getElementById('prompt-nb-6a').innerHTML;
         document.getElementById('pdf-content-nb-6b').innerHTML = document.getElementById('prompt-nb-6b').innerHTML;
+        
+        
+        // Bloque 2 (Visual + Estrategia + Nuevos)
+        if(document.getElementById('prompt-visual-1')) {
+            document.getElementById('pdf-content-visual-1').innerHTML = document.getElementById('prompt-visual-1').innerHTML;
+        }
+        if(document.getElementById('prompt-nb-7')) {
+            document.getElementById('pdf-content-nb-7').innerHTML = document.getElementById('prompt-nb-7').innerHTML;
+        }
+        if(document.getElementById('prompt-visual-2')) {
+            document.getElementById('pdf-content-visual-2').innerHTML = document.getElementById('prompt-visual-2').innerHTML;
+        }
+        if(document.getElementById('prompt-visual-3')) {
+            document.getElementById('pdf-content-visual-3').innerHTML = document.getElementById('prompt-visual-3').innerHTML;
+        }
 
         const element = document.getElementById('pdf-template');
         element.style.display = 'block';
