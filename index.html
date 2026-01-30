@@ -222,6 +222,24 @@
       vertical-align: middle;
       animation: blink 1s step-end infinite;
     }
+    
+    /* Estilos para Chips del Generador */
+    .chip-select {
+        transition: all 0.2s;
+        cursor: pointer;
+        font-size: 10px;
+        white-space: nowrap;
+    }
+    .chip-select:hover {
+        background-color: rgba(154, 255, 95, 0.1);
+        border-color: rgba(154, 255, 95, 0.3);
+    }
+    .chip-select.selected {
+        background-color: #9AFF5F;
+        color: black;
+        border-color: #9AFF5F;
+        font-weight: bold;
+    }
   </style>
 </head>
 <body class="min-h-screen pb-20 selection:bg-neuro-green selection:text-black relative">
@@ -1145,12 +1163,250 @@ Con la información que tienes de mi , ejecuta el día número uno. voy a suvbir
 
     </div>
 
-    <!-- CONTENIDO BLOQUE 3 (Próximamente) -->
-    <div id="content-bloque3" class="hidden animate-fade-in-up text-center py-20">
-        <div class="glass-panel rounded-3xl p-12 border border-white/5 bg-black/50">
-            <i data-lucide="lock" class="w-16 h-16 text-gray-600 mx-auto mb-6"></i>
-            <h3 class="text-2xl font-orbitron font-bold text-gray-300 mb-2">BLOQUE 3</h3>
-            <p class="text-gray-500">Contenido en desarrollo. Disponible próximamente.</p>
+    <!-- CONTENIDO BLOQUE 3: BRÚJULA DE DECISIONES -->
+    <div id="content-bloque3" class="hidden animate-fade-in-up space-y-12">
+        
+        <!-- ENCABEZADO -->
+        <div class="text-center py-8">
+            <h2 class="text-3xl font-orbitron font-bold text-white mb-4">BRÚJULA DE <span class="text-neuro-green">DECISIONES</span></h2>
+            <p class="text-gray-300 text-sm max-w-xl mx-auto mb-6">
+                Sistema de análisis económico y laboral para decidir con claridad en el corto plazo.
+            </p>
+        </div>
+
+        <!-- FASE 1: GENERADOR DE CONTEXTO (INTERACTIVO) -->
+        <section class="glass-panel rounded-3xl p-6 border border-white/5 relative overflow-hidden">
+             <div class="flex items-center gap-3 mb-6">
+                <div class="bg-neuro-green/10 p-2 rounded-lg border border-neuro-green/30">
+                    <i data-lucide="sliders" class="text-neuro-green w-5 h-5"></i>
+                </div>
+                <h3 class="text-lg font-orbitron font-bold text-white">1. Generador de Contexto</h3>
+             </div>
+             <p class="text-xs text-gray-400 mb-6">Selecciona una opción o escribe tu propia respuesta para generar el prompt automáticamente.</p>
+             
+             <!-- FORMULARIO INTERACTIVO -->
+             <div class="space-y-6" id="context-generator-form">
+                 
+                 <!-- ACTIVIDAD -->
+                 <div class="bg-black/60 rounded-xl border border-white/5 p-4">
+                     <label class="text-neuro-green font-bold text-xs uppercase mb-2 block">Actividad o Fuente de Ingreso</label>
+                     <div class="flex gap-2 overflow-x-auto pb-2 mb-2 custom-scrollbar">
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-actividad', 'Clases particulares')">Clases particulares</span>
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-actividad', 'Consultoría independiente')">Consultoría</span>
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-actividad', 'Comercio minorista')">Comercio</span>
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-actividad', 'Trabajo administrativo')">Administrativo</span>
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-actividad', 'Emprendimiento gastronómico')">Gastronómico</span>
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-actividad', 'Jubilación activa')">Jubilación activa</span>
+                     </div>
+                     <input type="text" id="input-actividad" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-neuro-green/50 transition-colors" placeholder="O escribe aquí tu actividad..." oninput="updatePromptB3()">
+                     <p class="text-[10px] text-gray-500 mt-1 italic">Tip: Sé concreto. No pongas "mi trabajo" o "varias cosas".</p>
+                 </div>
+
+                 <!-- GRID: INGRESO - COSTOS - TIEMPO -->
+                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                     <!-- INGRESO -->
+                     <div class="bg-black/60 rounded-xl border border-white/5 p-4">
+                         <label class="text-neuro-green font-bold text-xs uppercase mb-2 block">Ingreso Mensual ($)</label>
+                         <input type="number" id="input-ingreso" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-neuro-green/50 transition-colors" placeholder="0.00" oninput="updatePromptB3()">
+                         <p class="text-[10px] text-gray-500 mt-1 italic">Promedio real últimos 3 meses. No pongas ingreso ideal.</p>
+                     </div>
+                     <!-- COSTOS -->
+                     <div class="bg-black/60 rounded-xl border border-white/5 p-4">
+                         <label class="text-neuro-green font-bold text-xs uppercase mb-2 block">Costos Directos ($)</label>
+                         <input type="number" id="input-costos" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-neuro-green/50 transition-colors" placeholder="0.00" oninput="updatePromptB3()">
+                         <p class="text-[10px] text-gray-500 mt-1 italic">Gastos que desaparecen si dejas la actividad.</p>
+                     </div>
+                     <!-- TIEMPO -->
+                     <div class="bg-black/60 rounded-xl border border-white/5 p-4">
+                         <label class="text-neuro-green font-bold text-xs uppercase mb-2 block">Tiempo (Horas/Mes)</label>
+                         <input type="number" id="input-tiempo" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-neuro-green/50 transition-colors" placeholder="0" oninput="updatePromptB3()">
+                         <p class="text-[10px] text-gray-500 mt-1 italic">Incluye traslados, preparación y mensajes.</p>
+                     </div>
+                 </div>
+
+                 <!-- IMPACTO -->
+                 <div class="bg-black/60 rounded-xl border border-white/5 p-4">
+                     <label class="text-neuro-green font-bold text-xs uppercase mb-2 block">Impacto Esperado (30 días)</label>
+                     <div class="flex gap-2 overflow-x-auto pb-2 mb-2 custom-scrollbar">
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-impacto', 'Estabilidad')">Estabilidad</span>
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-impacto', 'Estabilidad con desgaste')">Estabilidad c/desgaste</span>
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-impacto', 'Crecimiento moderado')">Crecimiento moderado</span>
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-impacto', 'Más ingresos con más carga')">Más ingresos c/carga</span>
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-impacto', 'Mayor carga sin mejora')">Mayor carga s/mejora</span>
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-impacto', 'Incertidumbre')">Incertidumbre</span>
+                     </div>
+                     <input type="text" id="input-impacto" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-neuro-green/50 transition-colors" placeholder="O escribe..." oninput="updatePromptB3()">
+                 </div>
+
+                 <!-- RIESGO PRINCIPAL -->
+                 <div class="bg-black/60 rounded-xl border border-white/5 p-4">
+                     <label class="text-neuro-green font-bold text-xs uppercase mb-2 block">Riesgo Principal</label>
+                     <div class="flex gap-2 overflow-x-auto pb-2 mb-2 custom-scrollbar">
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-riesgo', 'Desgaste personal')">Desgaste personal</span>
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-riesgo', 'Falta de tiempo')">Falta de tiempo</span>
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-riesgo', 'Precio bajo para el tiempo')">Precio bajo</span>
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-riesgo', 'Ingresos inestables')">Ingresos inestables</span>
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-riesgo', 'Dependencia pocos clientes')">Dependencia clientes</span>
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-riesgo', 'Estancamiento')">Estancamiento</span>
+                     </div>
+                     <input type="text" id="input-riesgo" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-neuro-green/50 transition-colors" placeholder="O escribe..." oninput="updatePromptB3()">
+                 </div>
+
+                 <!-- OBSERVACIÓN -->
+                 <div class="bg-black/60 rounded-xl border border-white/5 p-4">
+                     <label class="text-neuro-green font-bold text-xs uppercase mb-2 block">Observación Personal</label>
+                     <div class="flex gap-2 overflow-x-auto pb-2 mb-2 custom-scrollbar">
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-obs', 'Trabajo constante, poco margen')">Poco margen</span>
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-obs', 'Me exige más energía de la que pensaba')">Mucha energía</span>
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-obs', 'Dependo de muchas horas')">Dependencia horas</span>
+                         <span class="chip-select px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:text-white" onclick="setInputValue('input-obs', 'Sensación de límite')">Sensación límite</span>
+                     </div>
+                     <input type="text" id="input-obs" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-neuro-green/50 transition-colors" placeholder="O escribe tu sensación..." oninput="updatePromptB3()">
+                 </div>
+
+             </div>
+        </section>
+
+        <!-- FASE 2: PROMPT PRINCIPAL (FILTRO DE REALIDAD) -->
+        <article class="glass-panel rounded-3xl p-1 relative group">
+          <div class="absolute -inset-0.5 bg-gradient-to-r from-neuro-green to-neuro-dark opacity-30 group-hover:opacity-50 rounded-3xl blur transition duration-500"></div>
+          <div class="relative bg-neuro-dark/90 h-full rounded-[20px] p-6 md:p-8 overflow-hidden">
+            <div class="relative z-10">
+              <div class="flex items-center gap-3 mb-6">
+                 <div class="bg-neuro-green/10 p-2 rounded-lg border border-neuro-green/30">
+                    <i data-lucide="compass" class="text-neuro-green w-6 h-6"></i>
+                 </div>
+                <h3 class="text-2xl font-orbitron font-bold text-white tracking-wide">EL FILTRO DE REALIDAD</h3>
+              </div>
+              <p class="text-sm text-gray-300 mb-6 font-light border-l-2 border-neuro-green/30 pl-4">
+                Analiza si lo que haces hoy es sostenible. <span class="text-neuro-green">El prompt se actualiza automáticamente con tus respuestas de arriba.</span>
+              </p>
+              <div class="bg-black/80 rounded-xl border border-white/5 p-6 font-mono text-sm text-gray-300 leading-relaxed shadow-inner">
+                <div id="prompt-b3-main">
+<div class="mb-4"><strong class="text-neuro-green">## ROL</strong></div>
+<div class="mb-4">Actuá como analista de decisiones económicas y laborales para personas activas. Tu función no es enseñar teoría ni motivar, sino ayudar a decidir con claridad en el corto plazo.</div>
+
+<div class="mb-4"><strong class="text-neuro-green">## CONTEXTO</strong></div>
+<div class="mb-4">Estoy evaluando una decisión económica o laboral. Trabajo con estimaciones, no con números perfectos. Quiero entender si lo que hago hoy es conveniente, sostenible o si necesita ajustes.</div>
+
+<div class="mb-4"><strong class="text-neuro-green">## DATOS</strong></div>
+<ul class="list-none space-y-2 pl-4 border-l border-gray-700 text-gray-400 text-xs mb-4">
+    <li><strong>Actividad:</strong> <span id="out-actividad">[COMPLETAR ARRIBA]</span></li>
+    <li><strong>Ingreso mensual estimado:</strong> <span id="out-ingreso">[COMPLETAR ARRIBA]</span></li>
+    <li><strong>Costos directos mensuales:</strong> <span id="out-costos">[COMPLETAR ARRIBA]</span></li>
+    <li><strong>Tiempo mensual invertido (hs):</strong> <span id="out-tiempo">[COMPLETAR ARRIBA]</span></li>
+    <li><strong>Impacto esperado (30 días):</strong> <span id="out-impacto">[COMPLETAR ARRIBA]</span></li>
+    <li><strong>Riesgo principal:</strong> <span id="out-riesgo">[COMPLETAR ARRIBA]</span></li>
+    <li><strong>Observación personal:</strong> <span id="out-obs">[COMPLETAR ARRIBA]</span></li>
+</ul>
+
+<div class="mb-4"><strong class="text-neuro-green">## INSTRUCCIONES</strong></div>
+<div class="mb-4">
+    1. Analizá los datos sin suavizar conclusiones ni relativizar el problema.<br>
+    2. Si los datos muestran un problema, decilo de forma directa.<br>
+    3. No pidas completar archivos ni Excel. Trabajá solo con la información del chat.<br>
+    4. Priorizá el corto plazo y la relación ingreso–tiempo–desgaste.<br>
+    5. No propongas más de una acción concreta.
+</div>
+
+<div class="mb-4"><strong class="text-neuro-green">## FORMATO DE RESPUESTA OBLIGATORIO</strong></div>
+<ul class="list-none space-y-1 pl-4 border-l border-gray-700 text-gray-400 text-xs">
+    <li>1. Qué estoy viendo</li>
+    <li>2. Problema real</li>
+    <li>3. Decisión recomendada</li>
+    <li>4. Error a evitar</li>
+    <li>5. Acción concreta para los próximos 7 días</li>
+</ul>
+                </div>
+              </div>
+              <div class="mt-8 flex justify-end">
+                <button onclick="copyToClipboard('prompt-b3-main', this)" 
+                        class="btn-cyber flex items-center justify-center gap-3 bg-neuro-green text-black font-orbitron font-bold py-3 px-8 rounded-xl hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(154,255,95,0.3)] hover:shadow-[0_0_30px_rgba(154,255,95,0.6)] w-full sm:w-auto">
+                  <i data-lucide="copy" class="w-4 h-4"></i>
+                  <span>COPIAR PROMPT</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- FASE 3: HERRAMIENTAS TÁCTICAS (GRID 3 COLUMNAS) -->
+        <h3 class="text-xl font-orbitron font-bold text-white mt-12 mb-6 text-center">HERRAMIENTAS TÁCTICAS</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- 1. COMPARAR (AZUL) -->
+            <article class="glass-panel rounded-2xl p-6 relative group border-t-2 border-neuro-blue/50">
+                 <div class="flex items-center gap-3 mb-4">
+                    <i data-lucide="arrow-left-right" class="text-neuro-blue-light w-5 h-5"></i>
+                    <h4 class="font-orbitron font-bold text-white text-sm">Comparar A vs B</h4>
+                 </div>
+                 <p class="text-[10px] text-gray-400 mb-4 h-10">Cuando dudas entre dos opciones y no quieres decidir por intuición.</p>
+                 
+                 <div class="bg-black/60 rounded-lg p-3 h-48 overflow-y-auto custom-scrollbar border border-white/5 mb-4">
+                    <div id="prompt-b3-compare" class="text-[10px] font-mono text-gray-300">
+<strong class="text-neuro-blue-light">## ROL:</strong> Analista de decisiones.<br>
+<strong class="text-neuro-blue-light">## CONTEXTO:</strong> Dudo entre dos opciones.<br>
+<strong class="text-neuro-blue-light">## DATOS:</strong><br>
+Opción A: [Descrip, Ingreso, Costo, Horas, Riesgo]<br>
+Opción B: [Descrip, Ingreso, Costo, Horas, Riesgo]<br>
+<strong class="text-neuro-blue-light">## INSTRUCCIONES:</strong><br>
+Compará priorizando ingreso real y tiempo. Elige una sola opción como la más conveniente HOY.<br>
+<strong class="text-neuro-blue-light">## FORMATO:</strong><br>
+1. Diferencia clave / 2. Opción ganadora / 3. Riesgo / 4. Error a evitar / 5. Acción inmediata.
+                    </div>
+                 </div>
+                 <button onclick="copyToClipboard('prompt-b3-compare', this)" class="w-full py-2 bg-neuro-blue/10 border border-neuro-blue text-neuro-blue-light text-[10px] font-bold font-orbitron rounded hover:bg-neuro-blue hover:text-white transition-colors">COPIAR</button>
+            </article>
+
+            <!-- 2. SIMULAR (VERDE) -->
+            <article class="glass-panel rounded-2xl p-6 relative group border-t-2 border-neuro-green/50">
+                 <div class="flex items-center gap-3 mb-4">
+                    <i data-lucide="zap" class="text-neuro-green w-5 h-5"></i>
+                    <h4 class="font-orbitron font-bold text-white text-sm">Simular Cambio</h4>
+                 </div>
+                 <p class="text-[10px] text-gray-400 mb-4 h-10">¿Qué pasa si subo precios o reduzco horas? Pruébalo antes de hacerlo.</p>
+                 
+                 <div class="bg-black/60 rounded-lg p-3 h-48 overflow-y-auto custom-scrollbar border border-white/5 mb-4">
+                    <div id="prompt-b3-simulate" class="text-[10px] font-mono text-gray-300">
+<strong class="text-neuro-green">## ROL:</strong> Analista económico práctico.<br>
+<strong class="text-neuro-green">## CONTEXTO:</strong> Simular un cambio puntual.<br>
+<strong class="text-neuro-green">## DATOS:</strong><br>
+Situación Actual: [Actividad, Ingreso, Costo, Horas]<br>
+Cambio a Simular: [Subir precio, quitar gasto, etc]<br>
+<strong class="text-neuro-green">## INSTRUCCIONES:</strong><br>
+Evaluá impacto en ingreso/tiempo. Decí si es reversible.<br>
+<strong class="text-neuro-green">## FORMATO:</strong><br>
+1. Qué cambia / 2. Beneficio / 3. Riesgo / 4. Decisión / 5. Prueba de 7 días.
+                    </div>
+                 </div>
+                 <button onclick="copyToClipboard('prompt-b3-simulate', this)" class="w-full py-2 bg-neuro-green/10 border border-neuro-green text-neuro-green text-[10px] font-bold font-orbitron rounded hover:bg-neuro-green hover:text-black transition-colors">COPIAR</button>
+            </article>
+
+            <!-- 3. CUELLO DE BOTELLA (BLANCO/GRIS) -->
+            <article class="glass-panel rounded-2xl p-6 relative group border-t-2 border-gray-500">
+                 <div class="flex items-center gap-3 mb-4">
+                    <i data-lucide="alert-triangle" class="text-gray-300 w-5 h-5"></i>
+                    <h4 class="font-orbitron font-bold text-white text-sm">Cuello de Botella</h4>
+                 </div>
+                 <p class="text-[10px] text-gray-400 mb-4 h-10">Cuando sientes estancamiento o desorden pero no sabes por qué.</p>
+                 
+                 <div class="bg-black/60 rounded-lg p-3 h-48 overflow-y-auto custom-scrollbar border border-white/5 mb-4">
+                    <div id="prompt-b3-bottleneck" class="text-[10px] font-mono text-gray-300">
+<strong class="text-white">## ROL:</strong> Analista organizacional.<br>
+<strong class="text-white">## CONTEXTO:</strong> Siento que algo no funciona.<br>
+<strong class="text-white">## DATOS:</strong><br>
+Actividad: [X], Ingreso: [X], Horas: [X]<br>
+Sensación general: [Cansancio, desorden, presión]<br>
+<strong class="text-white">## INSTRUCCIONES:</strong><br>
+Identificá qué traba el sistema (precio, tiempo, foco). Proponé SOLO UNA corrección.<br>
+<strong class="text-white">## FORMATO:</strong><br>
+1. Qué traba el sistema / 2. Por qué / 3. Qué dejar de hacer / 4. Ajuste recomendado / 5. Acción inmediata.
+                    </div>
+                 </div>
+                 <button onclick="copyToClipboard('prompt-b3-bottleneck', this)" class="w-full py-2 bg-white/5 border border-white/30 text-gray-300 text-[10px] font-bold font-orbitron rounded hover:bg-white hover:text-black transition-colors">COPIAR</button>
+            </article>
+
         </div>
     </div>
 
@@ -1288,11 +1544,28 @@ Con la información que tienes de mi , ejecuta el día número uno. voy a suvbir
          </div>
      </div>
 
-     <!-- BLOQUE 3 -->
-     <div style="margin-bottom: 30px;">
-         <h3 style="background: #333; color: #fff; display: inline-block; padding: 5px 15px; border-radius: 4px; font-size: 14px; font-weight: bold; margin-bottom: 20px;">BLOQUE 3</h3>
-         <div style="padding: 20px; border: 1px dashed #ccc; text-align: center; color: #666; font-size: 12px;">
-             Contenido en desarrollo. Disponible próximamente.
+     <!-- BLOQUE 3 - AGREGADO AL PDF -->
+     <div style="margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px;">
+         <h3 style="background: #000; color: #fff; display: inline-block; padding: 5px 15px; border-radius: 4px; font-size: 14px; font-weight: bold; margin-bottom: 20px;">BLOQUE 3: BRÚJULA DE DECISIONES</h3>
+         
+         <div class="pdf-no-break">
+            <h4 style="font-size: 14px; font-weight: bold; color: black; margin-bottom: 10px;">Prompt Principal (Filtro de Realidad)</h4>
+            <div id="pdf-content-b3-main" style="background: #f4f4f4; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 11px; line-height: 1.4;"></div>
+         </div>
+
+         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+             <div class="pdf-no-break">
+                <h4 style="font-size: 12px; font-weight: bold; color: #2100E5; margin-bottom: 5px;">Comparar</h4>
+                <div id="pdf-content-b3-compare" style="background: #f0f4ff; padding: 10px; border-radius: 8px; font-family: monospace; font-size: 9px; line-height: 1.4;"></div>
+             </div>
+             <div class="pdf-no-break">
+                <h4 style="font-size: 12px; font-weight: bold; color: #008000; margin-bottom: 5px;">Simular</h4>
+                <div id="pdf-content-b3-simulate" style="background: #f0fff4; padding: 10px; border-radius: 8px; font-family: monospace; font-size: 9px; line-height: 1.4;"></div>
+             </div>
+             <div class="pdf-no-break">
+                <h4 style="font-size: 12px; font-weight: bold; color: #333; margin-bottom: 5px;">Cuello de Botella</h4>
+                <div id="pdf-content-b3-bottleneck" style="background: #eee; padding: 10px; border-radius: 8px; font-family: monospace; font-size: 9px; line-height: 1.4;"></div>
+             </div>
          </div>
      </div>
      
@@ -1438,6 +1711,56 @@ Con la información que tienes de mi , ejecuta el día número uno. voy a suvbir
       }, 2500);
     }
 
+    // === LÓGICA DEL GENERADOR DE CONTEXTO (BLOQUE 3) ===
+    function setInputValue(inputId, value) {
+        const input = document.getElementById(inputId);
+        input.value = value;
+        updatePromptB3();
+        
+        // Efecto visual en los chips del mismo grupo
+        const parentDiv = input.parentElement;
+        const chips = parentDiv.querySelectorAll('.chip-select');
+        chips.forEach(chip => {
+            if(chip.innerText === value || (chip.innerText.includes(value) && value.length > 5)) {
+                chip.classList.add('selected');
+            } else {
+                chip.classList.remove('selected');
+            }
+        });
+    }
+
+    function updatePromptB3() {
+        // Obtener valores
+        const act = document.getElementById('input-actividad').value || "[COMPLETAR ARRIBA]";
+        const ing = document.getElementById('input-ingreso').value || "[COMPLETAR ARRIBA]";
+        const cos = document.getElementById('input-costos').value || "[COMPLETAR ARRIBA]";
+        const tie = document.getElementById('input-tiempo').value || "[COMPLETAR ARRIBA]";
+        const imp = document.getElementById('input-impacto').value || "[COMPLETAR ARRIBA]";
+        const rie = document.getElementById('input-riesgo').value || "[COMPLETAR ARRIBA]";
+        const obs = document.getElementById('input-obs').value || "[COMPLETAR ARRIBA]";
+
+        // Actualizar Prompt
+        document.getElementById('out-actividad').innerText = act;
+        document.getElementById('out-ingreso').innerText = ing;
+        document.getElementById('out-costos').innerText = cos;
+        document.getElementById('out-tiempo').innerText = tie;
+        document.getElementById('out-impacto').innerText = imp;
+        document.getElementById('out-riesgo').innerText = rie;
+        document.getElementById('out-obs').innerText = obs;
+        
+        // Colorear si está completo
+        const outputs = ['out-actividad', 'out-ingreso', 'out-costos', 'out-tiempo', 'out-impacto', 'out-riesgo', 'out-obs'];
+        outputs.forEach(id => {
+            const el = document.getElementById(id);
+            if (el.innerText !== "[COMPLETAR ARRIBA]") {
+                el.classList.add('text-neuro-green');
+                el.classList.remove('text-gray-500');
+            } else {
+                el.classList.remove('text-neuro-green');
+            }
+        });
+    }
+
     // PDF Optimizado para evitar cortes e incluir TODOS los bloques
     function downloadPDF(btn) {
         btn.classList.add('loading');
@@ -1456,7 +1779,6 @@ Con la información que tienes de mi , ejecuta el día número uno. voy a suvbir
         document.getElementById('pdf-content-nb-6a').innerHTML = document.getElementById('prompt-nb-6a').innerHTML;
         document.getElementById('pdf-content-nb-6b').innerHTML = document.getElementById('prompt-nb-6b').innerHTML;
         
-        
         // Bloque 2 (Visual + Estrategia + Nuevos)
         if(document.getElementById('prompt-visual-1')) {
             document.getElementById('pdf-content-visual-1').innerHTML = document.getElementById('prompt-visual-1').innerHTML;
@@ -1469,6 +1791,20 @@ Con la información que tienes de mi , ejecuta el día número uno. voy a suvbir
         }
         if(document.getElementById('prompt-visual-3')) {
             document.getElementById('pdf-content-visual-3').innerHTML = document.getElementById('prompt-visual-3').innerHTML;
+        }
+
+        // Bloque 3 (NUEVO - Agregado al JS)
+        if(document.getElementById('prompt-b3-main')) {
+            document.getElementById('pdf-content-b3-main').innerHTML = document.getElementById('prompt-b3-main').innerHTML;
+        }
+        if(document.getElementById('prompt-b3-compare')) {
+            document.getElementById('pdf-content-b3-compare').innerHTML = document.getElementById('prompt-b3-compare').innerHTML;
+        }
+        if(document.getElementById('prompt-b3-simulate')) {
+            document.getElementById('pdf-content-b3-simulate').innerHTML = document.getElementById('prompt-b3-simulate').innerHTML;
+        }
+        if(document.getElementById('prompt-b3-bottleneck')) {
+            document.getElementById('pdf-content-b3-bottleneck').innerHTML = document.getElementById('prompt-b3-bottleneck').innerHTML;
         }
 
         const element = document.getElementById('pdf-template');
