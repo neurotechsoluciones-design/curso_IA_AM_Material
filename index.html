@@ -1018,6 +1018,74 @@ Sé directo y específico. Evitá frases genéricas. Si falta información crít
                 </div>
             </article>
 
+            <!-- FOTOGRAFÍA DE PRODUCTO & PUBLICIDAD -->
+            <article class="glass-panel rounded-3xl p-1 relative group max-w-3xl mx-auto mt-12">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-neuro-green via-neuro-blue to-neuro-dark opacity-20 group-hover:opacity-50 rounded-3xl blur transition duration-500"></div>
+                
+                <div class="relative bg-neuro-dark/95 h-full rounded-[20px] p-6 md:p-8 overflow-hidden">
+                    <div class="relative z-10">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-neuro-green/10 p-3 rounded-xl border border-neuro-green/30 shadow-[0_0_15px_rgba(154,255,95,0.15)]">
+                                    <i data-lucide="shopping-bag" class="text-neuro-green w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-orbitron font-bold text-white tracking-wide">Fotografía de Producto & Publicidad</h3>
+                                    <div class="flex items-center gap-2 mt-1">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-neuro-blue animate-pulse"></span>
+                                        <p class="text-[10px] text-gray-400 uppercase tracking-wider font-bold">Dirección de Arte Comercial</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/5 border border-white/10 rounded-xl p-4 mb-6">
+                            <p class="text-sm text-gray-300 font-light flex gap-3 items-start">
+                                <i data-lucide="info" class="w-5 h-5 text-neuro-green flex-shrink-0 mt-0.5"></i>
+                                <span><strong>Nota de valor:</strong> Aprendé a transformar la foto base de un producto (o incluso una tomada de forma casera con tu celular) en una pieza publicitaria profesional. Dale el contexto de venta, ponelo en escena y aplicá la dirección de arte de un publicista o fotógrafo comercial para destacar atributos y generar ventas.</span>
+                            </p>
+                        </div>
+
+                        <div class="space-y-8">
+                            <!-- Prompt 1 -->
+                            <div>
+                                <h4 class="text-neuro-green font-bold text-xs uppercase mb-3 flex items-center gap-2">
+                                    <i data-lucide="camera" class="w-4 h-4"></i> Paso 1: Puesta en Escena
+                                </h4>
+                                <div class="bg-black/80 rounded-xl border border-white/5 p-6 font-mono text-sm text-gray-300 leading-relaxed shadow-inner">
+                                    <div id="prompt-visual-producto-1">Crea una imagen de una mochila de trekking profesional de 45 litros, color verde oliva, para montaña en San Rafael, Mendoza. Vista frontal centrada, producto completo visible. Formato vertical 4:5 (1080x1350), con espacio arriba para texto. Estilo fotografía realista, iluminación natural, fondo de montaña desenfocado, imagen clara, ordenada y atractiva.</div>
+                                </div>
+                                <div class="mt-4 flex justify-end">
+                                    <button onclick="copyToClipboard('prompt-visual-producto-1', this)" 
+                                            class="btn-cyber flex items-center justify-center gap-2 bg-neuro-green/10 border border-neuro-green text-neuro-green hover:bg-neuro-green hover:text-black font-orbitron text-xs font-bold py-2.5 px-6 rounded-lg transition-all w-full sm:w-auto">
+                                        <i data-lucide="copy" class="w-4 h-4"></i>
+                                        <span>COPIAR PASO 1</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Prompt 2 -->
+                            <div>
+                                <h4 class="text-neuro-blue-light font-bold text-xs uppercase mb-3 flex items-center gap-2">
+                                    <i data-lucide="pen-tool" class="w-4 h-4"></i> Paso 2: Diseño Publicitario (Copy)
+                                </h4>
+                                <div class="bg-black/80 rounded-xl border border-white/5 p-6 font-mono text-sm text-gray-300 leading-relaxed shadow-inner">
+                                    <div id="prompt-visual-producto-2">Usá la misma imagen como base. Mantené la mochila igual, pero podés ajustar levemente la composición para integrar un diseño publicitario. Agregá texto oferta especial 50% OFF, últimas disponibles y Av. El Libertador 910, con estilo profesional, sin tapar el producto.</div>
+                                </div>
+                                <div class="mt-4 flex justify-end">
+                                    <button onclick="copyToClipboard('prompt-visual-producto-2', this)" 
+                                            class="btn-cyber flex items-center justify-center gap-2 bg-neuro-blue-light/10 border border-neuro-blue-light text-neuro-blue-light hover:bg-neuro-blue-light hover:text-white font-orbitron text-xs font-bold py-2.5 px-6 rounded-lg transition-all w-full sm:w-auto">
+                                        <i data-lucide="copy" class="w-4 h-4"></i>
+                                        <span>COPIAR PASO 2</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </article>
+
             <!-- IMAGEN HIPER REALISTA (Arquitecto de Realidad) -->
             <article class="glass-panel rounded-3xl p-6 md:p-10 relative overflow-hidden mt-12" id="engineering-widget">
                 <div class="absolute -right-20 -top-20 w-60 h-60 bg-neuro-blue rounded-full filter blur-[100px] opacity-10"></div>
@@ -1755,6 +1823,16 @@ Identificá qué traba el sistema (precio, tiempo, foco). Proponé SOLO UNA corr
             <h4 style="font-size: 14px; font-weight: bold; color: black; margin-bottom: 10px;">Marca Personal Premium</h4>
             <div id="pdf-content-visual-1" style="background: #fdf6e3; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 10px; line-height: 1.4; border: 1px solid #ddd; margin-bottom: 10px;"></div>
             
+            <h4 style="font-size: 14px; font-weight: bold; color: black; margin-bottom: 10px;">Fotografía de Producto & Publicidad</h4>
+            <div style="background: #f0fff4; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 10px; line-height: 1.4; border: 1px solid #ddd; margin-bottom: 5px;">
+                <strong style="color: #008000;">Paso 1:</strong><br>
+                <span id="pdf-content-visual-producto-1"></span>
+            </div>
+            <div style="background: #f0f4ff; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 10px; line-height: 1.4; border: 1px solid #ddd; margin-bottom: 10px;">
+                <strong style="color: #2100E5;">Paso 2:</strong><br>
+                <span id="pdf-content-visual-producto-2"></span>
+            </div>
+
             <h4 style="font-size: 14px; font-weight: bold; color: black; margin-bottom: 10px;">Ingeniería de Identidad (Arquitecto de Realidad)</h4>
             <div id="pdf-content-engineering" style="background: #f0f4ff; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 11px; line-height: 1.4; border: 1px solid #ddd; margin-bottom: 10px;"></div>
             
@@ -2154,6 +2232,12 @@ Identificá qué traba el sistema (precio, tiempo, foco). Proponé SOLO UNA corr
         // Bloque 3 (Visual + Ingeniería)
         if(document.getElementById('prompt-visual-1')) {
             document.getElementById('pdf-content-visual-1').innerHTML = document.getElementById('prompt-visual-1').innerHTML;
+        }
+
+        // Nuevo bloque: Fotografía de Producto & Publicidad
+        if(document.getElementById('prompt-visual-producto-1')) {
+            document.getElementById('pdf-content-visual-producto-1').innerHTML = document.getElementById('prompt-visual-producto-1').innerHTML;
+            document.getElementById('pdf-content-visual-producto-2').innerHTML = document.getElementById('prompt-visual-producto-2').innerHTML;
         }
         
         // Cargar Ingeniería de Identidad al PDF
