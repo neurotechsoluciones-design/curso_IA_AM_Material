@@ -134,6 +134,12 @@
     }
     .btn-cyber:hover::before { left: 100%; }
     .btn-cyber:active { transform: scale(0.95); }
+
+    .pdf-download-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
     
     .animate-text-gradient {
       background: linear-gradient(to right, #ffffff, #9AFF5F, #2100E5, #ffffff);
@@ -359,17 +365,32 @@
                   </div>
               </nav>
 
-              <!-- Material PSD por módulo -->
+              <!-- Material PDF por módulo -->
               <div class="mt-8 pt-6 border-t border-white/10 space-y-3">
-                <p class="text-[10px] text-gray-500 font-orbitron tracking-widest uppercase text-center">Material PSD para descargar</p>
-                <a href="https://drive.google.com/uc?export=download&id=1LFJke5FsLfT2hD5RpJQ12vNx_xhzqVEh" target="_blank" class="flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-gray-300 font-bold py-3 px-4 rounded-xl hover:bg-white/10 hover:text-white transition-all text-xs font-orbitron tracking-wider">
-                    <i data-lucide="download" class="w-4 h-4"></i> MÓDULO 1 · PSD
+                <p class="text-[10px] text-gray-500 font-orbitron tracking-widest uppercase text-center">Material PDF para descargar</p>
+                <a href="https://drive.google.com/uc?export=download&id=1LFJke5FsLfT2hD5RpJQ12vNx_xhzqVEh" target="_blank" class="flex items-center justify-center gap-2 bg-neuro-green/10 border border-neuro-green text-neuro-green font-bold py-3 px-4 rounded-xl hover:bg-neuro-green hover:text-black transition-all text-xs font-orbitron tracking-wider">
+                    <svg class="pdf-download-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M14 3H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 3v6h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9 13h6M9 17h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+                    MÓDULO 1 · PDF
                 </a>
-                <a href="https://drive.google.com/uc?export=download&id=1x3xzI5KLEWFFSN-zSGYSduHzicEQ2Ha8" target="_blank" class="flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-gray-300 font-bold py-3 px-4 rounded-xl hover:bg-white/10 hover:text-white transition-all text-xs font-orbitron tracking-wider">
-                    <i data-lucide="download" class="w-4 h-4"></i> MÓDULO 2 · PSD
+                <a href="https://drive.google.com/uc?export=download&id=1x3xzI5KLEWFFSN-zSGYSduHzicEQ2Ha8" target="_blank" class="flex items-center justify-center gap-2 bg-neuro-green/10 border border-neuro-green text-neuro-green font-bold py-3 px-4 rounded-xl hover:bg-neuro-green hover:text-black transition-all text-xs font-orbitron tracking-wider">
+                    <svg class="pdf-download-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M14 3H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 3v6h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9 13h6M9 17h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+                    MÓDULO 2 · PDF
                 </a>
-                <a href="https://drive.google.com/uc?export=download&id=1-D1gwCptCAQQVt5mC1FpadPLPvuvTp6O" target="_blank" class="flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-gray-300 font-bold py-3 px-4 rounded-xl hover:bg-white/10 hover:text-white transition-all text-xs font-orbitron tracking-wider">
-                    <i data-lucide="download" class="w-4 h-4"></i> MÓDULO 3 · PSD
+                <a href="https://drive.google.com/uc?export=download&id=1-D1gwCptCAQQVt5mC1FpadPLPvuvTp6O" target="_blank" class="flex items-center justify-center gap-2 bg-neuro-green/10 border border-neuro-green text-neuro-green font-bold py-3 px-4 rounded-xl hover:bg-neuro-green hover:text-black transition-all text-xs font-orbitron tracking-wider">
+                    <svg class="pdf-download-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M14 3H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 3v6h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9 13h6M9 17h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+                    MÓDULO 3 · PDF
                 </a>
               </div>
           </div>
@@ -1353,9 +1374,9 @@ Sé directo y específico. Evitá frases genéricas. Si falta información crít
                         </div>
                     </div>
                 </div>
-                <div class="mt-6 flex justify-end">
+                <div class="mt-6">
                     <button onclick="copyToClipboard('prompt-visual-1', this)" 
-                            class="btn-cyber flex items-center justify-center gap-2 bg-neuro-blue-light/20 border border-neuro-blue-light text-white font-orbitron text-xs font-bold py-3 px-8 rounded-xl transition-all">
+                            class="w-full btn-cyber flex items-center justify-center gap-2 bg-neuro-green/10 border border-neuro-green text-neuro-green hover:bg-neuro-green hover:text-black font-orbitron text-xs font-bold py-2.5 px-6 rounded-lg transition-all">
                         <i data-lucide="copy" class="w-4 h-4"></i>
                         <span>COPIAR PROMPT</span>
                     </button>
@@ -1558,13 +1579,13 @@ Sé directo y específico. Evitá frases genéricas. Si falta información crít
 
                 <!-- Resultado Profesional -->
                 <div id="resultArea" class="mt-8 space-y-4 hidden animate-fade-in-up relative z-10">
-                    <div class="flex justify-between items-end">
-                        <label class="label-neuro !mb-0">Prompt Maestro Final</label>
-                        <button onclick="copyToClipboard('outputPrompt', this)" class="text-neuro-blue-light text-[10px] font-bold flex items-center gap-1 hover:text-white transition-colors uppercase tracking-widest bg-neuro-blue/20 px-3 py-1.5 rounded border border-neuro-blue/50">
-                            <i data-lucide="copy" class="w-3 h-3"></i> COPIAR AL PORTAPAPELES
+                    <label class="label-neuro !mb-0">Prompt Maestro Final</label>
+                    <textarea id="outputPrompt" readonly class="w-full h-48 p-4 rounded-xl font-mono text-xs leading-relaxed border border-neuro-blue/30 bg-black/80 custom-scrollbar focus:outline-none text-gray-300"></textarea>
+                    <div class="flex justify-end">
+                        <button onclick="copyToClipboard('outputPrompt', this)" class="btn-cyber flex items-center justify-center gap-2 bg-neuro-green/10 border border-neuro-green text-neuro-green hover:bg-neuro-green hover:text-black font-orbitron text-xs font-bold py-2.5 px-6 rounded-lg transition-all">
+                            <i data-lucide="copy" class="w-4 h-4"></i> COPIAR AL PORTAPAPELES
                         </button>
                     </div>
-                    <textarea id="outputPrompt" readonly class="w-full h-48 p-4 rounded-xl font-mono text-xs leading-relaxed border border-neuro-blue/30 bg-black/80 custom-scrollbar focus:outline-none text-gray-300"></textarea>
                 </div>
             </article>
 
@@ -1907,23 +1928,67 @@ Sé directo y específico. Evitá frases genéricas. Si falta información crít
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Copia inteligente
-    function copyToClipboard(id, btnElement) {
-        const el = document.getElementById(id);
-        const textToCopy = (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') ? el.value : el.innerText;
-        
-        navigator.clipboard.writeText(textToCopy).then(() => {
-            const originalContent = btnElement.innerHTML;
-            btnElement.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i><span>LISTO</span>`;
+    function showCopySuccess(btnElement) {
+        const originalContent = btnElement.innerHTML;
+        btnElement.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i><span>LISTO</span>`;
+        lucide.createIcons();
+        showToast();
+        setTimeout(() => {
+            btnElement.innerHTML = originalContent;
             lucide.createIcons();
-            showToast();
-            setTimeout(() => {
-                btnElement.innerHTML = originalContent;
-                lucide.createIcons();
-            }, 2000);
-        }).catch(err => {
-            console.error('Error:', err);
-        });
+        }, 2000);
+    }
+
+    function fallbackCopyText(textToCopy) {
+        const helper = document.createElement('textarea');
+        helper.value = textToCopy;
+        helper.setAttribute('readonly', '');
+        helper.style.position = 'fixed';
+        helper.style.opacity = '0';
+        helper.style.pointerEvents = 'none';
+        document.body.appendChild(helper);
+        helper.focus();
+        helper.select();
+
+        const wasCopied = document.execCommand('copy');
+        document.body.removeChild(helper);
+
+        if (!wasCopied) {
+            throw new Error('No se pudo copiar el texto.');
+        }
+    }
+
+    // Copia inteligente
+    async function copyToClipboard(id, btnElement) {
+        const el = document.getElementById(id);
+        if (!el) {
+            console.error(`No se encontró el elemento con id "${id}".`);
+            return;
+        }
+
+        const textToCopy = (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') ? el.value : el.innerText;
+        const canUseClipboardApi =
+            typeof navigator !== 'undefined' &&
+            navigator.clipboard &&
+            typeof navigator.clipboard.writeText === 'function' &&
+            window.isSecureContext;
+
+        try {
+            if (canUseClipboardApi) {
+                await navigator.clipboard.writeText(textToCopy);
+            } else {
+                fallbackCopyText(textToCopy);
+            }
+
+            showCopySuccess(btnElement);
+        } catch (err) {
+            try {
+                fallbackCopyText(textToCopy);
+                showCopySuccess(btnElement);
+            } catch (fallbackError) {
+                console.error('Error al copiar:', fallbackError || err);
+            }
+        }
     }
 
     function showToast() {
@@ -2078,8 +2143,6 @@ Sé directo y específico. Evitá frases genéricas. Si falta información crít
         } else {
             outModo.innerText = "[SELECCIONAR]";
         }
-    }
-        });
     }
 
     // PDF Optimizado
