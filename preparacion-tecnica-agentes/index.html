@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050711">
+  <title>Preparación técnica | Curso Avanzado de Agentes IA · NeuroTech</title>
+  <meta name="description" content="Guía de instalación paso a paso para preparar tu computadora y comenzar a construir agentes de IA y automatizaciones empresariales con NeuroTech Soluciones.">
+  <meta property="og:title" content="Preparación técnica | Curso Avanzado de Agentes IA">
+  <meta property="og:description" content="Descargá las herramientas, configurá tu entorno y verificá que todo esté listo para trabajar con agentes y automatización.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#050711; --panel:#0b1020; --panel2:#0e1628; --line:rgba(255,255,255,.10);
+      --text:#f5f7ff; --muted:#a7b0c5; --soft:#75819b; --blue:#3c49ff; --blue2:#6f79ff;
+      --green:#a7ff68; --green-dark:#18351d; --cyan:#68e6ff; --orange:#ffc36a;
+      --radius:22px; --shadow:0 24px 80px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:90px}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+    a{color:inherit}
+    button,input{font:inherit}
+    .ambient{position:fixed;inset:0;pointer-events:none;z-index:-2;background:
+      radial-gradient(ellipse at 12% 10%,rgba(60,73,255,.18),transparent 35%),
+      radial-gradient(ellipse at 88% 25%,rgba(167,255,104,.09),transparent 30%),
+      linear-gradient(180deg,#050711 0%,#070b17 60%,#050711 100%)}
+    .grid-bg{position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.25;background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:46px 46px;
+      mask-image:linear-gradient(to bottom,black,transparent 78%)}
+    .container{width:min(1160px,calc(100% - 40px));margin-inline:auto}
+    .topbar{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-family:Orbitron,sans-serif;font-weight:800;letter-spacing:.08em;font-size:13px}
+    .brand-mark{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;color:#050711;background:linear-gradient(135deg,var(--green),#d8ffad);font-size:18px;font-weight:900;box-shadow:0 0 24px rgba(167,255,104,.22)}
+    .brand small{display:block;color:var(--muted);font:600 9px Inter,sans-serif;letter-spacing:.22em;margin-top:2px}
+    .nav{display:flex;align-items:center;gap:24px}
+    .nav a{font-size:12px;color:var(--muted);text-decoration:none;transition:.2s}
+    .nav a:hover{color:var(--green)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid transparent;border-radius:999px;padding:12px 18px;font-size:12px;font-weight:800;text-decoration:none;cursor:pointer;transition:.2s}
+    .btn-primary{background:var(--green);color:#07100a;box-shadow:0 8px 30px rgba(167,255,104,.14)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 35px rgba(167,255,104,.24)}
+    .btn-ghost{border-color:rgba(255,255,255,.17);background:rgba(255,255,255,.035);color:var(--text)}
+    .btn-ghost:hover{border-color:rgba(167,255,104,.5);color:var(--green)}
+    .hero{padding:74px 0 54px;display:grid;grid-template-columns:1.12fr .88fr;gap:46px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--green);font:700 10px Orbitron,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+    .eyebrow:before{content:"";width:25px;height:1px;background:var(--green);box-shadow:0 0 10px var(--green)}
+    h1{font:800 clamp(34px,5.3vw,62px)/1.04 Orbitron,sans-serif;letter-spacing:-.055em;margin:18px 0 20px;max-width:750px}
+    h1 span{color:var(--green);text-shadow:0 0 28px rgba(167,255,104,.16)}
+    .hero-copy{font-size:17px;color:#c0c9dc;max-width:660px;margin:0 0 26px}
+    .hero-copy strong{color:white}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+    .hero-tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:30px}
+    .tag{border:1px solid var(--line);background:rgba(255,255,255,.035);padding:7px 11px;border-radius:999px;font-size:10px;color:#c3cbe0}
+    .hero-card{position:relative;border:1px solid rgba(167,255,104,.22);border-radius:28px;padding:24px;background:linear-gradient(145deg,rgba(17,26,49,.92),rgba(7,12,25,.94));box-shadow:var(--shadow);overflow:hidden}
+    .hero-card:before{content:"";position:absolute;width:250px;height:250px;right:-100px;top:-100px;background:radial-gradient(circle,rgba(60,73,255,.38),transparent 70%);pointer-events:none}
+    .terminal-top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:15px;margin-bottom:18px;position:relative}
+    .dots{display:flex;gap:6px}.dots i{width:8px;height:8px;border-radius:50%;background:#45506b}.dots i:first-child{background:#ff6c73}.dots i:nth-child(2){background:#ffc36a}.dots i:nth-child(3){background:var(--green)}
+    .terminal-label{font:500 10px "DM Mono",monospace;color:#aab5cb}
+    .terminal-code{font:12px/2 "DM Mono",monospace;color:#d9e2f6;position:relative}
+    .terminal-code .prompt{color:var(--green)}.terminal-code .comment{color:#73819e}
+    .terminal-result{display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding:12px 14px;border-radius:14px;background:rgba(167,255,104,.07);border:1px solid rgba(167,255,104,.16);font-size:11px;color:#d7e9d0}
+    .terminal-result b{color:var(--green);font-family:Orbitron,sans-serif;font-size:10px;letter-spacing:.08em}
+    .section{padding:54px 0}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:28px;margin-bottom:26px}
+    .section-kicker{color:var(--blue2);font:700 10px Orbitron,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+    h2{font:700 clamp(24px,3vw,36px)/1.15 Orbitron,sans-serif;letter-spacing:-.035em;margin:9px 0 0}
+    .section-head p{max-width:470px;color:var(--muted);font-size:13px;margin:0}
+    .notice{display:flex;gap:14px;align-items:flex-start;border:1px solid rgba(255,195,106,.22);background:rgba(255,195,106,.055);border-radius:18px;padding:17px 18px;margin:22px 0}
+    .notice-icon{flex:0 0 30px;height:30px;border-radius:10px;background:rgba(255,195,106,.14);display:grid;place-items:center;color:var(--orange);font-weight:900}
+    .notice p{margin:0;color:#d7dcec;font-size:12px}.notice strong{color:#ffe0ae}
+    .requirements{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .requirement{border:1px solid var(--line);background:rgba(255,255,255,.025);border-radius:17px;padding:16px}
+    .requirement .symbol{font:700 11px Orbitron,sans-serif;color:var(--green);margin-bottom:9px}
+    .requirement strong{display:block;font-size:12px;margin-bottom:4px}
+    .requirement span{font-size:11px;color:var(--muted)}
+    .progress-box{border:1px solid rgba(167,255,104,.22);background:linear-gradient(100deg,rgba(167,255,104,.075),rgba(60,73,255,.08));border-radius:20px;padding:18px 20px;margin:28px 0 20px}
+    .progress-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px}
+    .progress-row strong{font:700 12px Orbitron,sans-serif;letter-spacing:.05em}
+    .progress-row span{font:500 11px "DM Mono",monospace;color:var(--green)}
+    .progress-track{height:7px;border-radius:99px;background:rgba(255,255,255,.10);overflow:hidden}
+    .progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--blue2),var(--green));border-radius:99px;transition:width .3s}
+    .tools-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .tool-card{border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,rgba(15,23,43,.88),rgba(8,13,27,.92));padding:21px;position:relative;overflow:hidden}
+    .tool-card:hover{border-color:rgba(167,255,104,.28);transform:translateY(-2px);transition:.2s}
+    .tool-card.optional{background:linear-gradient(145deg,rgba(14,20,37,.78),rgba(8,12,24,.9))}
+    .tool-head{display:flex;align-items:flex-start;gap:13px;margin-bottom:14px}
+    .tool-icon{width:43px;height:43px;flex:0 0 43px;border-radius:14px;background:rgba(60,73,255,.16);border:1px solid rgba(111,121,255,.22);display:grid;place-items:center;font:800 14px Orbitron,sans-serif;color:#c5caff}
+    .tool-card:nth-child(3n) .tool-icon{background:rgba(167,255,104,.09);border-color:rgba(167,255,104,.2);color:var(--green)}
+    .tool-title{flex:1;min-width:0}
+    .tool-title h3{margin:0 0 4px;font-size:17px;line-height:1.25}
+    .tool-title p{margin:0;color:var(--muted);font-size:11px}
+    .status{display:inline-flex;align-items:center;gap:6px;font:700 9px Orbitron,sans-serif;letter-spacing:.08em;text-transform:uppercase;border-radius:99px;padding:6px 9px;background:rgba(167,255,104,.09);color:var(--green);border:1px solid rgba(167,255,104,.16);white-space:nowrap}
+    .status.blue{background:rgba(111,121,255,.10);border-color:rgba(111,121,255,.2);color:#b9c0ff}
+    .status.amber{background:rgba(255,195,106,.08);border-color:rgba(255,195,106,.18);color:var(--orange)}
+    .tool-card ul,.steps{padding-left:18px;margin:12px 0;color:#c3cce0;font-size:12px}
+    .tool-card li,.steps li{margin:6px 0}
+    .tool-card li::marker,.steps li::marker{color:var(--green)}
+    .tool-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}
+    .tool-link{display:inline-flex;align-items:center;gap:7px;text-decoration:none;border-radius:11px;padding:9px 12px;font-size:11px;font-weight:800;background:var(--green);color:#08110a}
+    .tool-link.secondary{background:rgba(255,255,255,.06);border:1px solid var(--line);color:#e8edfa}
+    .tool-link:hover{filter:brightness(1.08)}
+    .step-label{font:700 9px Orbitron,sans-serif;color:var(--blue2);letter-spacing:.12em;text-transform:uppercase;margin-top:16px}
+    .code-wrap{position:relative;margin:12px 0 4px}
+    pre{margin:0;padding:14px 42px 14px 14px;background:#030610;border:1px solid rgba(255,255,255,.08);border-radius:13px;color:#cce5d0;white-space:pre-wrap;word-break:break-word;font:11px/1.7 "DM Mono",monospace;overflow:auto}
+    .copy{position:absolute;right:8px;top:8px;border:1px solid rgba(255,255,255,.14);background:#111a2d;color:#c7d0e4;border-radius:8px;padding:5px 8px;font-size:9px;cursor:pointer}
+    .copy:hover{border-color:var(--green);color:var(--green)}
+    .checkline{display:flex;align-items:center;gap:9px;border-top:1px solid var(--line);padding-top:14px;margin-top:16px;font-size:11px;color:#d5dded}
+    .checkline input{appearance:none;width:17px;height:17px;border:1px solid #5e6b85;border-radius:5px;background:#090f20;cursor:pointer;flex:0 0 17px}
+    .checkline input:checked{background:var(--green);border-color:var(--green);position:relative}
+    .checkline input:checked:after{content:"✓";position:absolute;inset:-1px 0 0;color:#08110a;text-align:center;font-size:12px;font-weight:900}
+    .mini-note{font-size:10px;color:var(--soft);margin-top:9px}
+    .optional-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .concepts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .concept{border:1px solid var(--line);border-radius:17px;padding:17px;background:rgba(255,255,255,.025)}
+    .concept h3{font-size:13px;margin:0 0 7px;color:var(--green)}
+    .concept p{font-size:11px;color:var(--muted);margin:0}
+    .verification{border:1px solid rgba(111,121,255,.25);background:linear-gradient(145deg,rgba(25,31,74,.45),rgba(9,14,30,.85));border-radius:22px;padding:22px}
+    .verification p{font-size:12px;color:var(--muted);margin:5px 0 12px}
+    .video-card{display:flex;align-items:center;justify-content:space-between;gap:18px;border:1px solid rgba(167,255,104,.22);background:linear-gradient(110deg,rgba(167,255,104,.07),rgba(60,73,255,.08));border-radius:20px;padding:20px}
+    .video-card strong{display:block;font-size:14px;margin-bottom:5px}.video-card span{font-size:11px;color:var(--muted)}
+    .video-link{white-space:nowrap;text-decoration:none;color:var(--green);font-size:11px;font-weight:800;border:1px solid rgba(167,255,104,.3);padding:10px 13px;border-radius:11px}
+    .security{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .security-item{display:flex;gap:11px;padding:15px;border-radius:15px;border:1px solid var(--line);background:rgba(255,255,255,.025)}
+    .security-item b{display:block;font-size:12px;margin-bottom:3px}.security-item span{display:block;color:var(--muted);font-size:11px}
+    .footer{padding:35px 0 45px;border-top:1px solid var(--line);margin-top:50px;color:var(--soft);font-size:10px}
+    .footer-row{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+    .footer a{color:#b8c3da;text-decoration:none}.footer a:hover{color:var(--green)}
+    .source-list{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+    .source-list a{font-size:10px}
+    .muted{color:var(--muted)}
+    .divider{height:1px;background:var(--line);margin:20px 0}
+    @media(max-width:900px){.hero{grid-template-columns:1fr;gap:30px;padding-top:55px}.hero-card{max-width:650px}.requirements{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:650px){.container{width:min(100% - 28px,1160px)}.topbar{height:66px}.nav{display:none}.topbar>.btn{padding:10px 12px;font-size:10px}.hero{padding:48px 0 34px}.hero-copy{font-size:15px}.section{padding:38px 0}.section-head{display:block}.section-head p{margin-top:12px}.tools-grid,.optional-grid,.concepts,.security{grid-template-columns:1fr}.requirements{grid-template-columns:repeat(2,1fr);gap:8px}.requirement{padding:13px}.tool-card{padding:17px}.video-card{align-items:flex-start;flex-direction:column}.video-link{white-space:normal}.hero-actions .btn{flex:1}.hero-card{padding:18px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+  </style>
+</head>
+<body>
+  <div class="ambient"></div><div class="grid-bg"></div>
+  <div class="container">
+    <header class="topbar">
+      <a class="brand" href="https://neurotechsoluciones.com/" aria-label="NeuroTech Soluciones">
+        <span class="brand-mark">N</span><span>NEUROTECH<small>SOLUCIONES INTELIGENTES</small></span>
+      </a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="#ruta">Instalación</a><a href="#opcionales">Herramientas avanzadas</a><a href="#verificar">Verificación</a><a href="#seguridad">Seguridad</a>
+      </nav>
+      <a class="btn btn-primary" href="#ruta">Preparar mi equipo <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Curso avanzado · Agentes de IA</div>
+          <h1>Tu entorno listo para <span>construir y automatizar.</span></h1>
+          <p class="hero-copy">Esta guía te acompaña desde la descarga hasta la primera verificación. Prepará tu computadora para crear agentes, conectar aplicaciones y desarrollar automatizaciones aplicadas a empresas.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#ruta">Empezar la instalación <span aria-hidden="true">↓</span></a>
+            <a class="btn btn-ghost" href="#mapa">Ver qué necesitás</a>
+          </div>
+          <div class="hero-tags">
+            <span class="tag">Windows 10 / 11 como ruta principal</span>
+            <span class="tag">Enlaces oficiales</span>
+            <span class="tag">Guía paso a paso</span>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="Vista previa de comandos de verificación">
+          <div class="terminal-top"><div class="dots"><i></i><i></i><i></i></div><span class="terminal-label">NEUROTECH / CHECKLIST</span></div>
+          <div class="terminal-code">
+            <div><span class="comment"># Comprobá las herramientas instaladas</span></div>
+            <div><span class="prompt">PS &gt;</span> git --version</div>
+            <div><span class="prompt">PS &gt;</span> node -v</div>
+            <div><span class="prompt">PS &gt;</span> npm -v</div>
+            <div><span class="prompt">PS &gt;</span> python --version</div>
+          </div>
+          <div class="terminal-result"><span>Entorno de desarrollo</span><b>READY TO BUILD</b></div>
+        </aside>
+      </section>
+
+      <section class="section" id="mapa">
+        <div class="section-head">
+          <div><div class="section-kicker">01 / Antes de empezar</div><h2>Qué necesitás tener a mano</h2></div>
+          <p>La ruta está pensada para equipos Windows. Si trabajás con macOS o Linux, los enlaces oficiales permiten elegir el instalador correspondiente.</p>
+        </div>
+        <div class="requirements">
+          <div class="requirement"><div class="symbol">01 / EQUIPO</div><strong>Windows 10 u 11</strong><span>Preferentemente 64 bits y actualizado.</span></div>
+          <div class="requirement"><div class="symbol">02 / CONEXIÓN</div><strong>Internet estable</strong><span>Para descargas, autenticación y servicios en la nube.</span></div>
+          <div class="requirement"><div class="symbol">03 / ACCESO</div><strong>Permisos de instalación</strong><span>Algunas herramientas pueden requerir autorización del administrador.</span></div>
+          <div class="requirement"><div class="symbol">04 / CUENTAS</div><strong>Correo de uso personal</strong><span>Para crear cuentas en GitHub y los servicios que utilice el curso.</span></div>
+        </div>
+        <div class="notice">
+          <div class="notice-icon">!</div>
+          <p><strong>No instales todo por las dudas.</strong> Primero completá la ruta principal. Docker, bases de datos y automatización de navegador se incorporan cuando el ejercicio lo necesita. Para trabajar con datos reales de una empresa, utilizá únicamente accesos autorizados y datos de prueba durante las prácticas.</p>
+        </div>
+      </section>
+
+      <section class="section" id="ruta">
+        <div class="section-head">
+          <div><div class="section-kicker">02 / Ruta principal</div><h2>Instalá en este orden</h2></div>
+          <p>Completá cada paso y marcá la casilla. El avance queda guardado en este navegador para que puedas retomar cuando quieras.</p>
+        </div>
+        <div class="progress-box">
+          <div class="progress-row"><strong>Tu preparación técnica</strong><span id="progressText">0 de 7 completados</span></div>
+          <div class="progress-track"><div class="progress-fill" id="progressBar"></div></div>
+        </div>
+
+        <div class="tools-grid">
+          <article class="tool-card" id="vscode">
+            <div class="tool-head"><div class="tool-icon">VS</div><div class="tool-title"><h3>1. Visual Studio Code</h3><p>Tu espacio de trabajo para abrir carpetas, archivos y proyectos.</p></div><span class="status">Base</span></div>
+            <div class="step-label">Descarga oficial</div>
+            <a class="tool-link" href="https://code.visualstudio.com/download" target="_blank" rel="noopener">Descargar VS Code ↗</a>
+            <ol class="steps">
+              <li>Entrá al sitio oficial y seleccioná Windows.</li>
+              <li>Elegí <strong>User Installer x64</strong> para una instalación habitual.</li>
+              <li>Ejecutá el archivo descargado y aceptá las opciones recomendadas.</li>
+              <li>Abrí Visual Studio Code desde el menú Inicio.</li>
+            </ol>
+            <p class="mini-note">No necesitás instalar extensiones ahora. Las agregaremos cuando el proyecto las requiera.</p>
+            <label class="checkline"><input class="task-check" type="checkbox" data-task="vscode"><span>Ya instalé y abrí Visual Studio Code</span></label>
+          </article>
+
+          <article class="tool-card" id="git">
+            <div class="tool-head"><div class="tool-icon">Git</div><div class="tool-title"><h3>2. Git para Windows</h3><p>Registra cambios y permite volver a versiones anteriores de tus proyectos.</p></div><span class="status">Base</span></div>
+            <div class="step-label">Descarga oficial</div>
+            <a class="tool-link" href="https://git-scm.com/install/windows" target="_blank" rel="noopener">Descargar Git ↗</a>
+            <ol class="steps">
+              <li>Descargá el instalador para Windows de acuerdo con tu procesador.</li>
+              <li>Ejecutalo y conservá las opciones recomendadas.</li>
+              <li>Finalizá la instalación. Git Bash se incluye en Git for Windows.</li>
+              <li>Abrí PowerShell y comprobá que Git responde.</li>
+            </ol>
+            <div class="code-wrap"><pre id="cmd-git">git --version</pre><button class="copy" type="button" data-copy="cmd-git">Copiar</button></div>
+            <label class="checkline"><input class="task-check" type="checkbox" data-task="git"><span>Git quedó instalado y responde en la terminal</span></label>
+          </article>
+
+          <article class="tool-card" id="github">
+            <div class="tool-head"><div class="tool-icon">GH</div><div class="tool-title"><h3>3. Cuenta de GitHub</h3><p>Tu espacio para guardar, versionar y compartir proyectos.</p></div><span class="status">Base</span></div>
+            <div class="step-label">Crear cuenta</div>
+            <a class="tool-link" href="https://github.com/signup" target="_blank" rel="noopener">Crear cuenta gratuita ↗</a>
+            <ol class="steps">
+              <li>Registrate con tu correo habitual y verificá la dirección.</li>
+              <li>Elegí un nombre de usuario que puedas compartir profesionalmente.</li>
+              <li>Activá la autenticación en dos pasos.</li>
+              <li>Conservá tus datos de acceso en un gestor seguro. No compartas tokens.</li>
+            </ol>
+            <p class="mini-note">Git es el programa que controla versiones. GitHub es el servicio en línea donde alojás repositorios. Son complementarios, no lo mismo.</p>
+            <label class="checkline"><input class="task-check" type="checkbox" data-task="github"><span>Creé y verifiqué mi cuenta de GitHub</span></label>
+          </article>
+
+          <article class="tool-card" id="node">
+            <div class="tool-head"><div class="tool-icon">JS</div><div class="tool-title"><h3>4. Node.js + npm</h3><p>Permite ejecutar herramientas JavaScript y administrar paquetes.</p></div><span class="status">Base</span></div>
+            <div class="step-label">Descarga oficial</div>
+            <a class="tool-link" href="https://nodejs.org/es/download/" target="_blank" rel="noopener">Descargar Node.js ↗</a>
+            <ol class="steps">
+              <li>Entrá al sitio oficial y elegí la versión <strong>LTS</strong>, no la versión Current.</li>
+              <li>Descargá el instalador Windows x64 (.msi).</li>
+              <li>Ejecutalo con las opciones predeterminadas. npm se instala junto con Node.js.</li>
+              <li>Cerrá y volvé a abrir PowerShell o la terminal de VS Code.</li>
+            </ol>
+            <div class="code-wrap"><pre id="cmd-node">node -v
+npm -v</pre><button class="copy" type="button" data-copy="cmd-node">Copiar</button></div>
+            <p class="mini-note">La versión LTS es la recomendada para el entorno del curso. No necesitás instalar npm por separado.</p>
+            <label class="checkline"><input class="task-check" type="checkbox" data-task="node"><span>Node.js y npm responden correctamente</span></label>
+          </article>
+
+          <article class="tool-card" id="python">
+            <div class="tool-head"><div class="tool-icon">Py</div><div class="tool-title"><h3>5. Python</h3><p>Para scripts, procesamiento de datos, lógica y agentes desarrollados con código.</p></div><span class="status">Base</span></div>
+            <div class="step-label">Descarga oficial</div>
+            <a class="tool-link" href="https://www.python.org/downloads/windows/" target="_blank" rel="noopener">Descargar Python ↗</a>
+            <ol class="steps">
+              <li>En la página oficial buscá una versión estable de la rama <strong>Python 3.13.x, 64 bits</strong>.</li>
+              <li>Descargá el instalador para Windows y ejecutalo.</li>
+              <li>Si utilizás el instalador clásico, activá <strong>Add Python to PATH</strong> antes de instalar.</li>
+              <li>Terminá la instalación y abrí una terminal nueva.</li>
+            </ol>
+            <div class="code-wrap"><pre id="cmd-python">python --version
+py --version</pre><button class="copy" type="button" data-copy="cmd-python">Copiar</button></div>
+            <p class="mini-note">Se propone Python 3.13 por compatibilidad con bibliotecas de automatización. No instales versiones experimentales para las prácticas.</p>
+            <label class="checkline"><input class="task-check" type="checkbox" data-task="python"><span>Python quedó instalado y responde en la terminal</span></label>
+          </article>
+
+          <article class="tool-card" id="codex">
+            <div class="tool-head"><div class="tool-icon">CX</div><div class="tool-title"><h3>6. ChatGPT para escritorio + Codex</h3><p>Agente de código para trabajar sobre carpetas, archivos y proyectos.</p></div><span class="status">Principal</span></div>
+            <div class="step-label">Descarga oficial</div>
+            <a class="tool-link" href="https://chatgpt.com/download/" target="_blank" rel="noopener">Descargar ChatGPT ↗</a>
+            <ol class="steps">
+              <li>Elegí la descarga para Windows.</li>
+              <li>Instalá la aplicación e iniciá sesión con tu cuenta de ChatGPT.</li>
+              <li>Seleccioná <strong>Codex</strong> dentro de la aplicación.</li>
+              <li>Creá una carpeta de práctica y abrila como proyecto. Empezá con archivos de prueba.</li>
+            </ol>
+            <p class="mini-note">El acceso a Codex depende de la disponibilidad y los límites del plan de la cuenta. La aplicación no convierte todas las funciones en gratuitas.</p>
+            <div class="divider"></div>
+            <strong style="font-size:11px">Alternativa por terminal: Codex CLI</strong>
+            <div class="code-wrap"><pre id="cmd-codex">powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"</pre><button class="copy" type="button" data-copy="cmd-codex">Copiar</button></div>
+            <label class="checkline"><input class="task-check" type="checkbox" data-task="codex"><span>Instalé ChatGPT y pude abrir Codex</span></label>
+          </article>
+
+          <article class="tool-card" id="n8n">
+            <div class="tool-head"><div class="tool-icon">n8n</div><div class="tool-title"><h3>7. n8n Cloud</h3><p>Plataforma para diseñar workflows, integrar servicios y orquestar agentes.</p></div><span class="status">Principal</span></div>
+            <div class="step-label">Acceso en línea, sin descarga local</div>
+            <a class="tool-link" href="https://n8n.io/" target="_blank" rel="noopener">Entrar al sitio oficial ↗</a>
+            <ol class="steps">
+              <li>Ingresá a n8n y elegí la opción de Cloud para comenzar.</li>
+              <li>Creá tu cuenta y completá el acceso al espacio de trabajo.</li>
+              <li>Creá un workflow nuevo.</li>
+              <li>Para la primera prueba, agregá un nodo Manual Trigger y ejecutá el flujo.</li>
+            </ol>
+            <p class="mini-note">Empezamos con Cloud para que todos puedan practicar sin configurar servidores. El alojamiento y los límites dependen del plan elegido.</p>
+            <a class="tool-link secondary" href="https://docs.n8n.io/" target="_blank" rel="noopener">Consultar documentación ↗</a>
+            <label class="checkline"><input class="task-check" type="checkbox" data-task="n8n"><span>Creé mi espacio de trabajo en n8n</span></label>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="opcionales">
+        <div class="section-head">
+          <div><div class="section-kicker">03 / Ampliación técnica</div><h2>Herramientas para proyectos avanzados</h2></div>
+          <p>Instalalas cuando el ejercicio o la arquitectura lo requieran. No son condición para completar la primera práctica.</p>
+        </div>
+        <div class="optional-grid">
+          <article class="tool-card optional" id="claude">
+            <div class="tool-head"><div class="tool-icon">CC</div><div class="tool-title"><h3>Claude Code</h3><p>Alternativa a Codex para programación asistida y trabajo agentic.</p></div><span class="status blue">Alternativa</span></div>
+            <a class="tool-link" href="https://code.claude.com/docs/en/overview" target="_blank" rel="noopener">Documentación oficial ↗</a>
+            <ol class="steps">
+              <li>Revisá los requisitos y el método de instalación para Windows.</li>
+              <li>Abrí PowerShell y ejecutá el instalador oficial.</li>
+              <li>Completá la autenticación con una cuenta que tenga acceso a Claude Code.</li>
+              <li>Verificá la instalación y ejecutá <code>claude doctor</code>.</li>
+            </ol>
+            <div class="code-wrap"><pre id="cmd-claude">irm https://claude.ai/install.ps1 | iex</pre><button class="copy" type="button" data-copy="cmd-claude">Copiar</button></div>
+            <p class="mini-note">No es obligatorio instalar Codex y Claude Code a la vez. Elegí uno como entorno principal y compará el otro si tenés acceso. Pueden existir costos de suscripción o uso de API.</p>
+          </article>
+
+          <article class="tool-card optional" id="docker">
+            <div class="tool-head"><div class="tool-icon">DK</div><div class="tool-title"><h3>Docker Desktop + WSL 2</h3><p>Para ejecutar n8n y otros servicios localmente en contenedores.</p></div><span class="status amber">Avanzado</span></div>
+            <a class="tool-link" href="https://www.docker.com/products/docker-desktop/" target="_blank" rel="noopener">Descargar Docker Desktop ↗</a>
+            <ol class="steps">
+              <li>En Windows, abrí PowerShell como administrador y ejecutá el comando de WSL.</li>
+              <li>Reiniciá el equipo si Windows lo solicita.</li>
+              <li>Instalá Docker Desktop y elegí el backend WSL 2 cuando corresponda.</li>
+              <li>Abrí Docker Desktop y esperá a que el motor indique que está funcionando.</li>
+              <li>Comprobá la instalación desde PowerShell.</li>
+            </ol>
+            <div class="code-wrap"><pre id="cmd-wsl">wsl --install</pre><button class="copy" type="button" data-copy="cmd-wsl">Copiar</button></div>
+            <div class="code-wrap"><pre id="cmd-docker">docker --version
+docker compose version</pre><button class="copy" type="button" data-copy="cmd-docker">Copiar</button></div>
+            <p class="mini-note">Requiere virtualización habilitada y recursos suficientes. Como referencia, Docker documenta 8 GB de RAM como mínimo para el backend WSL 2. Si no cumple tu equipo, utilizá n8n Cloud.</p>
+            <a class="tool-link secondary" href="https://docs.docker.com/desktop/setup/install/windows-install/" target="_blank" rel="noopener">Guía de instalación Windows ↗</a>
+          </article>
+
+          <article class="tool-card optional" id="supabase">
+            <div class="tool-head"><div class="tool-icon">SB</div><div class="tool-title"><h3>Supabase</h3><p>Base de datos PostgreSQL, autenticación, almacenamiento y backend.</p></div><span class="status blue">Según proyecto</span></div>
+            <a class="tool-link" href="https://supabase.com/dashboard" target="_blank" rel="noopener">Crear cuenta y proyecto ↗</a>
+            <ol class="steps">
+              <li>Registrate y creá una organización.</li>
+              <li>Seleccioná New project y elegí un nombre.</li>
+              <li>Definí una contraseña segura para la base de datos y guardala fuera del código.</li>
+              <li>Cuando el proyecto esté listo, explorá Table Editor y SQL Editor.</li>
+              <li>Revisá las políticas de Row Level Security antes de exponer datos.</li>
+            </ol>
+            <p class="mini-note">No necesitás instalar Supabase en la computadora para utilizar el servicio alojado. Las claves secretas nunca deben quedar en el frontend ni en un repositorio público.</p>
+            <a class="tool-link secondary" href="https://supabase.com/docs/guides/getting-started" target="_blank" rel="noopener">Guía oficial de inicio ↗</a>
+          </article>
+
+          <article class="tool-card optional" id="postman">
+            <div class="tool-head"><div class="tool-icon">API</div><div class="tool-title"><h3>Postman</h3><p>Probar APIs, revisar respuestas y validar solicitudes HTTP.</p></div><span class="status blue">Recomendado</span></div>
+            <a class="tool-link" href="https://www.postman.com/downloads/" target="_blank" rel="noopener">Descargar Postman ↗</a>
+            <ol class="steps">
+              <li>Elegí la aplicación de escritorio para tu sistema operativo.</li>
+              <li>Instalala y abrila.</li>
+              <li>Creá un workspace para tus prácticas.</li>
+              <li>Empezá con una solicitud GET a una API de prueba y observá el código de respuesta y el cuerpo.</li>
+            </ol>
+            <p class="mini-note">También existe una versión web. La aplicación de escritorio ofrece funciones adicionales para trabajar con APIs locales y privadas.</p>
+            <a class="tool-link secondary" href="https://learning.postman.com/docs/getting-started/overview/" target="_blank" rel="noopener">Aprender Postman ↗</a>
+          </article>
+
+          <article class="tool-card optional" id="playwright">
+            <div class="tool-head"><div class="tool-icon">PW</div><div class="tool-title"><h3>Playwright</h3><p>Automatizar navegadores y procesos web cuando no hay una API adecuada.</p></div><span class="status amber">Avanzado</span></div>
+            <a class="tool-link" href="https://playwright.dev/docs/intro" target="_blank" rel="noopener">Documentación oficial ↗</a>
+            <ol class="steps">
+              <li>Primero instalá Node.js y npm siguiendo la ruta principal.</li>
+              <li>Abrí PowerShell en la carpeta donde quieras crear el proyecto.</li>
+              <li>Ejecutá el inicializador y elegí JavaScript o TypeScript.</li>
+              <li>Aceptá la instalación de los navegadores de prueba.</li>
+              <li>Ejecutá el test de ejemplo.</li>
+            </ol>
+            <div class="code-wrap"><pre id="cmd-playwright">mkdir prueba-playwright
+cd prueba-playwright
+npm init playwright@latest
+npx playwright test</pre><button class="copy" type="button" data-copy="cmd-playwright">Copiar</button></div>
+            <p class="mini-note">Usalo para automatización web y pruebas. Antes de operar sitios de terceros, revisá permisos, términos de uso y datos involucrados.</p>
+          </article>
+
+          <article class="tool-card optional">
+            <div class="tool-head"><div class="tool-icon">WS</div><div class="tool-title"><h3>Make.com</h3><p>Alternativa visual a n8n para construir automatizaciones.</p></div><span class="status blue">Alternativa</span></div>
+            <a class="tool-link" href="https://www.make.com/" target="_blank" rel="noopener">Acceder a Make ↗</a>
+            <ol class="steps">
+              <li>Creá una cuenta y entrá al escenario visual.</li>
+              <li>Probá una conexión simple entre dos aplicaciones.</li>
+              <li>Compará facilidad de uso, límites, costos y posibilidades de control con n8n.</li>
+            </ol>
+            <p class="mini-note">No hace falta aprender n8n y Make en simultáneo. Para este curso priorizamos n8n y usamos Make como comparación cuando tenga sentido.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div><div class="section-kicker">04 / Conceptos que no se descargan</div><h2>No confundas protocolo, archivo y programa</h2></div>
+          <p>Estos elementos se configuran o se construyen durante el curso. No busques un instalador genérico para cada uno.</p>
+        </div>
+        <div class="concepts">
+          <div class="concept"><h3>MCP</h3><p>Protocolo que estandariza la conexión entre un cliente de IA y herramientas o fuentes externas. Se configura según el agente y el servicio.</p></div>
+          <div class="concept"><h3>Skills</h3><p>Procedimientos reutilizables que indican cómo realizar una tarea. Pueden incluir instrucciones, ejemplos y recursos.</p></div>
+          <div class="concept"><h3>API y webhooks</h3><p>Mecanismos para intercambiar información y disparar acciones entre aplicaciones. Se usan desde código o plataformas como n8n.</p></div>
+          <div class="concept"><h3>RAG</h3><p>Una arquitectura para recuperar información relevante desde fuentes documentales o bases de conocimiento. Se implementa cuando el caso lo requiere.</p></div>
+          <div class="concept"><h3>Agentes y subagentes</h3><p>Componentes de una arquitectura de trabajo. Se diseñan con objetivos, contexto, herramientas, límites y criterios de revisión.</p></div>
+          <div class="concept"><h3>Credenciales</h3><p>Accesos y claves que habilitan integraciones. Se gestionan con permisos mínimos y almacenamiento seguro, nunca dentro de prompts públicos.</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="verificar">
+        <div class="section-head">
+          <div><div class="section-kicker">05 / Control de instalación</div><h2>Verificá tu entorno</h2></div>
+          <p>Cuando termines la ruta principal, abrí PowerShell o la terminal de VS Code y ejecutá estos comandos.</p>
+        </div>
+        <div class="verification">
+          <strong style="font:700 13px Orbitron,sans-serif">COMPROBACIÓN GENERAL</strong>
+          <p>Copiá el bloque completo. Cada línea debería devolver una versión, no un mensaje de comando desconocido.</p>
+          <div class="code-wrap"><pre id="cmd-check">git --version
+node -v
+npm -v
+python --version
+py --version</pre><button class="copy" type="button" data-copy="cmd-check">Copiar comandos</button></div>
+          <div class="divider"></div>
+          <strong style="font-size:12px">Configuración inicial de Git</strong>
+          <p>Reemplazá los datos de ejemplo por tu nombre y el correo que vas a utilizar en GitHub.</p>
+          <div class="code-wrap"><pre id="cmd-gitconfig">git config --global user.name "Nombre Apellido"
+git config --global user.email "tu-correo@ejemplo.com"</pre><button class="copy" type="button" data-copy="cmd-gitconfig">Copiar comandos</button></div>
+        </div>
+        <div class="notice">
+          <div class="notice-icon">i</div>
+          <p><strong>Si un comando no se reconoce:</strong> cerrá y volvé a abrir la terminal. Si continúa el problema, revisá que la instalación haya terminado y que el programa esté agregado al PATH. No ejecutes scripts de origen desconocido ni cambies políticas de seguridad sin comprender el efecto.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div><div class="section-kicker">06 / Material complementario</div><h2>Automatización de navegador</h2></div>
+          <p>Este recurso muestra una aplicación práctica de un agente de código trabajando con Playwright.</p>
+        </div>
+        <div class="video-card">
+          <div><strong>Claude Code + Playwright: Automates Literally Anything</strong><span>Video complementario para explorar automatización de procesos web.</span></div>
+          <a class="video-link" href="https://www.youtube.com/watch?v=J-6pnl5DQg8" target="_blank" rel="noopener">Ver tutorial en YouTube ↗</a>
+        </div>
+      </section>
+
+      <section class="section" id="seguridad">
+        <div class="section-head">
+          <div><div class="section-kicker">07 / Buenas prácticas</div><h2>Antes de conectar sistemas de una empresa</h2></div>
+          <p>Instalar una herramienta no significa que esté lista para operar con información sensible o procesos de producción.</p>
+        </div>
+        <div class="security">
+          <div class="security-item"><span style="color:var(--green);font-weight:900">01</span><div><b>Protegé las claves</b><span>No pegues API keys, tokens ni contraseñas en prompts, capturas o repositorios.</span></div></div>
+          <div class="security-item"><span style="color:var(--green);font-weight:900">02</span><div><b>Usá datos ficticios</b><span>Probá primero con información de ejemplo, no con bases reales de clientes.</span></div></div>
+          <div class="security-item"><span style="color:var(--green);font-weight:900">03</span><div><b>Limitá los permisos</b><span>Empezá con acceso de lectura. Habilitá escritura solo cuando sea necesario.</span></div></div>
+          <div class="security-item"><span style="color:var(--green);font-weight:900">04</span><div><b>Revisá antes de ejecutar</b><span>Pedí aprobación humana para pagos, envíos, borrados y acciones irreversibles.</span></div></div>
+          <div class="security-item"><span style="color:var(--green);font-weight:900">05</span><div><b>Auditá las extensiones</b><span>Revisá el origen y los permisos de MCP, plugins y paquetes comunitarios antes de instalarlos.</span></div></div>
+          <div class="security-item"><span style="color:var(--green);font-weight:900">06</span><div><b>Versioná los proyectos</b><span>Usá Git y mantené separados desarrollo y producción. Conservá una forma de volver atrás.</span></div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div><div class="section-kicker">08 / Cierre</div><h2>¿Cuándo estás listo para empezar?</h2></div>
+          <p>Con la ruta principal completada ya podés comenzar los primeros ejercicios del curso. Las ampliaciones se suman en el momento adecuado.</p>
+        </div>
+        <div class="video-card">
+          <div><strong>Tu primer objetivo</strong><span>Crear un proyecto en VS Code, versionarlo con Git y construir un workflow inicial en n8n. Después conectaremos herramientas, APIs y agentes.</span></div>
+          <a class="video-link" href="#ruta">Volver a la ruta ↑</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-row">
+        <div><strong style="font:700 11px Orbitron,sans-serif;color:#eef2ff">NEUROTECH SOLUCIONES</strong><br><span>Curso Avanzado de Agentes de IA · Guía de preparación técnica</span></div>
+        <div>Enlaces oficiales revisados: 9 de noviembre de 2026</div>
+        <div><a href="https://neurotechsoluciones.com/" target="_blank" rel="noopener">neurotechsoluciones.com ↗</a></div>
+      </div>
+      <div class="source-list">
+        <a href="https://code.visualstudio.com/docs/setup/setup-overview" target="_blank" rel="noopener">VS Code</a>
+        <a href="https://git-scm.com/install/windows" target="_blank" rel="noopener">Git</a>
+        <a href="https://nodejs.org/es/download/" target="_blank" rel="noopener">Node.js</a>
+        <a href="https://www.python.org/downloads/windows/" target="_blank" rel="noopener">Python</a>
+        <a href="https://learn.chatgpt.com/docs/app/windows" target="_blank" rel="noopener">Codex en Windows</a>
+        <a href="https://docs.n8n.io/" target="_blank" rel="noopener">n8n</a>
+        <a href="https://docs.docker.com/desktop/setup/install/windows-install/" target="_blank" rel="noopener">Docker</a>
+        <a href="https://playwright.dev/docs/intro" target="_blank" rel="noopener">Playwright</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const checks = Array.from(document.querySelectorAll(".task-check"));
+      const bar = document.getElementById("progressBar");
+      const label = document.getElementById("progressText");
+      const storageKey = "neurotech-agent-course-setup-v1";
+      let saved = {};
+      try { saved = JSON.parse(localStorage.getItem(storageKey) || "{}"); } catch (e) { saved = {}; }
+      checks.forEach(function (check) {
+        check.checked = Boolean(saved[check.dataset.task]);
+        check.addEventListener("change", update);
+      });
+      function update() {
+        const done = checks.filter(function (check) { return check.checked; }).length;
+        const total = checks.length;
+        const pct = total ? Math.round((done / total) * 100) : 0;
+        bar.style.width = pct + "%";
+        label.textContent = done + " de " + total + " completados";
+        const state = {};
+        checks.forEach(function (check) { state[check.dataset.task] = check.checked; });
+        try { localStorage.setItem(storageKey, JSON.stringify(state)); } catch (e) {}
+      }
+      update();
+      document.querySelectorAll("[data-copy]").forEach(function (button) {
+        button.addEventListener("click", async function () {
+          const target = document.getElementById(button.dataset.copy);
+          if (!target) return;
+          const original = button.textContent;
+          try {
+            await navigator.clipboard.writeText(target.textContent.trim());
+            button.textContent = "Copiado";
+          } catch (e) {
+            button.textContent = "No disponible";
+          }
+          window.setTimeout(function () { button.textContent = original; }, 1600);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
